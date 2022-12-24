@@ -1,0 +1,21 @@
+version: '3.7'
+
+services:
+  postgres:
+    image: postgres:latest
+    volumes:
+      - postgres:/var/lib/postgresql/data
+    environment:
+      POSTGRES_PASSWORD: password
+  web:
+    build: .
+    environment:
+      RAILS_ENV: development
+    volumes:
+      - .:/app_home
+    ports:
+      - "3000:3000"
+    depends_on:
+      - postgres
+volumes:
+  postgres: {}
