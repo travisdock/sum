@@ -1,0 +1,23 @@
+= form_with(model: category) do |form|
+  - if category.errors.any?
+    %div{:style => "color: red"}
+      %h2
+        = pluralize(category.errors.count, "error")
+        prohibited this category from being saved:
+      %ul
+        - category.errors.each do |error|
+          %li= error.full_message
+  %div
+    = form.label :name, style: "display: block"
+    = form.text_field :name
+  %div
+    = form.label :income, style: "display: block"
+    = form.check_box :income
+  %div
+    = form.label :untracked, style: "display: block"
+    = form.check_box :untracked
+  %div
+    = form.label :year, style: "display: block"
+    = form.number_field :year
+  %div
+    = form.submit
