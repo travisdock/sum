@@ -1,7 +1,19 @@
 %h1 Categories
-#categories
-  - @categories.each do |category|
-    = render category
-    %p
-      = link_to "Show this category", category
-= link_to "New category", new_category_path
+%a.btn.btn-primary{ href: new_category_path }
+  %i.bi.bi-plus-circle-fill
+  New Category
+%div.data-table-wrapper{ 'data-controller' => 'data-table' }
+%table.table.hover
+  %thead
+    %tr
+      %th{scope: "col"} Name
+      %th{scope: "col"} Income
+      %th{scope: "col"} Untracked
+      %th{scope: "col"} Year
+  %tbody
+    - @categories.each do |category|
+      %tr.clickable-row{ 'data-href': category_url(category) }
+        %td= category.name
+        %td= category.income
+        %td= category.untracked
+        %td= category.year
