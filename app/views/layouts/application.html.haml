@@ -7,8 +7,14 @@
     = csrf_meta_tags
     = csp_meta_tag
     = stylesheet_link_tag "application", "data-turbo-track": "reload"
+    = stylesheet_link_tag "https://cdn.datatables.net/1.13.1/css/jquery.dataTables.min.css"
+    = stylesheet_link_tag "https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.2/font/bootstrap-icons.css"
     = javascript_importmap_tags
   %body
-    %p.notice= notice
-    %p.alert= alert
-    = yield
+    .container
+      - flash.each do |type, msg|
+        .toast.show.position-absolute{ role: 'alert', 'aria-live': 'assertive', 'aria-atomic': 'true' }
+          .toast-header
+            = msg
+            %button.btn-close{ 'aria-label': 'Close', 'data-bs-dismiss': 'toast', type: 'button' }
+      = yield
