@@ -25,3 +25,5 @@
 = link_to 'Edit', edit_entry_path(@entry)
 \|
 = link_to 'Back', entries_path
+\|
+= link_to 'Destroy', entry_path(@entry), class: 'btn btn-primary', data: { 'turbo-method': :delete }
