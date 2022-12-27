@@ -1,10 +1,10 @@
 class CategoriesController < ApplicationController
   before_action :authenticate_user!
-  before_action :set_category, only: %i[ show edit update destroy ]
+  before_action :set_category, only: %i[ show edit update remove destroy ]
 
   # GET /categories or /categories.json
   def index
-    @categories = Category.all
+    @categories = current_user.categories
   end
 
   # GET /categories/1 or /categories/1.json
@@ -26,6 +26,7 @@ class CategoriesController < ApplicationController
 
     respond_to do |format|
       if @category.save
+        current_user.categories << @category
         format.html { redirect_to category_url(@category), notice: "Category was successfully created." }
         format.json { render :show, status: :created, location: @category }
       else
@@ -46,6 +47,13 @@ class CategoriesController < ApplicationController
         format.json { render json: @category.errors, status: :unprocessable_entity }
       end
     end
+  end
+
+  # DELETE /categories/1/remove
+  def remove
+    current_user.categories.delete(@category)
+
+    redirect_to categories_url, notice: "Category was successfully removed."
   end
 
   # DELETE /categories/1 or /categories/1.json

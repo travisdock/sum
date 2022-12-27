@@ -1,6 +1,8 @@
 Rails.application.routes.draw do
   resources :entries
-  resources :categories
+  resources :categories do
+    delete 'remove', on: :member
+  end
   devise_for :users
 
   devise_scope :user do
