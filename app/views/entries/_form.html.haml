@@ -1,0 +1,31 @@
+= form_for @entry do |f|
+  - if @entry.errors.any?
+    #error_explanation
+      %h2= "#{pluralize(@entry.errors.count, "error")} prohibited this entry from being saved:"
+      %ul
+        - @entry.errors.full_messages.each do |message|
+          %li= message
+
+  .field.mb-3{ 'data-controller': 'date-picker' }
+    = f.label :date, { class: 'form-label' }
+    = f.date_field :date, { class: 'form-control', id: 'date-picker' }
+  .field.mb-3
+    = f.label :amount, { class: 'form-label' }
+    = f.number_field :amount, { class: 'form-control', placeholder: '$0.00', step: '.01', inputmode: "decimal" }
+  .field.mb-3
+    = f.label :notes, { class: 'form-label' }
+    = f.text_area :notes, { class: 'form-control' }
+  .field.mb-3
+    = f.label :category_name, { class: 'form-label' }
+    = f.text_field :category_name, { class: 'form-control' }
+  .field.mb-3
+    = f.label :category, { class: 'form-label' }
+    = f.collection_select :category_id, Category.all, :id, :name, { include_blank: true }, { class: 'form-select' }
+  .field.mb-3.form-check
+    = f.check_box :untracked, { class: 'form-check-input' }
+    = f.label :untracked, { class: 'form-check-label' }
+  .field.mb-3.form-check
+    = f.check_box :income, { class: 'form-check-input' }
+    = f.label :income, { class: 'form-check-label' }
+  .actions
+    = f.submit 'Save', class: 'btn btn-primary'

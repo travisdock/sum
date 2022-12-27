@@ -1,0 +1,27 @@
+%p#notice= notice
+
+%p
+  %b Date:
+  = @entry.date
+%p
+  %b Amount:
+  = @entry.amount
+%p
+  %b Notes:
+  = @entry.notes
+%p
+  %b Category name:
+  = @entry.category_name
+%p
+  %b Income:
+  = @entry.income
+%p
+  %b Untracked:
+  = @entry.untracked
+%p
+  %b Category:
+  = @entry.category.name
+
+= link_to 'Edit', edit_entry_path(@entry)
+\|
+= link_to 'Back', entries_path
