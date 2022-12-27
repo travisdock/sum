@@ -12,6 +12,21 @@
     = javascript_importmap_tags
   %body
     .container
+      %nav.navbar.navbar-expand-lg.bg-light
+        %div.container-fluid
+          %a.navbar-brand.mb-0.h1 Sum
+          - if user_signed_in?
+            %button.navbar-toggler{ type: 'button', data: { bs: { target: "#navbarSupportedContent", toggle: "collapse" }, aria: { controls: "navbarSupportedContent", expanded: "false", label: "Toggle navigation" } } }
+              %span.navbar-toggler-icon
+            %div.collapse.navbar-collapse{ id: "navbarSupportedContent" }
+              %ul.navbar-nav.me-auto.mb-2.mb-lg-0
+                %li.nav-item
+                  %a.nav-link{ href: entries_url }
+                    Entries
+                %li.nav-item
+                  %a.nav-link{ href: categories_url }
+                    Categories
+              = link_to "Sign Out", destroy_user_session_path, class: "btn btn-outline-secondary", data: { "turbo-method": :delete }
       - flash.each do |type, msg|
         .toast.show.position-absolute{ role: 'alert', 'aria-live': 'assertive', 'aria-atomic': 'true' }
           .toast-header
