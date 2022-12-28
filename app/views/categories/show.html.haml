@@ -4,4 +4,4 @@
 %br
   = link_to "Back to categories", categories_path, class: "btn btn-primary"
 %br
-  = link_to "Remove", remove_category_path(@category), class: "btn btn-primary", data: { 'turbo-method': :delete }
+  = link_to "Remove", remove_category_path(@category), class: "btn btn-primary", data: { 'turbo-method': :delete, 'turbo-confirm': 'Are you sure you want to remove this?' }

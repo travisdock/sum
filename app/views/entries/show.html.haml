@@ -26,4 +26,4 @@
 \|
 = link_to 'Back', entries_path
 \|
-= link_to 'Destroy', entry_path(@entry), class: 'btn btn-primary', data: { 'turbo-method': :delete }
+= link_to 'Destroy', entry_path(@entry), class: 'btn btn-primary', data: { 'turbo-method': :delete, 'turbo-confirm': 'Are you sure you want to delete this?' }
