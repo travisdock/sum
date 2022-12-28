@@ -1,5 +1,6 @@
 Rails.application.routes.draw do
   resources :entries
+  get '/export/entries', to: 'entries#export'
   resources :categories do
     delete 'remove', on: :member
   end

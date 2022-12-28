@@ -1,3 +1,5 @@
+require 'csv'
+
 class EntriesController < ApplicationController
   before_action :authenticate_user!
   before_action :set_entry, only: %i[ show edit update destroy ]
@@ -56,6 +58,18 @@ class EntriesController < ApplicationController
     respond_to do |format|
       format.html { redirect_to entries_url, notice: "Entry was successfully destroyed." }
       format.json { head :no_content }
+    end
+  end
+
+  # GET /entries/export
+  def export
+    @entries = Entry.where(user: current_user)
+    respond_to do |format|
+      format.csv do
+        response.headers['Content-Type'] = 'text/csv'
+        response.headers['Content-Disposition'] = "attachment; filename=entries.csv"
+        render 'export'
+      end
     end
   end
 
