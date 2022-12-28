@@ -26,6 +26,9 @@
                 %li.nav-item
                   %a.nav-link{ href: categories_url }
                     Categories
+                %li.nav-item
+                  %a.nav-link{ href: edit_user_registration_path }
+                    Account
               = link_to "Sign Out", destroy_user_session_path, class: "btn btn-outline-secondary", data: { "turbo-method": :delete }
       - flash.each do |type, msg|
         .toast.show.position-absolute{ role: 'alert', 'aria-live': 'assertive', 'aria-atomic': 'true' }

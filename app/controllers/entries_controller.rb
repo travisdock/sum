@@ -4,7 +4,7 @@ class EntriesController < ApplicationController
 
   # GET /entries or /entries.json
   def index
-    @entries = Entry.where(user: current_user)
+    @entries = Entry.where(user: current_user).by_year(current_user.year_view)
   end
 
   # GET /entries/1 or /entries/1.json
