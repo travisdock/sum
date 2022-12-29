@@ -1,0 +1,15 @@
+%div#entries.data-table-wrapper{ 'data-controller' => 'data-table' }
+  %table.table.hover
+    %thead
+      %tr
+        %th{scope: "col"} Date
+        %th{scope: "col"} Amount
+        %th{scope: "col"} Category
+        %th{scope: "col"} Notes
+    %tbody
+      - @entries.each do |entry|
+        %tr.clickable-row{ 'data-href': entry_url(entry) }
+          %td= entry.date
+          %td= entry.amount
+          %td= entry.category_name
+          %td= entry.notes

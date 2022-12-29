@@ -1,5 +1,6 @@
 Rails.application.routes.draw do
   resources :entries
+  post '/filtered_entries', to: 'entries#filtered_index'
   get '/export/entries', to: 'entries#export'
   get '/dashboard', to: 'entries#dashboard'
   post '/dashboard', to: 'entries#dashboard'

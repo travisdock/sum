@@ -2,18 +2,14 @@
 %a.btn.btn-primary{ href: new_entry_path }
   %i.bi.bi-plus-circle-fill
   New Entry
-%div.data-table-wrapper{ 'data-controller' => 'data-table' }
-%table.table.hover
-  %thead
-    %tr
-      %th{scope: "col"} Date
-      %th{scope: "col"} Amount
-      %th{scope: "col"} Category
-      %th{scope: "col"} Notes
-  %tbody
-    - @entries.each do |entry|
-      %tr.clickable-row{ 'data-href': entry_url(entry) }
-        %td= entry.date
-        %td= entry.amount
-        %td= entry.category_name
-        %td= entry.notes
+= form_with(url: '/filtered_entries') do |f|
+  %div
+    = f.label :month, 'Month',  class: 'form-label'
+    = f.select :month, options_for_select(Date::MONTHNAMES.zip(0..12)), {}, class: 'form-select d-inline-block', style: 'width:auto;'
+  %div
+    = f.label :year, 'Year', class: 'form-label'
+    = f.select :year, options_for_select(@years), { include_blank: true }, class: 'form-select d-inline-block', style: 'width:auto;'
+  %div
+    = f.submit "Filter", class: 'btn btn-primary'
+
+= render partial: "entries", locals: { entries: @entries }
