@@ -1,0 +1,17 @@
+%div#data
+  %h2 Totals
+  .row
+    .col-sm-6
+      .card.text-dark.bg-light
+        .card-body
+          %h5.card-title Total Spending
+          %p.card-text= number_to_currency(@data.total_spending)
+  %hr
+  %h2 Categories
+  .row.rows-cols-auto.g-2
+    - @data.category_totals.each do |category, total|
+      .col
+        .card.text-dark.bg-light
+          .card-body
+            %h5.card-title= category
+            %p.card-text= number_to_currency(total)

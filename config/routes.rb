@@ -1,6 +1,8 @@
 Rails.application.routes.draw do
   resources :entries
   get '/export/entries', to: 'entries#export'
+  get '/dashboard', to: 'entries#dashboard'
+  post '/dashboard', to: 'entries#dashboard'
   resources :categories do
     delete 'remove', on: :member
   end

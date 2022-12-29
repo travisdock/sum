@@ -73,6 +73,18 @@ class EntriesController < ApplicationController
     end
   end
 
+  # GET /dashboard
+  def dashboard
+    entries = Entry.where(user: current_user).by_year(params['year']).by_month(params['month'])
+    @years = Entry.where(user: current_user).pluck(:date).uniq { |d| d.year }.map(&:year)
+    @data = Dashboard.new(entries)
+
+    respond_to do |format|
+      format.html
+      format.turbo_stream { render turbo_stream: turbo_stream.replace(:data, partial: "dashboard_data", locals: { data: @data }) }
+    end
+  end
+
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_entry

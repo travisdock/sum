@@ -1,0 +1,13 @@
+%h1 Dashboard
+= turbo_frame_tag 'filter' do
+  = form_with(url: '/dashboard') do |f|
+    %div
+      = f.label :month, 'Month',  class: 'form-label'
+      = f.select :month, options_for_select(Date::MONTHNAMES.zip(0..12)), {}, class: 'form-select d-inline-block', style: 'width:auto;'
+    %div
+      = f.label :year, 'Year', class: 'form-label'
+      = f.select :year, options_for_select(@years), { include_blank: true }, class: 'form-select d-inline-block', style: 'width:auto;'
+    %div
+      = f.submit "Filter", class: 'btn btn-primary'
+%div#data
+  = render partial: "dashboard_data", locals: { data: @data }
