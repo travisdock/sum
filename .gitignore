@@ -31,3 +31,5 @@
 /config/master.key
 
 vendor/bundle
+
+*.swp
