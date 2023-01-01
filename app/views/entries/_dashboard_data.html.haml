@@ -6,6 +6,11 @@
         .card-body
           %h5.card-title Total Spending
           %p.card-text= number_to_currency(@data.total_spending)
+    .col-sm-6
+      .card.text-dark.bg-light
+        .card-body
+          %h5.card-title Total Income
+          %p.card-text= number_to_currency(@data.total_income)
   %hr
   %h2 Categories
   .row.rows-cols-auto.g-2
