@@ -86,7 +86,7 @@ class EntriesController < ApplicationController
 
   # GET /dashboard
   def dashboard
-    entries = Entry.where(user: current_user).by_year(params['year']).by_month(params['month'])
+    entries = Entry.where(user: current_user).by_year(params['year'] || current_user.year_view).by_month(params['month'])
     @years = Entry.where(user: current_user).pluck(:date).uniq { |d| d.year }.map(&:year)
     @data = Dashboard.new(entries)
 
