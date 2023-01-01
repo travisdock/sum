@@ -6,7 +6,7 @@ class EntriesController < ApplicationController
 
   # GET /entries or /entries.json
   def index
-    @entries = Entry.where(user: current_user).by_year(params['year'] || current_user.year_view)
+    @entries = Entry.where(user: current_user).by_year(params['year'] || current_user.year_view).includes(:category)
     @years = Entry.where(user: current_user).pluck(:date).uniq { |d| d.year }.map(&:year)
   end
 
