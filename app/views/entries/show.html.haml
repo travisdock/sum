@@ -10,20 +10,17 @@
   %b Notes:
   = @entry.notes
 %p
-  %b Category name:
-  = @entry.category_name
-%p
-  %b Income:
-  = @entry.income
-%p
-  %b Untracked:
-  = @entry.untracked
-%p
   %b Category:
   = @entry.category.name
+%p
+  %b Income:
+  = @entry.category.income
+%p
+  %b Untracked:
+  = @entry.category.untracked
 
-= link_to 'Edit', edit_entry_path(@entry)
+= link_to 'Edit', edit_entry_path(@entry), class: 'btn btn-primary'
 \|
-= link_to 'Back', entries_path
+= link_to 'Back', entries_path, class: 'btn btn-primary'
 \|
 = link_to 'Destroy', entry_path(@entry), class: 'btn btn-primary', data: { 'turbo-method': :delete, 'turbo-confirm': 'Are you sure you want to delete this?' }
