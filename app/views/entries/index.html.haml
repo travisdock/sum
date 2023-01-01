@@ -1,15 +1,14 @@
 %h1 Entries
-%a.btn.btn-primary{ href: new_entry_path }
+%a.btn.btn-primary.mb-3{ href: new_entry_path }
   %i.bi.bi-plus-circle-fill
   New Entry
+%br
 = form_with(url: '/filtered_entries') do |f|
-  %div
+  %div.mb-3
     = f.label :month, 'Month',  class: 'form-label'
     = f.select :month, options_for_select(Date::MONTHNAMES.zip(0..12)), {}, class: 'form-select d-inline-block', style: 'width:auto;'
-  %div
     = f.label :year, 'Year', class: 'form-label'
     = f.select :year, options_for_select(@years), { include_blank: true }, class: 'form-select d-inline-block', style: 'width:auto;'
-  %div
-    = f.submit "Filter", class: 'btn btn-primary'
+  = f.submit "Filter", class: 'btn btn-primary'
 
 = render partial: "entries", locals: { entries: @entries }
