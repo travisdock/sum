@@ -26,6 +26,7 @@ class EntriesController < ApplicationController
   # GET /entries/new
   def new
     @entry = Entry.new
+    @categories = current_user.categories.where(year: current_user.year_view)
   end
 
   # GET /entries/1/edit
