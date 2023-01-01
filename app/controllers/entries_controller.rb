@@ -31,6 +31,7 @@ class EntriesController < ApplicationController
 
   # GET /entries/1/edit
   def edit
+    @categories = current_user.categories.where(year: current_user.year_view)
   end
 
   # POST /entries or /entries.json
