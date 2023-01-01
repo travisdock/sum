@@ -11,7 +11,7 @@ Rails.application.routes.draw do
 
   devise_scope :user do
     authenticated :user do
-      root 'entries#index', as: :authenticated_root
+      root 'entries#new', as: :authenticated_root
     end
 
     unauthenticated :user do
