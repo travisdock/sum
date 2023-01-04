@@ -20,3 +20,5 @@
           .card-body
             %h5.card-title= category
             %p.card-text= number_to_currency(total)
+  %h2 Pie
+  = pie_chart @data.category_totals
