@@ -8,4 +8,7 @@
       = f.select :year, options_for_select(@years), { include_blank: true }, class: 'form-select d-inline-block', style: 'width:auto;'
     = f.submit "Filter", class: 'btn btn-primary'
 %div#data
-  = render partial: "dashboard_data", locals: { data: @data }
+  = render partial: "data", locals: { data: @data }
+%div#bar_chart_annual_categories
+-#= turbo_frame_tag 'annual_categories_bc' do
+-#  = %a.btn.btn-primary{ href: 
