@@ -2,6 +2,7 @@ Rails.application.routes.draw do
   resources :entries
   post '/filtered_entries', to: 'entries#filtered_index'
   get '/export/entries', to: 'entries#export'
+
   resources :categories do
     delete 'remove', on: :member
   end
@@ -9,6 +10,7 @@ Rails.application.routes.draw do
   # Dashboard
   get '/dashboard', to: 'dashboards#show'
   post '/dashboard', to: 'dashboards#show'
+  post '/turbo_charts/:chart_name', to: 'dashboards#charts', as: 'chart'
 
   devise_for :users
 

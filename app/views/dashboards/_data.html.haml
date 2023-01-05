@@ -20,5 +20,9 @@
           .card-body
             %h5.card-title= category
             %p.card-text= number_to_currency(total)
-  %h2 Pie
-  = pie_chart @data.category_totals
+  %hr
+  %h2 Charts
+  %input{ type: 'submit', name: 'commit', value: 'Pie Chart', class: 'btn btn-primary', formaction: '/turbo_charts/pie_chart', form: 'data_form' }
+  %input{ type: 'submit', name: 'commit', value: 'Bar Chart', class: 'btn btn-primary', formaction: '/turbo_charts/bar_chart', form: 'data_form' }
+
+  %div#chart
