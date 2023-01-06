@@ -6,13 +6,16 @@ class EntriesController < ApplicationController
 
   # GET /entries or /entries.json
   def index
-    @entries = Entry.where(user: current_user).by_year(params['year'] || current_user.year_view).includes(:category)
+    @entries = Entry.where(user: current_user).by_year(current_user.year_view).includes(:category)
     @years = Entry.where(user: current_user).order(:date).pluck(:date).uniq { |d| d.year }.map(&:year)
   end
 
   # POST /filtered_entries
   def filtered_index
-    @entries = Entry.where(user: current_user).by_year(params['year'] || current_user.year_view).by_month(params['month'])
+    @entries = Entry.where(user: current_user)
+                    .by_year(params['year'] || current_user.year_view)
+                    .by_month(params['month'])
+                    .by_income(params['income'])
 
     respond_to do |format|
       format.turbo_stream { render turbo_stream: turbo_stream.replace(:entries, partial: "entries", locals: { entries: @entries }) }

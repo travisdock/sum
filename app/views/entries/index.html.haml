@@ -8,7 +8,9 @@
     = f.label :month, 'Month',  class: 'form-label'
     = f.select :month, options_for_select(Date::MONTHNAMES.zip(0..12)), {}, class: 'form-select d-inline-block', style: 'width:auto;'
     = f.label :year, 'Year', class: 'form-label'
-    = f.select :year, options_for_select(@years), { include_blank: true }, class: 'form-select d-inline-block', style: 'width:auto;'
+    = f.select :year, options_for_select(@years, current_user.year_view), { include_blank: true }, class: 'form-select d-inline-block', style: 'width:auto;'
+    = f.label :income, 'Income', class: 'form-label'
+    = f.select :income, options_for_select([true, false]), { include_blank: true, placeholder: 'all' }, class: 'form-select d-inline-block', style: 'width:auto;'
   = f.submit "Filter", class: 'btn btn-primary'
 
 = render partial: "entries", locals: { entries: @entries }
