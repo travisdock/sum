@@ -16,4 +16,11 @@ class Dashboard
   def category_totals
     @entries.joins(:category).group(:name).sum(:amount)
   end
+
+  def total_spending_by_month
+    @entries.group('(EXTRACT(MONTH FROM date))::integer')
+            .joins(:category).where('category.income' => false)
+            .sum(:amount)
+            .transform_keys { |key| Date::MONTHNAMES[key] }
+  end
 end
