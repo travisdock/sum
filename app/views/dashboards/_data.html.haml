@@ -1,16 +1,21 @@
 %div#data
   %h2 Totals
   .row
-    .col-sm-6
+    .col-sm-4
       .card.text-dark.bg-light
         .card-body
           %h5.card-title Total Spending
           %p.card-text= number_to_currency(@data.total_spending)
-    .col-sm-6
+    .col-sm-4
       .card.text-dark.bg-light
         .card-body
           %h5.card-title Total Income
           %p.card-text= number_to_currency(@data.total_income)
+    .col-sm-4
+      .card.text-dark.bg-light
+        .card-body
+          %h5.card-title Profit/Loss
+          %p.card-text= number_to_currency(@data.profit_loss)
   %hr
   %h2 Categories
   .row.rows-cols-auto.g-2

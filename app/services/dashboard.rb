@@ -13,6 +13,10 @@ class Dashboard
     @entries.joins(:category).where('category.income' => true).where('category.untracked' => false).sum(:amount)
   end
 
+  def profit_loss
+    total_income - total_spending
+  end
+
   def category_totals
     @entries.joins(:category).group(:name).sum(:amount)
   end
