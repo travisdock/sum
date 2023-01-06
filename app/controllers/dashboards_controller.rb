@@ -4,7 +4,7 @@ class DashboardsController < ApplicationController
   # GET POST /dashboard
   def show
     entries = Entry.where(user: current_user).by_year(params['year'] || current_user.year_view).by_month(params['month'])
-    @years = Entry.where(user: current_user).pluck(:date).uniq { |d| d.year }.map(&:year)
+    @years = Entry.where(user: current_user).order(:date).pluck(:date).uniq { |d| d.year }.map(&:year)
     @data = Dashboard.new(entries)
 
     respond_to do |format|
