@@ -5,6 +5,10 @@ class Dashboard
     @entries = entries
   end
 
+  def last_entry_date
+    @entries.order(:date).last.date
+  end
+
   def total_spending
     @entries.joins(:category).where('category.income' => false).where('category.untracked' => false).sum(:amount)
   end

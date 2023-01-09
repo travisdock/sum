@@ -6,14 +6,15 @@ class EntriesController < ApplicationController
 
   # GET /entries or /entries.json
   def index
-    @entries = Entry.where(user: current_user).by_year(current_user.year_view).includes(:category)
+    last_entry_date = Entry.where(user: current_user).order(:date).last.date
+    @entries = Entry.where(user: current_user).by_year(last_entry_date.year).by_month(last_entry_date.month).order(:date).includes(:category)
     @years = Entry.where(user: current_user).order(:date).pluck(:date).uniq { |d| d.year }.map(&:year)
   end
 
   # POST /filtered_entries
   def filtered_index
     @entries = Entry.where(user: current_user)
-                    .by_year(params['year'] || current_user.year_view)
+                    .by_year(params['year'])
                     .by_month(params['month'])
                     .by_income(params['income'])
 
