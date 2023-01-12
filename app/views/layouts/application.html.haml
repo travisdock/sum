@@ -5,10 +5,10 @@
     %title Sum
     %meta{:content => "width=device-width,initial-scale=1", :name => "viewport"}/
     %meta{:content => "noindex, nofollow, noarchive", :name => "robots"}
-    %link{rel: "apple-touch-icon", sizes: "144x144", href: "app/assets/images/apple-touch-icon.png"}
     = csrf_meta_tags
     = csp_meta_tag
     = favicon_link_tag asset_path('favicon.png')
+    = favicon_link_tag asset_path('apple-touch-icon.png'), rel: 'apple-touch-icon', sizes: '144x144', type: 'image/png'
     = stylesheet_link_tag "application", "data-turbo-track": "reload"
     = stylesheet_link_tag "https://cdn.datatables.net/1.13.1/css/jquery.dataTables.min.css"
     = stylesheet_link_tag "https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.2/font/bootstrap-icons.css"
