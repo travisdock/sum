@@ -156,7 +156,7 @@ GEM
     pg (1.4.5)
     popper_js (2.11.6)
     public_suffix (5.0.1)
-    puma (5.6.5)
+    puma (6.0.2)
       nio4r (~> 2.0)
     racc (1.6.2)
     rack (2.2.6.2)
@@ -261,8 +261,8 @@ DEPENDENCIES
   importmap-rails
   jbuilder
   pg (~> 1.1)
-  puma (~> 5.0)
-  rails (~> 7.0.4)
+  puma
+  rails
   selenium-webdriver
   sprockets-rails
   stimulus-rails
