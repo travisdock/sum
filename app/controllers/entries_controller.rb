@@ -7,7 +7,7 @@ class EntriesController < ApplicationController
   # GET /entries or /entries.json
   def index
     last_entry_date = Entry.where(user: current_user).order(:date).last.date
-    @entries = Entry.where(user: current_user).by_year(last_entry_date.year).by_month(last_entry_date.month).order(:date).includes(:category)
+    @entries = Entry.where(user: current_user).by_year(Date.today.year).by_month(Date.today.month).order(:date).includes(:category)
     @years = Entry.where(user: current_user).order(:date).pluck(:date).uniq { |d| d.year }.map(&:year)
   end
 

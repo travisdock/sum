@@ -3,9 +3,9 @@
   = form_with(url: '/dashboard', id: 'data_form') do |f|
     %div.mb-3
       = f.label :month, 'Month',  class: 'form-label'
-      = f.select :month, options_for_select(Date::MONTHNAMES.zip(0..12), @data.last_entry_date.month), {}, class: 'form-select d-inline-block', style: 'width:auto;'
+      = f.select :month, options_for_select(Date::MONTHNAMES.zip(0..12), Date.today.month), {}, class: 'form-select d-inline-block', style: 'width:auto;'
       = f.label :year, 'Year', class: 'form-label'
-      = f.select :year, options_for_select(@years, @data.last_entry_date.year), { include_blank: true }, class: 'form-select d-inline-block', style: 'width:auto;'
+      = f.select :year, options_for_select(@years, Date.today.year), { include_blank: true }, class: 'form-select d-inline-block', style: 'width:auto;'
     = f.submit "Filter", class: 'btn btn-primary'
 %div#data
   = render partial: "data", locals: { data: @data }
