@@ -20,4 +20,4 @@ production:
   database: sum_production
   host: 127.0.0.1
   username: sum
-# password: <%# Rails.application.credentials.production[:database_password] %>
+  password: ENV['DB_PASSWORD']
