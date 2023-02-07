@@ -36,5 +36,9 @@ jobs:
         IMAGE_ID=$(echo $IMAGE_ID | tr '[A-Z]' '[a-z]')
         echo IMAGE_ID=$IMAGE_ID
         echo "$IMAGE_NAME $IMAGE_ID:$IMAGE_TAG"
+        # Push a timestampes image
         docker tag $IMAGE_NAME $IMAGE_ID:$IMAGE_TAG
         docker push $IMAGE_ID:$IMAGE_TAG
+        # Push image as latest
+        docker tag $IMAGE_NAME $IMAGE_ID:latest
+        docker push $IMAGE_ID:latest
