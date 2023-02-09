@@ -115,6 +115,7 @@ GEM
       activesupport (>= 5.1)
       haml (>= 4.0.6)
       railties (>= 5.1)
+    honeybadger (5.1.0)
     i18n (1.12.0)
       concurrent-ruby (~> 1.0)
     importmap-rails (1.1.5)
@@ -258,6 +259,7 @@ DEPENDENCIES
   debug
   devise
   haml-rails
+  honeybadger
   importmap-rails
   jbuilder
   pg (~> 1.1)
