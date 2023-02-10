@@ -59,4 +59,4 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - name: Notify Honeybadger
-      run: curl -g "https://api.honeybadger.io/v1/deploys?deploy[environment]=production&deploy[local_username]=travisdock&deploy[revision]=${GITHUB_SHA}&deploy[repository]=${GITHUB_REPOSITORY}&api_key=${HONEYBADGER_KEY}"
+      run:  curl -g "https://api.honeybadger.io/v1/deploys?deploy[environment]=production&deploy[local_username]=travisdock&deploy[revision]=${{ github.sha }}&deploy[repository]=${{ github.repository }}&api_key=${{ secrets.HONEYBADGER_KEY }}"
