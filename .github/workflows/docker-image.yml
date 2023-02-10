@@ -3,8 +3,6 @@ name: Production Docker Image CI
 on:
   push:
     branches: [ "main" ]
-  pull_request:
-    branches: [ "main" ]
 
 env:
   IMAGE_NAME: production
@@ -55,3 +53,10 @@ jobs:
         port: ${{ secrets.PORT }}
         script_stop: true
         script: ./deploy.sh
+
+  notify:
+    needs: deploy
+    runs-on: ubuntu-latest
+    steps:
+    - name: Notify Honeybadger
+      run: curl -g "https://api.honeybadger.io/v1/deploys?deploy[environment]=production&deploy[local_username]=travisdock&deploy[revision]=${GITHUB_SHA}&deploy[repository]=${GITHUB_REPOSITORY}&api_key=${HONEYBADGER_KEY}"
