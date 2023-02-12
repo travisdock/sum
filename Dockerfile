@@ -8,6 +8,10 @@ RUN apt-get install -y nodejs
 
 WORKDIR $APP_HOME
 
+# RUN echo 'alias rspec="RAILS_ENV=test bundle exec rspec"' >> ~/.bashrc
+RUN echo '#!/bin/bash\nRAILS_ENV=test bundle exec rspec "$@"' > /usr/bin/rspec && \
+          chmod +x /usr/bin/rspec
+
 EXPOSE 3000
 
 ENTRYPOINT ["./entrypoint.sh"]
