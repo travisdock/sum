@@ -8,8 +8,11 @@ RUN apt-get install -y nodejs
 
 WORKDIR $APP_HOME
 
-# RUN echo 'alias rspec="RAILS_ENV=test bundle exec rspec"' >> ~/.bashrc
+# alias rspec
 RUN echo '#!/bin/bash\nRAILS_ENV=test bundle exec rspec "$@"' > /usr/bin/rspec && \
+          chmod +x /usr/bin/rspec
+# alias rails
+RUN echo '#!/bin/bash\nRAILS_ENV=development bundle exec rails "$@"' > /usr/bin/rspec && \
           chmod +x /usr/bin/rspec
 
 EXPOSE 3000
