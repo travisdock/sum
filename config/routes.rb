@@ -6,6 +6,8 @@ Rails.application.routes.draw do
   resources :categories do
     delete 'remove', on: :member
   end
+  get '/merge_categories', to: 'categories#merge_form'
+  post '/merge_categories', to: 'categories#merge'
 
   # Dashboard
   get '/dashboard', to: 'dashboards#show'

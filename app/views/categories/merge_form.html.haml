@@ -1,0 +1,6 @@
+= form_with url: merge_categories_path, method: :post do |f|
+  = f.label :id, "Category to merge"
+  = f.select :id, options_for_select(@categories.map { |c| [c.name, c.id] })
+  = f.label :merge_with, 'Category to merge into'
+  = f.select :merge_with, options_for_select(@categories.map { |c| [c.name, c.id] })
+  = f.submit 'Merge'

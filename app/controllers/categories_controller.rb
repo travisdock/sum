@@ -66,6 +66,26 @@ class CategoriesController < ApplicationController
     end
   end
 
+  # GET /categories/merge
+  def merge_form
+    @categories = current_user.categories
+  end
+
+  # POST /categories/merge
+  # Copy all entries from one category to another and remove the old category
+  def merge
+    @category = Category.find(params[:id])
+    @merge_with = Category.find(params[:merge_with])
+    ActiveRecord::Base.transaction do
+      Entry.where(category: @category).update_all(category_id: @merge_with.id)
+      @category.destroy
+    end
+    redirect_to categories_url, notice: "Category was successfully merged."
+
+  rescue ActiveRecord::RecordInvalid => e
+    redirect_to categories_url, alert: "There was an error. Category could not be merged."
+  end
+
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_category
