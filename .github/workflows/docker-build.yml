@@ -3,8 +3,8 @@ name: Production Docker Image CI Build
 
 on:
   pull_request:
-    types:
-      - opened
+    branches:
+      - main
 
 jobs:
   build:
