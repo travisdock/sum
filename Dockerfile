@@ -1,4 +1,4 @@
-FROM ruby:3.1.3
+FROM ruby:3.2.1
 
 ENV APP_HOME="/app_home"
 ENV BUNDLE_PATH="${APP_HOME}/vendor/bundle"
