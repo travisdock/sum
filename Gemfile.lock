@@ -105,7 +105,6 @@ GEM
       activesupport (>= 5.1)
       haml (>= 4.0.6)
       railties (>= 5.1)
-    honeybadger (5.1.0)
     i18n (1.12.0)
       concurrent-ruby (~> 1.0)
     importmap-rails (1.1.5)
@@ -208,6 +207,11 @@ GEM
       sprockets (> 3.0)
       sprockets-rails
       tilt
+    sentry-rails (5.8.0)
+      railties (>= 5.0)
+      sentry-ruby (~> 5.8.0)
+    sentry-ruby (5.8.0)
+      concurrent-ruby (~> 1.0, >= 1.0.2)
     sprockets (4.2.0)
       concurrent-ruby (~> 1.0)
       rack (>= 2.2.4, < 4)
@@ -249,13 +253,14 @@ DEPENDENCIES
   debug
   devise
   haml-rails
-  honeybadger
   importmap-rails
   jbuilder
   pg (~> 1.1)
   puma
   rails
   rspec-rails
+  sentry-rails
+  sentry-ruby
   sprockets-rails
   stimulus-rails
   turbo-rails

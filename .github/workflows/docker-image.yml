@@ -54,9 +54,3 @@ jobs:
         script_stop: true
         script: ./deploy.sh
 
-  notify:
-    needs: deploy
-    runs-on: ubuntu-latest
-    steps:
-    - name: Notify Honeybadger
-      run:  curl -g "https://api.honeybadger.io/v1/deploys?deploy[environment]=production&deploy[local_username]=travisdock&deploy[revision]=${{ github.sha }}&deploy[repository]=${{ github.repository }}&api_key=${{ secrets.HONEYBADGER_KEY }}"
