@@ -1,4 +1,4 @@
-name: Production Docker Image CI
+name: Production Deploy
 
 on:
   push:

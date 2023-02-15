@@ -1,5 +1,5 @@
 
-name: Production Docker Image CI Build
+name: Build
 
 on:
   pull_request:
