@@ -1,7 +1,7 @@
 FROM ruby:3.2.1
 
-ENV APP_HOME="/app_home" \
-    BUNDLE_PATH="${APP_HOME}/vendor/bundle" \
+ENV APP_HOME="/app_home"
+ENV BUNDLE_PATH="${APP_HOME}/vendor/bundle" \
     BUNDLE_WITHOUT="production"
 
 RUN curl -fsSL https://deb.nodesource.com/setup_19.x | bash -
@@ -10,11 +10,11 @@ RUN apt-get install -y nodejs
 WORKDIR $APP_HOME
 
 # alias rspec
-RUN echo '#!/bin/bash\nRAILS_ENV=test bundle exec rspec "$@"' > /usr/bin/rspec && \
+#RUN echo '#!/bin/bash\nRAILS_ENV=test bundle exec rspec "$@"' > /usr/bin/rspec && \
           chmod +x /usr/bin/rspec
 # alias rails
-RUN echo '#!/bin/bash\nRAILS_ENV=development bundle exec rails "$@"' > /usr/bin/rspec && \
-          chmod +x /usr/bin/rspec
+#RUN echo '#!/bin/bash\nRAILS_ENV=development bundle exec rails "$@"' > /usr/bin/rails&& \
+          chmod +x /usr/bin/rails
 
 EXPOSE 3000
 
