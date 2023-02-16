@@ -10,11 +10,11 @@ class Dashboard
   end
 
   def total_spending
-    @entries.joins(:category).where('category.income' => false).where('category.untracked' => false).sum(:amount)
+    @entries.by_income(false).by_untracked(false).sum(:amount)
   end
 
   def total_income
-    @entries.joins(:category).where('category.income' => true).where('category.untracked' => false).sum(:amount)
+    @entries.by_income(true).by_untracked(false).sum(:amount)
   end
 
   def profit_loss
@@ -27,7 +27,7 @@ class Dashboard
 
   def total_spending_by_month
     @entries.group('(EXTRACT(MONTH FROM date))::integer')
-            .joins(:category).where('category.income' => false)
+            .by_income(false)
             .sum(:amount)
             .transform_keys { |key| Date::MONTHNAMES[key] }
   end
