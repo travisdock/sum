@@ -96,8 +96,6 @@ GEM
     ffi (1.15.5)
     globalid (1.1.0)
       activesupport (>= 5.0)
-    gutentag (2.6.2)
-      activerecord (>= 3.2.0)
     haml (6.1.1)
       temple (>= 0.8.2)
       thor
@@ -254,7 +252,6 @@ DEPENDENCIES
   chartkick
   debug
   devise
-  gutentag
   haml-rails
   importmap-rails
   jbuilder
