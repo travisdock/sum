@@ -6,7 +6,6 @@ class EntriesController < ApplicationController
 
   # GET /entries or /entries.json
   def index
-    last_entry_date = Entry.where(user: current_user).order(:date).last.date
     @entries = Entry.where(user: current_user).by_year(Date.today.year).by_month(Date.today.month).includes(:category)
     @years = Entry.where(user: current_user).order(:date).pluck(:date).uniq { |d| d.year }.map(&:year)
   end
@@ -30,51 +29,43 @@ class EntriesController < ApplicationController
   # GET /entries/new
   def new
     @entry = Entry.new
+    @entry.build_tag
     @categories = current_user.categories.where(year: current_user.year_view)
   end
 
   # GET /entries/1/edit
   def edit
     @categories = current_user.categories.where(year: current_user.year_view)
+    @entry.build_tag unless @entry.tag
   end
 
-  # POST /entries or /entries.json
+  # POST /entries
   def create
     @entry = Entry.new(entry_params)
     @entry.user = current_user
 
-    respond_to do |format|
-      if @entry.save
-        format.html { redirect_to new_entry_url, notice: "Entry was successfully created." }
-        format.json { render :show, status: :created, location: @entry }
-      else
-        format.html { render :new, status: :unprocessable_entity }
-        format.json { render json: @entry.errors, status: :unprocessable_entity }
-      end
+    if @entry.save
+      redirect_to new_entry_url, notice: "Entry was successfully created."
+    else
+      @categories = current_user.categories.where(year: current_user.year_view)
+      render :new, status: :unprocessable_entity
     end
   end
 
-  # PATCH/PUT /entries/1 or /entries/1.json
+  # PATCH/PUT /entries/1
   def update
-    respond_to do |format|
-      if @entry.update(entry_params)
-        format.html { redirect_to entry_url(@entry), notice: "Entry was successfully updated." }
-        format.json { render :show, status: :ok, location: @entry }
-      else
-        format.html { render :edit, status: :unprocessable_entity }
-        format.json { render json: @entry.errors, status: :unprocessable_entity }
-      end
+    if @entry.update(entry_params)
+      redirect_to entry_url(@entry), notice: "Entry was successfully updated."
+    else
+      @categories = current_user.categories.where(year: current_user.year_view)
+      render :edit, status: :unprocessable_entity
     end
   end
 
-  # DELETE /entries/1 or /entries/1.json
+  # DELETE /entries/1
   def destroy
     @entry.destroy
-
-    respond_to do |format|
-      format.html { redirect_to entries_url, notice: "Entry was successfully destroyed." }
-      format.json { head :no_content }
-    end
+    redirect_to entries_url, notice: "Entry was successfully destroyed."
   end
 
   # GET /entries/export
@@ -98,6 +89,6 @@ class EntriesController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def entry_params
-      params.require(:entry).permit(:date, :amount, :notes, :category_name, :income, :untracked, :user_id, :category_id)
+      params.require(:entry).permit(:date, :amount, :notes, :category_name, :income, :untracked, :user_id, :category_id, tag_attributes: [:id, :name, :_destroy])
     end
 end
