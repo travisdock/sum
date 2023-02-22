@@ -3,7 +3,8 @@ class TagsController < ApplicationController
 
   # GET /tags
   def index
-    @tags = Tag.all
+    ids = Entry.where(user: current_user).pluck(:tag_id)
+    @tags = Tag.where(id: ids)
   end
 
   # GET /tags/1
