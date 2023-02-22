@@ -18,6 +18,7 @@ export default class extends Controller {
 
     var table = $('.table').DataTable({
        paging: false,
+       order: [[ 0, "desc" ]],
        info: false,
        //dom: '<"#toolbar.float-start">frtip',
        dom: "<'row'<'#toolbar.col-sm-12 col-md-6'l><'col-sm-12 col-md-6'f>>" +
