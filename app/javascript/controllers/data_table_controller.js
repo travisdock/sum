@@ -25,6 +25,8 @@ export default class extends Controller {
                "<'row'<'col-sm-12'tr>>" +
                        "<'row'<'col-sm-12 col-md-5'i><'col-sm-12 col-md-7'p>>",
        drawCallback: function() {
+         // don't sum if table has class no-sum
+         if ($('.no-sum').length > 0) return;
          const sum = this.api().column(1,{search:'applied'}).data().sum();
          $('#toolbar').text(`Sum: ${num2curr(sum)}`);
        }

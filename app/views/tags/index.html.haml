@@ -1,0 +1,18 @@
+%h1 Tags
+
+%div.data-table-wrapper{ 'data-controller' => 'data-table' }
+%table.table.hover.no-sum
+  %thead
+    %tr
+      %th{scope: "col"} Name
+      %th{scope: "col"} Created
+      %th{scope: "col"}
+  %tbody
+    - @tags.each do |tag|
+      %tr
+        %td= tag.name
+        %td= tag.created_at
+        %td
+          = link_to 'Edit', edit_tag_path(tag), class: 'btn btn-primary'
+          = link_to 'Delete', tag_path(tag), data: { 'turbo-method': :delete, 'turbo-confirm': 'Are you sure?' }, class: 'btn btn-danger'
+
