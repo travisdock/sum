@@ -8,7 +8,7 @@
 
   .field.mb-3{ 'data-controller': 'date-picker' }
     = f.label :date, { class: 'form-label' }
-    = f.date_field :date, { class: 'form-control', id: 'date-picker' }
+    = f.date_field :date, { class: 'form-control', id: "#{@entry.id ? '' : 'date-picker'}" }
   .field.mb-3
     = f.label :amount, { class: 'form-label' }
     = f.number_field :amount, { class: 'form-control', placeholder: '$0.00', step: '.01', inputmode: "decimal" }
