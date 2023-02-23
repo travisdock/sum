@@ -35,6 +35,7 @@ gem "bootsnap", require: false
 
 # Use devise for auth
 gem 'devise'
+gem "responders"
 
 # Use bootstrap for styling
 gem 'bootstrap'
