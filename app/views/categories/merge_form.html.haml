@@ -1,6 +1,15 @@
-= form_with url: merge_categories_path, method: :post do |f|
-  = f.label :id, "Category to merge"
-  = f.select :id, options_for_select(@categories.map { |c| [c.name, c.id] })
-  = f.label :merge_with, 'Category to merge into'
-  = f.select :merge_with, options_for_select(@categories.map { |c| [c.name, c.id] })
-  = f.submit 'Merge'
+%div
+  = form_with url: merge_categories_path, method: :post do |f|
+    %div.d-flex.flex-column.align-items-center
+      = f.label :id, "I want to merge Category:"
+      = f.select :id, options_for_select(@categories.map { |c| ["#{c.name} (#{c.year})", c.id] }), include_blank: true
+    %div.d-flex.flex-column.align-items-center
+      = f.label :merge_with, "Into Category:"
+      = f.select :merge_with, options_for_select(@categories.map { |c| ["#{c.name} (#{c.year})", c.id] }), include_blank: true
+    %div.d-flex.flex-column.align-items-center
+      = f.label :tag_id, "and mark the entries with the following tag:"
+      %div
+        = f.select :tag_id, options_for_select(@tags.map { |t| [t.name, t.id] }), include_blank: true
+        = f.text_field :tag_name, placeholder: "or create a new tag"
+    %div.d-flex.flex-column.align-items-center
+      = f.submit 'Merge'

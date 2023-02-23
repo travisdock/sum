@@ -69,16 +69,23 @@ class CategoriesController < ApplicationController
   # GET /categories/merge
   def merge_form
     @categories = current_user.categories
+    @tags = current_user.tags
   end
 
   # POST /categories/merge
   # Copy all entries from one category to another and remove the old category
   def merge
-    @category = Category.find(params[:id])
-    @merge_with = Category.find(params[:merge_with])
+    @old_category = current_user.categories.find(merge_params[:id])
+    @merge_with = current_user.categories.find(merge_params[:merge_with])
+    if merge_params[:tag_id].present?
+      @tag = current_user.tags.find(merge_params[:tag_id])
+    elsif merge_params[:tag_name].present?
+      @tag = current_user.tags.find_or_create_by(name: merge_params[:tag_name])
+    end
     ActiveRecord::Base.transaction do
-      Entry.where(category: @category).update_all(category_id: @merge_with.id)
-      @category.destroy
+      entries = Entry.where(category: @old_category)
+      entries.update_all(category_id: @merge_with.id, tag_id: @tag&.id)
+      @old_category.destroy
     end
     redirect_to categories_url, notice: "Category was successfully merged."
 
@@ -89,11 +96,17 @@ class CategoriesController < ApplicationController
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_category
-      @category = Category.find(params[:id])
+      @category = current_user.categories.find(params[:id])
+    rescue ActiveRecord::RecordNotFound
+      redirect_to categories_url, alert: "Category not found."
     end
 
     # Only allow a list of trusted parameters through.
     def category_params
       params.require(:category).permit(:name, :income, :untracked, :year)
+    end
+
+    def merge_params
+      params.permit(:id, :merge_with, :tag_id, :tag_name)
     end
 end
