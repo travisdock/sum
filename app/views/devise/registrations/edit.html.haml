@@ -1,6 +1,6 @@
 = render "devise/shared/error_messages", resource: resource
 %h3 Edit Year View
-= form_for(resource, as: resource_name, url: registration_path(resource_name), html: { 'data-turbo': false, method: :put }) do |f|
+= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f|
   .field.mb-3
     = f.label :year_view, class: 'form-label'
     %br/
@@ -18,7 +18,7 @@
 %br
 
 %h3 Edit Email/Password
-= form_for(resource, as: resource_name, url: registration_path(resource_name), html: { 'data-turbo': false, method: :put }) do |f|
+= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f|
   .field.mb-3
     = f.label :email, class: 'form-label'
     %br/
