@@ -51,12 +51,9 @@ class TagsController < ApplicationController
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_tag
-      ids = Entry.where(user: current_user).pluck(:tag_id)
-      if ids.include?(params[:id].to_i)
-        @tag = Tag.find(params[:id])
-      else
-        redirect_to tags_url, notice: "Tag not found."
-      end
+      @tag = current_user.tags.find(params[:id])
+    rescue ActiveRecord::RecordNotFound
+      redirect_to tags_url, notice: "Tag not found."
     end
 
     # Only allow a list of trusted parameters through.
