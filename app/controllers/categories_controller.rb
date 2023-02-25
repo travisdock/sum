@@ -68,7 +68,7 @@ class CategoriesController < ApplicationController
 
   # GET /categories/merge
   def merge_form
-    @categories = current_user.categories
+    @categories = current_user.categories.order(year: :asc)
     @tags = current_user.tags
   end
 
@@ -87,10 +87,10 @@ class CategoriesController < ApplicationController
       entries.update_all(category_id: @merge_with.id, tag_id: @tag&.id)
       @old_category.destroy
     end
-    redirect_to categories_url, notice: "Category was successfully merged."
+    redirect_to merge_categories_path, notice: "Category was successfully merged."
 
   rescue ActiveRecord::RecordInvalid => e
-    redirect_to categories_url, alert: "There was an error. Category could not be merged."
+    redirect_to merge_categories_path, alert: "There was an error. Category could not be merged."
   end
 
   private
