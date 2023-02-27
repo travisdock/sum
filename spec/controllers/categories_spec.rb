@@ -31,7 +31,7 @@ RSpec.describe CategoriesController, type: :controller do
       get :merge_form
       expect(response).to have_http_status(:success)
       post :merge, params: { id: @category2.id, merge_with: @category1.id }
-      expect(response).to redirect_to categories_path
+      expect(response).to redirect_to merge_categories_path
       expect(Entry.where(category_id: @category2.id).count).to eq(0)
       expect(Entry.where(category_id: @category1.id).count).to eq(2)
       expect(Category.find_by(id: @category2.id)).to be_nil
@@ -44,7 +44,7 @@ RSpec.describe CategoriesController, type: :controller do
       get :merge_form
       expect(response).to have_http_status(:success)
       post :merge, params: { id: @category2.id, merge_with: @category1.id, tag_name: "Test Tag" }
-      expect(response).to redirect_to categories_path
+      expect(response).to redirect_to merge_categories_path
       expect(Entry.where(category_id: @category2.id).count).to eq(0)
       expect(Entry.where(category_id: @category1.id).count).to eq(2)
       expect(Category.find_by(id: @category2.id)).to be_nil
@@ -62,7 +62,7 @@ RSpec.describe CategoriesController, type: :controller do
       get :merge_form
       expect(response).to have_http_status(:success)
       post :merge, params: { id: @category2.id, merge_with: @category1.id, tag_id: tag.id }
-      expect(response).to redirect_to categories_path
+      expect(response).to redirect_to merge_categories_path
       expect(Entry.where(category_id: @category2.id).count).to eq(0)
       expect(Entry.where(category_id: @category1.id).count).to eq(3)
       expect(Category.find_by(id: @category2.id)).to be_nil
