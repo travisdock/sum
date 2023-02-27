@@ -11,10 +11,10 @@ WORKDIR $APP_HOME
 
 # alias rspec
 #RUN echo '#!/bin/bash\nRAILS_ENV=test bundle exec rspec "$@"' > /usr/bin/rspec && \
-          chmod +x /usr/bin/rspec
+#          chmod +x /usr/bin/rspec
 # alias rails
 #RUN echo '#!/bin/bash\nRAILS_ENV=development bundle exec rails "$@"' > /usr/bin/rails&& \
-          chmod +x /usr/bin/rails
+#          chmod +x /usr/bin/rails
 
 EXPOSE 3000
 

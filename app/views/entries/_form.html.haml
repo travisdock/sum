@@ -18,5 +18,13 @@
   .field.mb-3
     = f.label :category, { class: 'form-label' }
     = f.collection_select :category_id, @categories, :id, :name, { include_blank: true }, { class: 'form-select' }
+  .field.mb-3{ 'data-controller': 'tag' }
+    = f.fields_for :tag do |nested_form|
+      = nested_form.label :name, 'Tag', { class: 'form-label' }
+      %div.d-flex.justify-content-between
+        = nested_form.text_field :name, { id: 'tag', class: 'form-control me-5' }
+        = nested_form.hidden_field :_destroy, { id: 'tag-destroy' }
+        %button.btn.btn-danger{ id: 'destroy-btn', class: "#{'invisible' unless @entry.tag_id}", data: { action: "click->tag#remove:prevent" } } Remove
+        %button.btn.btn-primary.invisible{ id: 'restore-btn', data: { action: "click->tag#restore:prevent" } } Restore
   .actions
     = f.submit 'Save', class: 'btn btn-primary'

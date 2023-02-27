@@ -6,4 +6,9 @@ class User < ApplicationRecord
          :timeoutable
 
   has_and_belongs_to_many :categories
+
+  def tags
+    tag_ids = Entry.where(user: self).pluck(:tag_id).uniq
+    Tag.where(id: tag_ids)
+  end
 end
