@@ -14,5 +14,5 @@
         %td= tag.created_at
         %td
           = link_to 'Edit', edit_tag_path(tag), class: 'btn btn-primary'
-          = link_to 'Delete', tag_path(tag), data: { 'turbo-method': :delete, 'turbo-confirm': 'Are you sure?' }, class: 'btn btn-danger'
+          = link_to 'Delete', tag_path(tag), data: { 'turbo-method': :delete, 'turbo-confirm': "Are you sure? This will remove the tag from #{Entry.where(tag_id: tag.id).count} entries." }, class: 'btn btn-danger'
 
