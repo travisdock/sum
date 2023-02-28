@@ -51,6 +51,8 @@ group :development, :test do
   gem "debug", platforms: %i[ mri mingw x64_mingw ]
   # Use rpsec for testing
   gem 'rspec-rails'
+  # Use SimpleCov for test coverage
+  gem 'simplecov', require: false
 end
 
 group :development do
