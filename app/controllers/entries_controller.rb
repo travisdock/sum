@@ -15,7 +15,7 @@ class EntriesController < ApplicationController
     @entries = Entry.where(user: current_user)
                     .by_year(params['year'])
                     .by_month(params['month'])
-                    .by_income(params['income'])
+                    .by_income(ActiveModel::Type::Boolean.new.cast(params['income']))
 
     respond_to do |format|
       format.turbo_stream { render turbo_stream: turbo_stream.replace(:entries, partial: "entries", locals: { entries: @entries }) }
