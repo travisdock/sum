@@ -80,6 +80,12 @@ GEM
     chartkick (5.0.1)
     concurrent-ruby (1.2.0)
     crass (1.0.6)
+    database_cleaner (2.0.1)
+      database_cleaner-active_record (~> 2.0.0)
+    database_cleaner-active_record (2.0.1)
+      activerecord (>= 5.a)
+      database_cleaner-core (~> 2.0.0)
+    database_cleaner-core (2.0.1)
     date (3.3.3)
     debug (1.7.1)
       irb (>= 1.5.0)
@@ -257,6 +263,7 @@ DEPENDENCIES
   bootsnap
   bootstrap
   chartkick
+  database_cleaner
   debug
   devise
   haml-rails

@@ -26,4 +26,8 @@ Rails.application.routes.draw do
       root 'devise/sessions#new', as: :unauthenticated_root
     end
   end
+
+  if Rails.configuration.database_configuration[Rails.env]['database'] == 'sum_test'
+    get '/clear_db', to: 'test#clear_db'
+  end
 end

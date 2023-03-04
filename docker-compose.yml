@@ -12,6 +12,7 @@ services:
   web:
     build: .
     environment:
+      CYPRESS: $CYPRESS
       RAILS_ENV: development
     volumes:
       - .:/app_home

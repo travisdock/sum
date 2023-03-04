@@ -53,6 +53,8 @@ group :development, :test do
   gem 'rspec-rails'
   # Use SimpleCov for test coverage
   gem 'simplecov', require: false
+  # Use database_cleaner for cleaning test database with Cypress
+  gem 'database_cleaner'
 end
 
 group :development do
