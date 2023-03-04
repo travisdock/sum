@@ -6,9 +6,18 @@ class User < ApplicationRecord
          :timeoutable
 
   has_and_belongs_to_many :categories
+  has_many :entries
+  has_many :tags, through: :entries
+  before_destroy :remove_data
 
-  def tags
-    tag_ids = Entry.where(user: self).pluck(:tag_id).uniq
-    Tag.where(id: tag_ids)
+  def remove_data
+    self.tags.destroy_all
+    self.entries.destroy_all
+    self.categories.destroy_all
   end
+
+  #def tags
+  #  tag_ids = entries.pluck(:tag_id).uniq
+  #  Tag.where(id: tag_ids)
+  #end
 end

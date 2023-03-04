@@ -52,8 +52,8 @@ describe('The Happiest Path', () => {
     cy.get('input[value="Pie Chart"]').click()
     // Visit Account page
     cy.get('a[href="/users/edit"]').click()
-    cy.contains('Cancel my account').click()
-
+    cy.get('button').contains('Cancel my account').click()
+    cy.get('.toast-header').should('contain', 'Bye! Your account has been successfully cancelled. We hope to see you again soon.')
   })
 
 })

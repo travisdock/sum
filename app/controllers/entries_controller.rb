@@ -6,16 +6,16 @@ class EntriesController < ApplicationController
 
   # GET /entries or /entries.json
   def index
-    @entries = Entry.where(user: current_user).by_year(Date.today.year).by_month(Date.today.month).includes(:category)
-    @years = Entry.where(user: current_user).order(:date).pluck(:date).uniq { |d| d.year }.map(&:year)
+    @entries = current_user.entries.by_year(Date.today.year).by_month(Date.today.month).includes(:category)
+    @years = current_user.entries.order(:date).pluck(:date).uniq { |d| d.year }.map(&:year)
   end
 
   # POST /filtered_entries
   def filtered_index
-    @entries = Entry.where(user: current_user)
-                    .by_year(params['year'])
-                    .by_month(params['month'])
-                    .by_income(ActiveModel::Type::Boolean.new.cast(params['income']))
+    @entries = current_user.entries
+                           .by_year(params['year'])
+                           .by_month(params['month'])
+                           .by_income(ActiveModel::Type::Boolean.new.cast(params['income']))
 
     respond_to do |format|
       format.turbo_stream { render turbo_stream: turbo_stream.replace(:entries, partial: "entries", locals: { entries: @entries }) }
@@ -70,7 +70,7 @@ class EntriesController < ApplicationController
 
   # GET /entries/export
   def export
-    @entries = Entry.where(user: current_user)
+    @entries = current_user.entries
     respond_to do |format|
       format.csv do
         response.headers['Content-Type'] = 'text/csv'
@@ -84,7 +84,7 @@ class EntriesController < ApplicationController
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_entry
-      @entry = Entry.where(user: current_user).find(params[:id])
+      @entry = current_user.entries.find(params[:id])
     rescue ActiveRecord::RecordNotFound
       redirect_to entries_url, notice: "Entry not found."
     end

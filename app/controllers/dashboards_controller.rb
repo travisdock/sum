@@ -3,9 +3,9 @@ class DashboardsController < ApplicationController
 
   # GET POST /dashboard
   def show
-    entries = Entry.where(user: current_user).by_year(params['year'] || Date.today.year).by_month(params['month'] || Date.today.month)
+    entries = current_user.entries.by_year(params['year'] || Date.today.year).by_month(params['month'] || Date.today.month)
     @data = Dashboard.new(entries)
-    @years = Entry.where(user: current_user).order(:date).pluck(:date).uniq { |d| d.year }.map(&:year)
+    @years = current_user.entries.order(:date).pluck(:date).uniq { |d| d.year }.map(&:year)
 
     respond_to do |format|
       format.html
@@ -14,7 +14,7 @@ class DashboardsController < ApplicationController
   end
 
   def charts
-    entries = Entry.where(user: current_user).by_income(false).by_year(params['year']).by_month(params['month'])
+    entries = current_user.entries.by_income(false).by_year(params['year']).by_month(params['month'])
     @data = Dashboard.new(entries)
     render turbo_stream: turbo_stream.replace(:chart, partial: params[:chart_name], locals: { data: @data })
   end
