@@ -1,0 +1,21 @@
+%h1 Recurring Entries
+
+%a.btn.btn-primary{ href: new_recurrable_path }
+  %i.bi.bi-plus-circle-fill
+  New Recurring Entry
+
+%div.data-table-wrapper{ 'data-controller' => 'data-table' }
+%table.table.hover.no-sum
+  %thead
+    %tr
+      %th Name
+      %th Amount
+      %th Category
+
+  %tbody
+    - @recurrables.each do |recurrable|
+      %tr.clickable-row{ 'data-href' => recurrable_path(recurrable) }
+        %td= recurrable.name
+        %td= recurrable.amount
+        %td= recurrable.category.name
+

@@ -1,0 +1,24 @@
+%p#notice= notice
+
+%p
+  %b Name:
+  = @recurrable.name
+%p
+  %b Rule:
+  = @recurrable.rule
+%p
+  %b Amount:
+  = @recurrable.amount
+%p
+  %b Notes:
+  = @recurrable.notes
+%p
+  %b Category:
+  = @recurrable.category.name
+%p
+  %b Tag:
+  = @recurrable.tag&.name
+
+= link_to 'Edit', edit_recurrable_path(@recurrable)
+\|
+= link_to 'Back', recurrables_path
