@@ -1,3 +1,10 @@
+GIT
+  remote: https://github.com/ice-cube-ruby/ice_cube.git
+  revision: 6b97e77c106cd6662cb7292a5f59b01e4ccaedc6
+  ref: 6b97e77c106cd6662cb7292a5f59b01e4ccaedc6
+  specs:
+    ice_cube (0.16.4)
+
 GEM
   remote: https://rubygems.org/
   specs:
@@ -267,6 +274,7 @@ DEPENDENCIES
   debug
   devise
   haml-rails
+  ice_cube!
   importmap-rails
   jbuilder
   pg (~> 1.4)

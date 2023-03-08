@@ -47,7 +47,9 @@ ActiveRecord::Schema[7.0].define(version: 2023_03_05_173630) do
 
   create_table "recurrables", force: :cascade do |t|
     t.string "name"
-    t.text "rule"
+    t.integer "date"
+    t.text "schedule"
+    t.string "schedule_string"
     t.decimal "amount"
     t.string "notes"
     t.bigint "category_id", null: false

@@ -19,6 +19,7 @@ class RecurrablesController < ApplicationController
   # GET /recurrables/1/edit
   def edit
     @categories = current_user.categories
+    @recurrable.build_tag unless @recurrable.tag
   end
 
   # POST /recurrables
@@ -59,6 +60,6 @@ class RecurrablesController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def recurrable_params
-      params.require(:recurrable).permit(:name, :rule, :amount, :notes, :category_id, :user_id, :tag_id)
+      params.require(:recurrable).permit(:name, :date, :amount, :notes, :category_id, tag_attributes: [:id, :name, :_destroy ])
     end
 end
