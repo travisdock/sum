@@ -13,6 +13,7 @@ class RecurrablesController < ApplicationController
   # GET /recurrables/new
   def new
     @recurrable = Recurrable.new
+    @recurrable.build_tag
     @categories = current_user.categories
   end
 

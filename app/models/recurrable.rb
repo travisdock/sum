@@ -1,7 +1,7 @@
 class Recurrable < ApplicationRecord
+  include Taggable
   belongs_to :category
   belongs_to :user
-  belongs_to :tag, optional: true
 
   serialize :schedule
 
