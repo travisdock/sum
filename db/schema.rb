@@ -10,9 +10,18 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_03_05_173630) do
+ActiveRecord::Schema[7.0].define(version: 2023_03_09_122017) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "arask_jobs", force: :cascade do |t|
+    t.string "job"
+    t.datetime "execute_at"
+    t.string "interval"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["execute_at"], name: "index_arask_jobs_on_execute_at"
+  end
 
   create_table "categories", force: :cascade do |t|
     t.string "name"
@@ -47,10 +56,10 @@ ActiveRecord::Schema[7.0].define(version: 2023_03_05_173630) do
 
   create_table "recurrables", force: :cascade do |t|
     t.string "name"
-    t.integer "date"
+    t.integer "day_of_month"
     t.text "schedule"
     t.string "schedule_string"
-    t.decimal "amount"
+    t.decimal "amount", precision: 8, scale: 2
     t.string "notes"
     t.bigint "category_id", null: false
     t.bigint "user_id", null: false

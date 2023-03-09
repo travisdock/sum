@@ -73,6 +73,9 @@ GEM
       i18n (>= 1.6, < 2)
       minitest (>= 5.1)
       tzinfo (~> 2.0)
+    arask (1.2.5)
+      fugit (~> 1.1)
+      rails (>= 5.0)
     autoprefixer-rails (10.4.7.0)
       execjs (~> 2)
     bcrypt (3.1.18)
@@ -106,8 +109,13 @@ GEM
     diff-lcs (1.5.0)
     docile (1.4.0)
     erubi (1.12.0)
+    et-orbi (1.2.7)
+      tzinfo
     execjs (2.8.1)
     ffi (1.15.5)
+    fugit (1.8.1)
+      et-orbi (~> 1, >= 1.2.7)
+      raabro (~> 1.4)
     globalid (1.1.0)
       activesupport (>= 5.0)
     haml (6.1.1)
@@ -160,6 +168,7 @@ GEM
     popper_js (2.11.6)
     puma (6.1.1)
       nio4r (~> 2.0)
+    raabro (1.4.0)
     racc (1.6.2)
     rack (2.2.6.3)
     rack-test (2.0.2)
@@ -267,6 +276,7 @@ PLATFORMS
   x86_64-linux
 
 DEPENDENCIES
+  arask
   bootsnap
   bootstrap
   chartkick
