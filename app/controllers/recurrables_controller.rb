@@ -61,6 +61,6 @@ class RecurrablesController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def recurrable_params
-      params.require(:recurrable).permit(:name, :date, :amount, :notes, :category_id, tag_attributes: [:id, :name, :_destroy ])
+      params.require(:recurrable).permit(:name, :day_of_month, :amount, :notes, :category_id, tag_attributes: [:id, :name, :_destroy ])
     end
 end

@@ -11,6 +11,7 @@
       %th Name
       %th Amount
       %th Category
+      %th Day of Month
 
   %tbody
     - @recurrables.each do |recurrable|
@@ -18,4 +19,5 @@
         %td= recurrable.name
         %td= recurrable.amount
         %td= recurrable.category.name
+        %td= recurrable.day_of_month
 
