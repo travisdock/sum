@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  resources :recurrables
   resources :tags
   resources :entries
   post '/filtered_entries', to: 'entries#filtered_index'

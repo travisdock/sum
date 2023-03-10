@@ -46,6 +46,13 @@ gem 'haml-rails'
 # Use Chartkick for charts
 gem 'chartkick'
 
+# Use icecube for scheduling
+gem 'ice_cube', github: 'ice-cube-ruby/ice_cube',
+      ref: '6b97e77c106cd6662cb7292a5f59b01e4ccaedc6'
+
+# Use arask for scheduling crons
+gem 'arask'
+
 group :development, :test do
   # See https://guides.rubyonrails.org/debugging_rails_applications.html#debugging-with-the-debug-gem
   gem "debug", platforms: %i[ mri mingw x64_mingw ]

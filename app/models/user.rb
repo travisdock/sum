@@ -7,6 +7,7 @@ class User < ApplicationRecord
 
   has_and_belongs_to_many :categories
   has_many :entries
+  has_many :recurrables
   before_destroy :remove_data
 
   def tags

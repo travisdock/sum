@@ -10,9 +10,18 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_02_19_162704) do
+ActiveRecord::Schema[7.0].define(version: 2023_03_09_122017) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "arask_jobs", force: :cascade do |t|
+    t.string "job"
+    t.datetime "execute_at"
+    t.string "interval"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["execute_at"], name: "index_arask_jobs_on_execute_at"
+  end
 
   create_table "categories", force: :cascade do |t|
     t.string "name"
@@ -45,6 +54,23 @@ ActiveRecord::Schema[7.0].define(version: 2023_02_19_162704) do
     t.index ["user_id"], name: "index_entries_on_user_id"
   end
 
+  create_table "recurrables", force: :cascade do |t|
+    t.string "name"
+    t.integer "day_of_month"
+    t.text "schedule"
+    t.string "schedule_string"
+    t.decimal "amount", precision: 8, scale: 2
+    t.string "notes"
+    t.bigint "category_id", null: false
+    t.bigint "user_id", null: false
+    t.bigint "tag_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["category_id"], name: "index_recurrables_on_category_id"
+    t.index ["tag_id"], name: "index_recurrables_on_tag_id"
+    t.index ["user_id"], name: "index_recurrables_on_user_id"
+  end
+
   create_table "tags", force: :cascade do |t|
     t.string "name"
     t.datetime "created_at", null: false
@@ -67,4 +93,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_02_19_162704) do
   add_foreign_key "entries", "categories"
   add_foreign_key "entries", "tags"
   add_foreign_key "entries", "users"
+  add_foreign_key "recurrables", "categories"
+  add_foreign_key "recurrables", "tags"
+  add_foreign_key "recurrables", "users"
 end

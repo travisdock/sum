@@ -1,0 +1,23 @@
+%h2 Recurring Expense
+%p
+  %b Name:
+  = @recurrable.name
+%p
+  %b Schedule:
+  = @recurrable.schedule_string
+%p
+  %b Amount:
+  = @recurrable.amount
+%p
+  %b Notes:
+  = @recurrable.notes
+%p
+  %b Category:
+  = @recurrable.category.name
+%p
+  %b Tag:
+  = @recurrable.tag&.name
+
+= link_to 'Edit', edit_recurrable_path(@recurrable), class: 'btn btn-primary'
+= link_to 'Back', recurrables_path, class: 'btn btn-primary'
+= link_to 'Destroy', recurrable_path(@recurrable), class: 'btn btn-primary', data: { 'turbo-method': :delete, 'turbo-confirm': 'Are you sure you want to delete this?' }
