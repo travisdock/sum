@@ -5,5 +5,4 @@ namespace :recurring do
       recurrable.create_occurrence
     end
   end
-
 end
