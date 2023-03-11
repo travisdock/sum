@@ -9,4 +9,6 @@ else
   bundle install --jobs=`getconf _NPROCESSORS_ONLN`
 fi
 
+./bin/rails db:prepare
+
 exec "$@"
