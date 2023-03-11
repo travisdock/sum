@@ -17,6 +17,14 @@ class Recurrable < ApplicationRecord
     IceCube::Schedule.from_yaml(read_attribute(:schedule))
   end
 
+  def self.create_occurrences
+    where(day_of_month: Date.today.day).each do |recurrable|
+      unless Entry.where(user_id: recurrable.user_id, category_id: recurrable.category_id, date: Date.today, amount: recurrable.amount, notes: recurrable.notes).exists?
+        recurrable.create_occurrence
+      end
+    end
+  end
+
   def create_occurrence
     Entry.create!(
       date: Date.today,
