@@ -12,11 +12,9 @@
       %th{scope: "col"} Name
       %th{scope: "col"} Income
       %th{scope: "col"} Untracked
-      %th{scope: "col"} Year
   %tbody
     - @categories.each do |category|
       %tr.clickable-row{ 'data-href': category_url(category) }
         %td= category.name
         %td= category.income
         %td= category.untracked
-        %td= category.year

@@ -30,12 +30,12 @@ class EntriesController < ApplicationController
   def new
     @entry = Entry.new
     @entry.build_tag
-    @categories = current_user.categories.where(year: current_user.year_view)
+    @categories = current_user.categories
   end
 
   # GET /entries/1/edit
   def edit
-    @categories = current_user.categories.where(year: current_user.year_view)
+    @categories = current_user.categories
     @entry.build_tag unless @entry.tag
   end
 
@@ -47,7 +47,7 @@ class EntriesController < ApplicationController
     if @entry.save
       redirect_to new_entry_url, notice: "Entry was successfully created."
     else
-      @categories = current_user.categories.where(year: current_user.year_view)
+      @categories = current_user.categories
       render :new, status: :unprocessable_entity
     end
   end
@@ -57,7 +57,7 @@ class EntriesController < ApplicationController
     if @entry.update(entry_params)
       redirect_to entry_url(@entry), notice: "Entry was successfully updated."
     else
-      @categories = current_user.categories.where(year: current_user.year_view)
+      @categories = current_user.categories
       render :edit, status: :unprocessable_entity
     end
   end

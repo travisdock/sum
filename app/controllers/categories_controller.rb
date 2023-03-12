@@ -68,7 +68,7 @@ class CategoriesController < ApplicationController
 
   # GET /categories/merge
   def merge_form
-    @categories = current_user.categories.order(year: :asc)
+    @categories = current_user.categories.order(created_at: :asc)
     @tags = current_user.tags
   end
 
@@ -103,7 +103,7 @@ class CategoriesController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def category_params
-      params.require(:category).permit(:name, :income, :untracked, :year)
+      params.require(:category).permit(:name, :income, :untracked)
     end
 
     def merge_params
