@@ -11,6 +11,10 @@
     = f.select :year, options_for_select(@years, Date.today.year), { include_blank: true }, class: 'form-select d-inline-block', style: 'width:auto;'
     = f.label :income, 'Income', class: 'form-label'
     = f.select :income, options_for_select([true, false]), { include_blank: true, placeholder: 'all' }, class: 'form-select d-inline-block', style: 'width:auto;'
+    = f.label :category_id, 'Category', class: 'form-label'
+    = f.collection_select :category_id, @categories, :id, :name, { include_blank: true, placeholder: 'all' }, class: 'form-select d-inline-block', style: 'width:auto;'
+    = f.label :tag_id, 'Tag', class: 'form-label'
+    = f.collection_select :tag_id, @tags, :id, :name, { include_blank: true, placeholder: 'all' }, class: 'form-select d-inline-block', style: 'width:auto;'
   = f.submit "Filter", class: 'btn btn-primary'
 
 = render partial: "entries", locals: { entries: @entries }
