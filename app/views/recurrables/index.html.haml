@@ -14,10 +14,18 @@
       %th Day of Month
 
   %tbody
-    - @recurrables.each do |recurrable|
-      %tr.clickable-row{ 'data-href' => recurrable_path(recurrable) }
-        %td= recurrable.name
-        %td= recurrable.amount
-        %td= recurrable.category.name
-        %td= recurrable.day_of_month
+    - if @recurrables.any?
+      - @recurrables.each do |recurrable|
+        %tr.clickable-row{ 'data-href' => recurrable_path(recurrable) }
+          %td= recurrable.name
+          %td= recurrable.amount
+          %td= recurrable.category.name
+          %td= recurrable.day_of_month
+    - else
+      %tr
+        %td
+          No recurring entries found.
+        %td
+        %td
+        %td
 
