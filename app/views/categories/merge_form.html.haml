@@ -2,10 +2,10 @@
   = form_with url: merge_categories_path, method: :post do |f|
     %div.d-flex.flex-column.align-items-center
       = f.label :id, "I want to merge Category:"
-      = f.select :id, options_for_select(@categories.map { |c| ["#{c.name} (#{c.year})", c.id] }), include_blank: true
+      = f.select :id, options_for_select(@categories.map { |c| ["#{c.name}", c.id] }), include_blank: true
     %div.d-flex.flex-column.align-items-center
       = f.label :merge_with, "Into Category:"
-      = f.select :merge_with, options_for_select(@categories.map { |c| ["#{c.name} (#{c.year})", c.id] }), include_blank: true
+      = f.select :merge_with, options_for_select(@categories.map { |c| ["#{c.name}", c.id] }), include_blank: true
     %div.d-flex.flex-column.align-items-center
       = f.label :tag_id, "and mark the entries with the following tag:"
       %div
