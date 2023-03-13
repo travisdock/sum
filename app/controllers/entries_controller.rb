@@ -6,16 +6,30 @@ class EntriesController < ApplicationController
 
   # GET /entries or /entries.json
   def index
-    @entries = current_user.entries.by_year(Date.today.year).by_month(Date.today.month).includes(:category)
+    @entries = current_user.entries
+                                   .by_year(session[:entry_filter_year] || Date.today.year)
+                                   .by_month(session[:entry_filter_month] || Date.today.month)
+                                   .by_income(ActiveModel::Type::Boolean.new.cast(session[:entry_filter_income]))
+                                   .by_category_id(session[:entry_filter_category_id])
+                                   .by_tag_id(session[:entry_filter_tag_id])
+                                   .includes(:category)
     @years = current_user.entries.order(:date).pluck(:date).uniq { |d| d.year }.map(&:year)
+    @categories = current_user.categories
+    @tags = current_user.tags
   end
 
   # POST /filtered_entries
   def filtered_index
+    set_session_filters
+    @categories = current_user.categories
+    @tags = current_user.tags
     @entries = current_user.entries
                            .by_year(params['year'])
                            .by_month(params['month'])
                            .by_income(ActiveModel::Type::Boolean.new.cast(params['income']))
+                           .by_category_id(params['category_id'])
+                           .by_tag_id(params['tag_id'])
+                           .includes(:category)
 
     respond_to do |format|
       format.turbo_stream { render turbo_stream: turbo_stream.replace(:entries, partial: "entries", locals: { entries: @entries }) }
@@ -92,5 +106,13 @@ class EntriesController < ApplicationController
     # Only allow a list of trusted parameters through.
     def entry_params
       params.require(:entry).permit(:date, :amount, :notes, :category_name, :income, :untracked, :user_id, :category_id, tag_attributes: [:id, :name, :_destroy])
+    end
+
+    def set_session_filters
+      session[:entry_filter_category_id] = params['category_id']
+      session[:entry_filter_tag_id] = params['tag_id']
+      session[:entry_filter_year] = params['year']
+      session[:entry_filter_month] = params['month']
+      session[:entry_filter_income] = params['income']
     end
 end

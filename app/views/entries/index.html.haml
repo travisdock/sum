@@ -6,11 +6,15 @@
 = form_with(url: '/filtered_entries') do |f|
   %div.mb-3
     = f.label :month, 'Month',  class: 'form-label'
-    = f.select :month, options_for_select(Date::MONTHNAMES.zip(0..12), Date.today.month), {}, class: 'form-select d-inline-block', style: 'width:auto;'
+    = f.select :month, options_for_select(Date::MONTHNAMES.zip(0..12), session[:entry_filter_month] || Date.today.month), {}, class: 'form-select d-inline-block', style: 'width:auto;'
     = f.label :year, 'Year', class: 'form-label'
-    = f.select :year, options_for_select(@years, Date.today.year), { include_blank: true }, class: 'form-select d-inline-block', style: 'width:auto;'
+    = f.select :year, options_for_select(@years, session[:entry_filter_year] || Date.today.year), { include_blank: true }, class: 'form-select d-inline-block', style: 'width:auto;'
     = f.label :income, 'Income', class: 'form-label'
-    = f.select :income, options_for_select([true, false]), { include_blank: true, placeholder: 'all' }, class: 'form-select d-inline-block', style: 'width:auto;'
+    = f.select :income, options_for_select([true, false], session[:entry_filter_income]), { include_blank: true }, class: 'form-select d-inline-block', style: 'width:auto;'
+    = f.label :category_id, 'Category', class: 'form-label'
+    = f.collection_select :category_id, @categories, :id, :name, { include_blank: true, placeholder: 'all', selected: session[:entry_filter_category_id] }, class: 'form-select d-inline-block', style: 'width:auto;'
+    = f.label :tag_id, 'Tag', class: 'form-label'
+    = f.collection_select :tag_id, @tags, :id, :name, { include_blank: true, placeholder: 'all', selected: session[:entry_filter_tag_id] }, class: 'form-select d-inline-block', style: 'width:auto;'
   = f.submit "Filter", class: 'btn btn-primary'
 
 = render partial: "entries", locals: { entries: @entries }
