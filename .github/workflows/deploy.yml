@@ -23,7 +23,7 @@ jobs:
         docker build . --file Dockerfile.prod --tag $IMAGE_NAME
 
     - name: Log in to registry
-      run: echo "${{ secrets.GITHUB_TOKEN }}" | docker login ghcr.io -u $ --password-stdin
+      run: echo "${{ secrets.DOCKER_TOKEN }}" | docker login ghcr.io -u $ --password-stdin
 
     - name: Push image
       run: |
