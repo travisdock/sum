@@ -2,7 +2,7 @@ version: '3.7'
 
 services:
   postgres:
-    image: postgres:latest
+    image: postgres:15.4-bookworm
     volumes:
       - postgres:/var/lib/postgresql/data
     environment:
@@ -13,7 +13,6 @@ services:
     build: .
     environment:
       CYPRESS: $CYPRESS
-      RAILS_ENV: development
     volumes:
       - .:/app_home
     ports:
