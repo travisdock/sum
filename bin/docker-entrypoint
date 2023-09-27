@@ -1,8 +1,19 @@
 #!/bin/bash
+if bundle check
+then
+  echo "Bundle installing..."
+  bundle install > ${BUNDLE_PATH}/bundle_install
+  tail -n 2 ${BUNDLE_PATH}/bundle_install
+else
+  bundle install
+fi
 
 # If running the rails server then create or migrate existing database
 if [ "${*}" == "./bin/rails server" ]; then
   ./bin/rails db:prepare
 fi
+
+mkdir -p tmp/pids
+rm -f tmp/pids/server.pid
 
 exec "${@}"
