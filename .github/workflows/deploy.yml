@@ -44,6 +44,13 @@ jobs:
     needs: build_and_push
     runs-on: ubuntu-latest
     steps:
+    - name: Create GitHub deployment
+      uses: chrnorm/deployment-action@v2
+      id: deployment
+      with:
+        token: '${{ github.token }}'
+        environment-url: http://sum-finance.com
+        environment: production
     - name: Deploy to server via script
       uses: appleboy/ssh-action@v1.0.0
       with:
@@ -55,10 +62,19 @@ jobs:
         script: |
           echo "${{ secrets.DOCKER_TOKEN }}" | docker login ghcr.io -u $ --password-stdin
           ./deploy.sh
-    - name: Create GitHub deployment
-      uses: chrnorm/deployment-action@v2
-      id: deployment
+    - name: Update deployment status (success)
+      if: success()
+      uses: chrnorm/deployment-status@v2
       with:
         token: '${{ github.token }}'
-        environment-url: http://sum-finance.com
-        environment: production
+        environment-url: ${{ steps.deployment.outputs.environment_url }}
+        deployment-id: ${{ steps.deployment.outputs.deployment_id }}
+        state: 'success'
+    - name: Update deployment status (failure)
+      if: failure()
+      uses: chrnorm/deployment-status@v2
+      with:
+        token: '${{ github.token }}'
+        environment-url: ${{ steps.deployment.outputs.environment_url }}
+        deployment-id: ${{ steps.deployment.outputs.deployment_id }}
+        state: 'failure'
