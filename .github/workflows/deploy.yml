@@ -55,4 +55,10 @@ jobs:
         script: |
           echo "${{ secrets.DOCKER_TOKEN }}" | docker login ghcr.io -u $ --password-stdin
           ./deploy.sh
-
+    - name: Create GitHub deployment
+      uses: chrnorm/deployment-action@v2
+      id: deployment
+      with:
+        token: '${{ github.token }}'
+        environment-url: http://sum-finance.com
+        environment: production
