@@ -39,6 +39,7 @@ gem "responders"
 
 # Use bootstrap for styling
 gem 'bootstrap'
+gem 'dartsass-sprockets'
 
 # Use Haml instead of erb
 gem 'haml-rails'
