@@ -182,7 +182,7 @@ GEM
       timeout
     net-smtp (0.4.0)
       net-protocol
-    nio4r (2.5.9)
+    nio4r (2.7.0)
     nokogiri (1.16.0-aarch64-linux)
       racc (~> 1.4)
     nokogiri (1.16.0-x86_64-linux)
@@ -192,7 +192,7 @@ GEM
     popper_js (2.11.8)
     psych (5.1.2)
       stringio
-    puma (6.4.0)
+    puma (6.4.2)
       nio4r (~> 2.0)
     raabro (1.4.0)
     racc (1.7.3)
