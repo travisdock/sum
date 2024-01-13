@@ -1,23 +1,23 @@
+# SQLite. Versions 3.8.0 and up are supported.
+#   gem install sqlite3
+#
+#   Ensure the SQLite 3 gem is defined in your Gemfile
+#   gem "sqlite3"
+#
 default: &default
-  adapter: postgresql
-  encoding: unicode
-  username: postgres
-  password: password
-  pool: 5
+  adapter: sqlite3
+  pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
+  timeout: 5000
 
 development:
   <<: *default
-  host: postgres
-  database: <%= ENV['CYPRESS'].present? ? "sum_test" : "sum_development" %>
+  <%= ENV['CYPRESS'].present? ? "sum_test" : "sum_development" %>
+  database: <%= ENV['CYPRESS'].present? ? "storage/test.sqlite3" : "storage/development.sqlite3" %>
 
 test:
   <<: *default
-  host: postgres
-  database: sum_test
+  database: storage/test.sqlite3
 
 production:
   <<: *default
-  database: sum_production
-  host: 127.0.0.1
-  username: sum
-  password: <%= ENV['DB_PASSWORD'] %>
+  database: storage/production.sqlite3
