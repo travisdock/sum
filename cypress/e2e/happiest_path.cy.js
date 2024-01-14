@@ -45,6 +45,7 @@ describe('The Happiest Path', () => {
     cy.wait(500).get('#toolbar').should('contain', 'Sum: $0.00')
     // Visit Tags page
     cy.get('a[href="/tags"]').click()
+    cy.wait(500)
     // Visit Dashboard
     cy.get('a[href="/dashboard"]').click()
     cy.get('h5').should('contain', 'Total Spending')
