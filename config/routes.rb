@@ -28,7 +28,7 @@ Rails.application.routes.draw do
     end
   end
 
-  if Rails.configuration.database_configuration[Rails.env]['database'] == 'sum_test'
+  if Rails.configuration.database_configuration[Rails.env]['database'] == 'storage/test.sqlite3'
     get '/clear_db', to: 'test#clear_db'
   end
 end
