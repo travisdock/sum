@@ -19,3 +19,5 @@ Importing data from prod to development:
 - There will probably be some migration, ar_internal_metadata, and index errors. You can get rid of the migration and ar_internal_metadata errors by running these commands before:
   - `delete from ar_internal_metadata;`
   - `delete from schema_migrations;`
+#### Database Backups
+The database is backed up nightly via a cron job that rsyncs the deploy home directory to the `/mnt/database_backup` volume. That volume is then backed up by the cloud provider. You can check the cron logs by running `sudo grep CRON /var/sys/log`. I installed Postfix to handle messages.
