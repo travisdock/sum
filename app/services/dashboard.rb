@@ -26,9 +26,9 @@ class Dashboard
   end
 
   def total_spending_by_month
-    @entries.group('(EXTRACT(MONTH FROM date))::integer')
+    @entries.group('strftime("%m", date)')
             .by_income(false)
             .sum(:amount)
-            .transform_keys { |key| Date::MONTHNAMES[key] }
+            .transform_keys { |key| Date::MONTHNAMES[key.to_i] }
   end
 end
