@@ -262,9 +262,9 @@ GEM
       google-protobuf (~> 3.25)
     sassc-embedded (1.69.1)
       sass-embedded (~> 1.69)
-    sentry-rails (5.17.1)
+    sentry-rails (5.17.2)
       railties (>= 5.0)
-      sentry-ruby (~> 5.17.1)
+      sentry-ruby (~> 5.17.2)
     sentry-ruby (5.17.2)
       bigdecimal
       concurrent-ruby (~> 1.0, >= 1.0.2)
