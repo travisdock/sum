@@ -3,7 +3,7 @@ class Recurrable < ApplicationRecord
   belongs_to :category
   belongs_to :user
 
-  serialize :schedule
+  serialize :schedule, coder: YAML
 
   def day_of_month=(num)
     schedule = IceCube::Schedule.new(Date.today)
