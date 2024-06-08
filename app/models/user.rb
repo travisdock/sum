@@ -12,7 +12,7 @@ class User < ApplicationRecord
 
   def tags
     # was going to use has_many through but it was not working
-    tag_ids = entries.pluck(:tag_id).uniq
+    tag_ids = entries.distinct.pluck(:tag_id)
     Tag.where(id: tag_ids)
   end
 

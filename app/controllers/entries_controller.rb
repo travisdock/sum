@@ -6,32 +6,15 @@ class EntriesController < ApplicationController
 
   # GET /entries or /entries.json
   def index
-    @entries = current_user.entries
-                                   .by_year(session[:entry_filter_year] || Date.today.year)
-                                   .by_month(session[:entry_filter_month] || Date.today.month)
-                                   .by_income(ActiveModel::Type::Boolean.new.cast(session[:entry_filter_income]))
-                                   .by_category_id(session[:entry_filter_category_id])
-                                   .by_tag_id(session[:entry_filter_tag_id])
-                                   .includes(:category)
-    @years = current_user.entries.order(:date).pluck(:date).uniq { |d| d.year }.map(&:year)
-    @categories = current_user.categories
-    @tags = current_user.tags
-  end
+    set_session_filters if params['commit'] == 'Filter'
+    set_entries
 
-  # POST /filtered_entries
-  def filtered_index
-    set_session_filters
+    @years = current_user.entries.pluck(Arel.sql("DISTINCT strftime('%Y', date)")).sort.map(&:to_i)
     @categories = current_user.categories
     @tags = current_user.tags
-    @entries = current_user.entries
-                           .by_year(params['year'])
-                           .by_month(params['month'])
-                           .by_income(ActiveModel::Type::Boolean.new.cast(params['income']))
-                           .by_category_id(params['category_id'])
-                           .by_tag_id(params['tag_id'])
-                           .includes(:category)
 
     respond_to do |format|
+      format.html
       format.turbo_stream { render turbo_stream: turbo_stream.replace(:entries, partial: "entries", locals: { entries: @entries }) }
     end
   end
@@ -114,5 +97,16 @@ class EntriesController < ApplicationController
       session[:entry_filter_year] = params['year']
       session[:entry_filter_month] = params['month']
       session[:entry_filter_income] = params['income']
+    end
+
+    def set_entries
+      @entries = current_user
+                 .entries
+                 .by_year(session[:entry_filter_year] || Date.today.year)
+                 .by_month(session[:entry_filter_month] || Date.today.month)
+                 .by_income(ActiveModel::Type::Boolean.new.cast(session[:entry_filter_income]))
+                 .by_category_id(session[:entry_filter_category_id])
+                 .by_tag_id(session[:entry_filter_tag_id])
+                 .includes(:category)
     end
 end
