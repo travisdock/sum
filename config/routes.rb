@@ -2,7 +2,7 @@ Rails.application.routes.draw do
   resources :recurrables
   resources :tags
   resources :entries
-  post '/filtered_entries', to: 'entries#filtered_index'
+  post '/filtered_entries', to: 'entries#index'
   get '/export/entries', to: 'entries#export'
 
   resources :categories do
