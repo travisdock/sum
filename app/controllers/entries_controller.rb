@@ -8,6 +8,8 @@ class EntriesController < ApplicationController
   def index
     set_session_filters if params['commit'] == 'Filter'
     set_entries
+    @q = @entries.ransack(search_params)
+    @entries = @q.result(distinct: true)
 
     @years = current_user.entries.pluck(Arel.sql("DISTINCT strftime('%Y', date)")).sort.map(&:to_i)
     @categories = current_user.categories
@@ -15,7 +17,14 @@ class EntriesController < ApplicationController
 
     respond_to do |format|
       format.html
-      format.turbo_stream { render turbo_stream: turbo_stream.replace(:entries, partial: "entries", locals: { entries: @entries }) }
+    end
+  end
+
+  def search
+    set_entries
+
+    respond_to do |format|
+      format.turbo_stream { render turbo_stream: turbo_stream.replace(:entries, partial: "entries/table", locals: { entries: @entries}) }
     end
   end
 
@@ -89,6 +98,10 @@ class EntriesController < ApplicationController
     # Only allow a list of trusted parameters through.
     def entry_params
       params.require(:entry).permit(:date, :amount, :notes, :category_name, :income, :untracked, :user_id, :category_id, tag_attributes: [:id, :name, :_destroy])
+    end
+
+    def search_params
+      params.fetch(:q, {}).permit(:notes_or_amount_cont, :s)
     end
 
     def set_session_filters

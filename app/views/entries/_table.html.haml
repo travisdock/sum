@@ -1,0 +1,19 @@
+#entries
+  %table.table.hover
+    %thead
+      %tr
+        %th{scope: "col"}
+          - current_params = params[:q] ? params[:q].to_unsafe_h : {}
+          = link_to "Date", entries_path(q: current_params.merge(s: "date #{sort_direction('date')}")), method: :get, data: { turbo_action: "replace" }
+        %th{scope: "col"}
+          = link_to "Amount", entries_path(q: current_params.merge(s: "amount #{sort_direction('amount')}")), method: :get, data: { turbo_action: "replace" }
+        %th{scope: "col"}
+          = link_to "Category", entries_path(q: current_params.merge(s: "category #{sort_direction('category')}")), method: :get, data: { turbo_action: "replace" }
+        %th{scope: "col"}
+    %tbody
+      - @entries.each do |entry|
+        %tr.clickable-row{ data: { href: entry_path(entry) } }
+          %td= entry.date
+          %td= entry.amount
+          %td= entry.category.name
+          %td= entry.notes

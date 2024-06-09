@@ -3,7 +3,7 @@
   %i.bi.bi-plus-circle-fill
   New Entry
 %br
-= form_with(url: '/filtered_entries') do |f|
+= form_with(url: '/filtered_entries', data: { turbo_frame: 'search' }) do |f|
   %div.mb-3
     = f.label :month, 'Month',  class: 'form-label'
     = f.select :month, options_for_select(Date::MONTHNAMES.zip(0..12), session[:entry_filter_month] || Date.today.month), {}, class: 'form-select d-inline-block', style: 'width:auto;'
@@ -19,4 +19,11 @@
     = f.collection_select :category_id, @categories, :id, :name, { include_blank: true, placeholder: 'all', selected: session[:entry_filter_category_id] }, class: 'form-select d-inline-block', style: 'width:auto;'
   = f.submit "Filter", class: 'btn btn-primary'
 
-= render partial: "entries", locals: { entries: @entries }
+= search_form_for @q, data: { turbo_frame: 'search', controller: 'search' } do |f|
+  = f.label :notes_or_amount_cont, "Search", hidden: true
+  = f.search_field :notes_or_amount_cont, placeholder: "Search entries", data: { action: "input->search#perform" }
+  = f.submit "Search", data: { disable_with: "Searching..." }
+
+= turbo_frame_tag 'search' do
+  = render partial: "entries/table", locals: { entries: @entries }
+

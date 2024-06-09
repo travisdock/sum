@@ -10,4 +10,16 @@ class Entry < ApplicationRecord
   scope :by_untracked, -> (untracked) { joins(:category).where(categories: { untracked: untracked }) if !!untracked == untracked }
   scope :by_category_id, -> (category_id) { where(category_id: category_id) if category_id.present? }
   scope :by_tag_id, -> (tag_id) { where(tag_id: tag_id) if tag_id.present? }
+
+  def self.ransackable_attributes(auth_object = nil)
+    ["amount", "date", "notes"]
+  end
+
+  def self.ransackable_associations(auth_object = nil)
+    []
+  end
+
+  ransacker :amount do
+    Arel.sql("CAST(amount AS DECIMAL)")
+  end
 end
