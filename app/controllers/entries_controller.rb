@@ -7,9 +7,8 @@ class EntriesController < ApplicationController
   # GET /entries or /entries.json
   def index
     set_session_filters if params['commit'] == 'Filter'
+    set_session_ordering if params['q'].present?
     set_entries
-    @q = @entries.ransack(search_params)
-    @entries = @q.result(distinct: true)
 
     @years = current_user.entries.pluck(Arel.sql("DISTINCT strftime('%Y', date)")).sort.map(&:to_i)
     @categories = current_user.categories
@@ -17,14 +16,6 @@ class EntriesController < ApplicationController
 
     respond_to do |format|
       format.html
-    end
-  end
-
-  def search
-    set_entries
-
-    respond_to do |format|
-      format.turbo_stream { render turbo_stream: turbo_stream.replace(:entries, partial: "entries/table", locals: { entries: @entries}) }
     end
   end
 
@@ -112,6 +103,10 @@ class EntriesController < ApplicationController
       session[:entry_filter_income] = params['income']
     end
 
+    def set_session_ordering
+      session[:sorting] = search_params['s']
+    end
+
     def set_entries
       @entries = current_user
                  .entries
@@ -121,5 +116,8 @@ class EntriesController < ApplicationController
                  .by_category_id(session[:entry_filter_category_id])
                  .by_tag_id(session[:entry_filter_tag_id])
                  .includes(:category)
+
+    @q = @entries.ransack(search_params.empty? ? { s: session[:sorting] } : search_params)
+    @entries = @q.result(distinct: true)
     end
 end
