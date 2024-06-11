@@ -13,10 +13,6 @@ class EntriesController < ApplicationController
     @years = current_user.entries.pluck(Arel.sql("DISTINCT strftime('%Y', date)")).sort.map(&:to_i)
     @categories = current_user.categories
     @tags = current_user.tags
-
-    respond_to do |format|
-      format.html
-    end
   end
 
   # GET /entries/1 or /entries/1.json
