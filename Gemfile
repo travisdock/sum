@@ -72,6 +72,9 @@ end
 
 group :production do
   # Use Sentry for errors and performance
-  gem "sentry-ruby"
-  gem "sentry-rails"
+  #gem "sentry-ruby"
+  #gem "sentry-rails"
+
+  # Use Honeybadger for errors
+  gem "honeybadger"
 end
