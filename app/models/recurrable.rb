@@ -19,7 +19,7 @@ class Recurrable < ApplicationRecord
 
   def self.create_occurrences
     # Sentry cron mon checkin
-    check_in_id = Sentry.capture_check_in('sum-recurring', :in_progress)
+    #check_in_id = Sentry.capture_check_in('sum-recurring', :in_progress)
 
     where(day_of_month: Date.today.day).each do |recurrable|
       unless Entry.where(user_id: recurrable.user_id, category_id: recurrable.category_id, date: Date.today, amount: recurrable.amount, notes: recurrable.notes).exists?
@@ -28,7 +28,7 @@ class Recurrable < ApplicationRecord
     end
 
     # Sentry cron mon checkin
-    Sentry.capture_check_in('sum-recurring', :ok, check_in_id: check_in_id)
+    #Sentry.capture_check_in('sum-recurring', :ok, check_in_id: check_in_id)
   end
 
   def create_occurrence

@@ -150,6 +150,7 @@ GEM
       activesupport (>= 5.1)
       haml (>= 4.0.6)
       railties (>= 5.1)
+    honeybadger (5.12.0)
     i18n (1.14.5)
       concurrent-ruby (~> 1.0)
     importmap-rails (2.0.1)
@@ -266,12 +267,6 @@ GEM
       google-protobuf (>= 3.25, < 5.0)
     sassc-embedded (1.76.0)
       sass-embedded (~> 1.76)
-    sentry-rails (5.17.3)
-      railties (>= 5.0)
-      sentry-ruby (~> 5.17.3)
-    sentry-ruby (5.17.3)
-      bigdecimal
-      concurrent-ruby (~> 1.0, >= 1.0.2)
     simplecov (0.22.0)
       docile (~> 1.1)
       simplecov-html (~> 0.11)
@@ -327,6 +322,7 @@ DEPENDENCIES
   debug
   devise
   haml-rails
+  honeybadger
   ice_cube!
   importmap-rails
   jbuilder
@@ -334,8 +330,6 @@ DEPENDENCIES
   rails
   responders
   rspec-rails
-  sentry-rails
-  sentry-ruby
   simplecov
   sprockets-rails
   sqlite3 (~> 1.7)
