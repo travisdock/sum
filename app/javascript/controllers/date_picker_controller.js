@@ -8,6 +8,6 @@ export default class extends Controller {
     var month = ("0" + (now.getMonth() + 1)).slice(-2);
 
     var today = now.getFullYear()+"-"+(month)+"-"+(day) ;
-    $('#date-picker').val(today);
+    document.getElementById('date-picker').value = today;
   }
 }

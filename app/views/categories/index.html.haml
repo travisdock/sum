@@ -5,8 +5,7 @@
 %a.btn.btn-primary{ href: merge_categories_path }
   %i.bi.bi-plus-circle-fill
   Merge Categories
-%div.data-table-wrapper{ 'data-controller' => 'data-table' }
-%table.table.hover.no-sum
+%table.styled-table{ data: { controller: "clickable-row" } }
   %thead
     %tr
       %th{scope: "col"} Name

@@ -21,8 +21,7 @@
 
 = search_form_for @q, data: { turbo_frame: 'search', controller: 'search' } do |f|
   = f.label :notes_or_amount_cont, "Search", hidden: true
-  = f.search_field :notes_or_amount_cont, placeholder: "Search entries", data: { action: "input->search#perform" }
-  = f.submit "Search", data: { disable_with: "Searching..." }
+  = f.search_field :notes_or_amount_cont, placeholder: "Search entries", class: 'float-end my-1', data: { action: "input->search#perform" }
 
 = turbo_frame_tag 'search' do
   = render partial: "entries/table", locals: { entries: @entries }

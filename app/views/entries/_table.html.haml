@@ -1,5 +1,5 @@
 #entries
-  %table.table.hover
+  %table.styled-table{ data: { controller: 'clickable-row' } }
     %thead
       %tr
         %th{scope: "col"}
@@ -7,7 +7,7 @@
         %th{scope: "col"}
           = sort_link @q, :amount, {}, { data: { turbo_frame: 'search', turbo_prefetch: false } }
         %th{scope: "col"}
-          = sort_link @q, :category_name, {}, { data: { turbo_frame: 'search', turbo_prefetch: false } }
+          = sort_link @q, :category_name, 'Category', { data: { turbo_frame: 'search', turbo_prefetch: false } }
         %th{scope: "col"} Notes
     %tbody
       - @entries.each do |entry|

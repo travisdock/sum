@@ -1,0 +1,56 @@
+/* General table styling */
+table.styled-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-family: Arial, sans-serif;
+  margin: 5px 0;
+}
+
+/* Table headers */
+table.styled-table th {
+  background-color: #f2f2f2;
+  color: #333;
+  text-align: left;
+  padding: 10px;
+  border-bottom: 2px solid #ddd;
+  font-weight: bold;
+}
+
+/* Table rows */
+table.styled-table td {
+  padding: 10px;
+  border-bottom: 1px solid #ddd;
+  text-align: left;
+}
+
+/* Even row styling */
+table.styled-table tr:nth-child(even) {
+  background-color: #f9f9f9;
+}
+
+/* Odd row styling */
+table.styled-table tr:nth-child(odd) {
+  background-color: #fff;
+}
+
+/* Hover effect for rows */
+table.styled-table tr:hover {
+  background-color: #f1f1f1;
+}
+
+/* Responsive design */
+@media (max-width: 600px) {
+  table.styled-table th,
+  table.styled-table td {
+    padding: 8px;
+  }
+
+  table.styled-table th {
+    font-size: 14px;
+  }
+
+  table.styled-table td {
+    font-size: 13px;
+  }
+}
+
