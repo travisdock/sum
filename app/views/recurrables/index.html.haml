@@ -4,8 +4,8 @@
   %i.bi.bi-plus-circle-fill
   New Recurring Entry
 
-%div.data-table-wrapper{ 'data-controller' => 'data-table' }
-%table.table.hover
+%p.mt-3.mb-0 Sum: #{number_to_currency(@recurrables.sum(:amount))}
+%table.styled-table{ data: { controller: 'clickable-row' } }
   %thead
     %tr
       %th Name
