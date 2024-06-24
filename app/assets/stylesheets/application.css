@@ -14,5 +14,5 @@
  *= require_self
  */
 
-@import "bootstrap";
-@import "table";
+require "table";
+

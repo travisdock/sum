@@ -25,7 +25,7 @@ gem "turbo-rails"
 gem "stimulus-rails"
 
 # Build JSON APIs with ease [https://github.com/rails/jbuilder]
-gem "jbuilder"
+#gem "jbuilder"
 
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
 gem "tzinfo-data", platforms: %i[ mingw mswin x64_mingw jruby ]
@@ -36,10 +36,6 @@ gem "bootsnap", require: false
 # Use devise for auth
 gem 'devise'
 gem "responders"
-
-# Use bootstrap for styling
-gem 'bootstrap'
-gem 'dartsass-sprockets'
 
 # Use Haml instead of erb
 gem 'haml-rails'
@@ -54,6 +50,7 @@ gem 'ice_cube', github: 'ice-cube-ruby/ice_cube',
 # Use arask for scheduling crons
 gem 'arask'
 
+# Use ransack for search and sorting of tables
 gem 'ransack'
 
 group :development, :test do
