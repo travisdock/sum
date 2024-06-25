@@ -16,32 +16,30 @@
     = javascript_importmap_tags
   %body
     .container
-      %nav.navbar.navbar-expand-lg.bg-light
-        %div.container-fluid
-          %a.navbar-brand.mb-0.h1 Sum
+      %nav
+        %ul
+          %li
+            %h1 Sum
           - if user_signed_in?
-            %button.navbar-toggler{ type: 'button', data: { bs: { target: "#navbarSupportedContent", toggle: "collapse" }, aria: { controls: "navbarSupportedContent", expanded: "false", label: "Toggle navigation" } } }
-              %span.navbar-toggler-icon
-            %div.collapse.navbar-collapse{ id: "navbarSupportedContent" }
-              %ul.navbar-nav.me-auto.mb-2.mb-lg-0
-                %li.nav-item
-                  %a.nav-link{ href: entries_path }
-                    Entries
-                %li.nav-item
-                  %a.nav-link{ href: categories_path }
-                    Categories
-                %li.nav-item
-                  %a.nav-link{ href: tags_path}
-                    Tags
-                %li.nav-item
-                  %a.nav-link{ href: recurrables_path }
-                    Recurring
-                %li.nav-item
-                  %a.nav-link{ href: dashboard_path }
-                    Dashboard
-                %li.nav-item
-                  %a.nav-link{ href: edit_user_registration_path }
-                    Account
+            %li
+              %a{ href: entries_path }
+                Entries
+            %li
+              %a{ href: categories_path }
+                Categories
+            %li
+              %a{ href: tags_path}
+                Tags
+            %li
+              %a{ href: recurrables_path }
+                Recurring
+            %li.nav-item
+              %a{ href: dashboard_path }
+                Dashboard
+            %li
+              %a{ href: edit_user_registration_path }
+                Account
+            %li
               = link_to "Sign Out", destroy_user_session_path, class: "btn btn-outline-secondary", data: { "turbo-method": :delete }
       - flash.each do |type, msg|
         .toast.show.position-absolute{ role: 'alert', 'aria-live': 'assertive', 'aria-atomic': 'true' }
