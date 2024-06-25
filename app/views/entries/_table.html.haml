@@ -4,9 +4,9 @@
     %thead
       %tr
         %th{scope: "col"}
-          = sort_link @q, :date, {}, { data: { turbo_frame: 'search', turbo_prefetch: false } }
+          = sort_link @q, :date, { data: { turbo_frame: 'search', turbo_prefetch: false } }
         %th{scope: "col"}
-          = sort_link @q, :amount, {}, { data: { turbo_frame: 'search', turbo_prefetch: false } }
+          = sort_link @q, :amount, { data: { turbo_frame: 'search', turbo_prefetch: false } }
         %th{scope: "col"}
           = sort_link @q, :category_name, 'Category', { data: { turbo_frame: 'search', turbo_prefetch: false } }
         %th{scope: "col"} Notes
