@@ -42,8 +42,8 @@
             %li
               = link_to "Sign Out", destroy_user_session_path, class: "btn btn-outline-secondary", data: { "turbo-method": :delete }
       - flash.each do |type, msg|
-        .toast.show.position-absolute{ role: 'alert', 'aria-live': 'assertive', 'aria-atomic': 'true' }
-          .toast-header
-            = msg
-            %button.btn-close{ 'aria-label': 'Close', 'data-bs-dismiss': 'toast', type: 'button' }
+        %article{ data: { controller: 'notification', 'notification-delay-value': '5000', 'transition-enter-from': 'opacity-0 translate-x-6', 'transition-enter-to': 'opacity-100 translate-x-0', 'transition-leave-from': 'opacity-100 translate-x-0', 'transition-leave-to': 'opacity-0 translate-x-6' }, class: "transition transform duration-1000 hidden" }
+          = msg
+          %footer
+            %button{ data: { action: 'notification#hide' } } Close
       = yield
