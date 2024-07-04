@@ -1,30 +1,22 @@
 %div#data
   %h2 Totals
-  .row
-    .col-sm-4
-      .card.text-dark.bg-light
-        .card-body
-          %h5.card-title Total Spending
-          %p.card-text= number_to_currency(@data.total_spending)
-    .col-sm-4
-      .card.text-dark.bg-light
-        .card-body
-          %h5.card-title Total Income
-          %p.card-text= number_to_currency(@data.total_income)
-    .col-sm-4
-      .card.text-dark.bg-light
-        .card-body
-          %h5.card-title Profit/Loss
-          %p.card-text= number_to_currency(@data.profit_loss)
+  %div{ style: 'display: flex; justify-content: space-between;' }
+    %div
+      %h5{ style: 'margin-bottom: 0;' } Total Spending
+      %p{ style: 'text-align: center;'}= number_to_currency(@data.total_spending)
+    %div
+      %h5{ style: 'margin-bottom: 0;' } Total Income
+      %p{ style: 'text-align: center;'}= number_to_currency(@data.total_income)
+    %div
+      %h5{ style: 'margin-bottom: 0;' } Profit/Loss
+      %p{ style: 'text-align: center;'}= number_to_currency(@data.profit_loss)
   %hr
   %h2 Categories
-  .row.rows-cols-auto.g-2
+  %div{ style: 'display: flex; justify-content: space-between; flex-wrap: wrap;' }
     - @data.category_totals.each do |category, total|
-      .col
-        .card.text-dark.bg-light
-          .card-body
-            %h5.card-title= category
-            %p.card-text= number_to_currency(total)
+      %article{ style: 'margin: 0 10px 10px 0;'}
+        %header{ style: 'text-align: center;'}= category
+        %p{ style: 'text-align: center;'}= number_to_currency(total)
   %hr
   %h2 Charts
   %input{ type: 'submit', name: 'commit', value: 'Pie Chart', class: 'btn btn-primary', formaction: '/turbo_charts/pie_chart', form: 'data_form' }
