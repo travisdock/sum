@@ -1,5 +1,5 @@
 !!!
-%html
+%html{ data: { theme: 'light' } }
   %head
     %meta{:content => "text/html; charset=UTF-8", "http-equiv" => "Content-Type"}/
     %title Sum
@@ -21,7 +21,7 @@
           %li
             %button.contrast.toggle-button{ data: { action: 'click->navbar#toggle' } } ☰
           %li
-            %h1 Sum
+            %button.contrast#dark-mode-toggle{ data: { controller: 'dark-mode', action: 'click->dark-mode#toggle' } }Sum ☽
         %ul{ data: { 'navbar-target': 'menu' }, class: "navbar menu" }
           - if user_signed_in?
             %li
