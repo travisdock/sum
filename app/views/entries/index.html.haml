@@ -1,27 +1,32 @@
 %h1 Entries
-%a.btn.btn-primary.mb-3{ href: new_entry_path }
+%a.btn.btn-primary.mb-3{ href: new_entry_path, role: 'button', style: 'margin-bottom: 1rem;' }
   %i.bi.bi-plus-circle-fill
   New Entry
 %br
-= form_with(url: '/filtered_entries', data: { turbo_frame: 'search' }) do |f|
-  %div.mb-3
-    = f.label :month, 'Month',  class: 'form-label'
-    = f.select :month, options_for_select(Date::MONTHNAMES.zip(0..12), session[:entry_filter_month] || Date.today.month), {}, class: 'form-select d-inline-block', style: 'width:auto;'
-    = f.label :year, 'Year', class: 'ms-3 form-label'
-    = f.select :year, options_for_select(@years, session[:entry_filter_year] || Date.today.year), { include_blank: true }, class: 'form-select d-inline-block me-4', style: 'width:auto;'
-  %div.mb-3
-    = f.label :income, 'Income', class: 'form-label'
-    = f.select :income, options_for_select([true, false], session[:entry_filter_income]), { include_blank: true }, class: 'form-select d-inline-block', style: 'width:auto;'
-    = f.label :tag_id, 'Tag', class: 'ms-3 form-label'
-    = f.collection_select :tag_id, @tags, :id, :name, { include_blank: true, placeholder: 'all', selected: session[:entry_filter_tag_id] }, class: 'form-select d-inline-block', style: 'width:auto;'
-  %div.mb-3
-    = f.label :category_id, 'Category', class: 'form-label'
-    = f.collection_select :category_id, @categories, :id, :name, { include_blank: true, placeholder: 'all', selected: session[:entry_filter_category_id] }, class: 'form-select d-inline-block', style: 'width:auto;'
-  = f.submit "Filter", class: 'btn btn-primary'
+= form_with(url: '/filtered_entries', data: { turbo_frame: 'search' }, html: { style: 'max-width: 500px;' }) do |f|
+  %div.row{ style: 'display: flex; max-width: 500px;' }
+    %div{ style: 'width: 100%; margin-right: 1rem;' }
+      = f.label :month, 'Month'
+      = f.select :month, options_for_select(Date::MONTHNAMES.zip(0..12), session[:entry_filter_month] || Date.today.month), {}
+    %div{ style: 'min-width: fit-content;' }
+      = f.label :year, 'Year'
+      = f.select :year, options_for_select(@years, session[:entry_filter_year] || Date.today.year), { include_blank: true }
+  %div.row{ style: 'display: flex; max-width: 500px;' }
+    %div{ style: 'margin-right: 1rem; min-width: fit-content;' }
+      = f.label :income, 'Income'
+      = f.select :income, options_for_select([true, false], session[:entry_filter_income]), { include_blank: true }
+    %div{ style: 'width: 100%' }
+      = f.label :tag_id, 'Tag'
+      = f.collection_select :tag_id, @tags, :id, :name, { include_blank: true, placeholder: 'all', selected: session[:entry_filter_tag_id] }
+  %div.row{ style: 'display: flex; max-width: 500px;' }
+    %div{ style: 'width: 100%' }
+      = f.label :category_id, 'Category', class: 'form-label'
+      = f.collection_select :category_id, @categories, :id, :name, { include_blank: true, placeholder: 'all', selected: session[:entry_filter_category_id] }
+  = f.submit "Filter"
 
 = search_form_for @q, data: { turbo_frame: 'search', controller: 'search' } do |f|
   = f.label :notes_or_amount_cont, "Search", hidden: true
-  = f.search_field :notes_or_amount_cont, placeholder: "Search entries", class: 'float-end my-1', data: { action: "input->search#perform" }
+  = f.search_field :notes_or_amount_cont, placeholder: "Search entries", data: { action: "input->search#perform" }
 
 = turbo_frame_tag 'search' do
   = render partial: "entries/table", locals: { entries: @entries }

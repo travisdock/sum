@@ -34,6 +34,8 @@
 %br
 %hr
 %br
+%h3 Sign Out
+= link_to "Sign Out", destroy_user_session_path, method: :delete, data: { 'turbo-method': 'delete' }
 
 %h3 Download Entries (CSV)
 = link_to "Download", export_entries_path(format: 'csv'), class: 'btn btn-warning'

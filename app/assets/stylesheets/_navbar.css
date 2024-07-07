@@ -1,0 +1,49 @@
+nav {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+nav:not(:has(ul.menu.collapsed)) {
+  flex-direction: row;
+}
+nav:has(ul.menu.collapsed) {
+  align-items: start;
+}
+
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  list-style: none;
+  padding: 0;
+}
+
+ul.menu {
+  display: block;
+  margin: 0 1rem;
+}
+
+ul.menu.collapsed {
+  display: none;
+}
+
+ul.menu.open {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  margin-left: 0;
+}
+
+@media (min-width: 769px) {
+  ul.menu.collapsed {
+    display: block !important;
+  }
+
+  .toggle-button {
+    display: none;
+  }
+}
+
+nav h1 {
+  margin: 0;
+}
