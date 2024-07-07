@@ -14,7 +14,6 @@ export default class extends Controller {
   }
 
   toggle() {
-    console.log(this.menuTarget)
     this.menuTarget.classList.toggle("open")
   }
 
