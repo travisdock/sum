@@ -25,6 +25,6 @@
       %div{ style: 'display: flex; justify-content: space-between;' }
         = nested_form.text_field :name, { id: 'tag', style: 'margin-end: 10px;' }
         = nested_form.hidden_field :_destroy, { id: 'tag-destroy' }
-        %button{ id: 'destroy-btn', class: "#{'invisible' unless @entry.tag_id}", data: { action: "click->tag#remove:prevent" } } Remove
+        %button{ id: 'destroy-btn', style: "#{'display: none;' unless @entry.tag_id}", data: { action: "click->tag#remove:prevent" } } Remove
         %button{ id: 'restore-btn', style: 'display: none;', data: { action: "click->tag#restore:prevent" } } Restore
-  = f.submit 'Save', class: 'btn btn-primary'
+  = f.submit 'Save'
