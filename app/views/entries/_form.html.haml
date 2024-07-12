@@ -7,7 +7,7 @@
           %li= message
 
   %div.grid
-    %fieldset
+    %fieldset{ 'data-controller': 'date-picker' }
       = f.label :date
       = f.date_field :date, { id: "#{@entry.id ? '' : 'date-picker'}" }
     %fieldset
