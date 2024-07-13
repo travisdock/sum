@@ -6,17 +6,17 @@
         - @entry.errors.full_messages.each do |message|
           %li= message
 
-  %div.grid
-    %fieldset{ 'data-controller': 'date-picker' }
+  %div.row{ style: 'display: flex; flex-direction: row; flex-wrap: wrap; justify-content: space-between;' }
+    %div{ 'data-controller': 'date-picker' }
       = f.label :date
       = f.date_field :date, { id: "#{@entry.id ? '' : 'date-picker'}" }
-    %fieldset
+    %div
       = f.label :amount
-      = f.number_field :amount, { placeholder: '$0.00', step: '.01', inputmode: "decimal" }
-    %fieldset
-      = f.label :category
-      = f.collection_select :category_id, @categories, :id, :name, { include_blank: true }
-  %fieldset
+      = f.number_field :amount, { placeholder: '$0.00', step: '.01', inputmode: "decimal", style: 'width: 130px;' }
+  %div
+    = f.label :category
+    = f.collection_select :category_id, @categories, :id, :name, { include_blank: true }
+  %div
     = f.label :notes
     = f.text_area :notes
   %fieldset{ 'data-controller': 'tag' }
