@@ -19,9 +19,9 @@
       %nav{ data: { controller: 'navbar' } }
         %ul
           %li
-            %button.contrast.toggle-button{ data: { action: 'click->navbar#toggle' } } ☰
+            %button.contrast.toggle-button{ style: 'padding-left: .8rem; padding-right: .8rem; font-size: larger;', data: { action: 'click->navbar#toggle' } } ☰
           %li
-            %button.contrast#dark-mode-toggle{ data: { controller: 'dark-mode', action: 'click->dark-mode#toggle' } }Sum ☽
+            %button.contrast#dark-mode-toggle{ style: 'font-size: larger;', data: { controller: 'dark-mode', action: 'click->dark-mode#toggle' } }Sum ☽
         %ul{ data: { 'navbar-target': 'menu' }, class: "navbar menu" }
           - if user_signed_in?
             %li

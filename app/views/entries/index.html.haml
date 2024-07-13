@@ -1,7 +1,7 @@
 %div{ style: 'display: flex; justify-content: space-between;' }
   %h1 Entries
-  %a{ href: new_entry_path }
-    New Entry
+  %a{ href: new_entry_path, role: "button", style: 'padding: .5rem; height: fit-content;' }
+    + New Entry
 = form_with(url: '/filtered_entries', data: { 'turbo-frame': 'search' }) do |f|
   %div.row{ style: 'display: flex; flex-direction: row; flex-wrap: wrap; justify-content: space-between;' }
     %div{ style: 'min-width: fit-content;' }
