@@ -1,3 +1,4 @@
+return if Rails.env.development? || Rails.env.test?
 Honeybadger.configure do |config|
   config.before_event do |event|
     begin
