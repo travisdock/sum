@@ -7,12 +7,12 @@
     %meta{:content => "noindex, nofollow, noarchive", :name => "robots"}
     = csrf_meta_tags
     = csp_meta_tag
-    %link{:rel => "shortcut icon", :href => image_url("favicon.ico"), :type => "image/x-icon"}
-    %link{:rel => "apple-touch-icon", :href => image_url("apple-touch-icon.png")}
+    %link{ rel: "icon", href: "/favicon.ico", type: "image/x-icon" }
+    %link{ rel: "apple-touch-icon", href: "/apple-touch-icon.png" }
     - %w(57 72 76 114 120 144 152 180).each do |size|
-      %link{:rel => "apple-touch-icon", :sizes => "#{size}x#{size}", :href => image_url("apple-touch-icon-#{size}x#{size}.png")}
+      %link{:rel => "apple-touch-icon", :sizes => "#{size}x#{size}", :href => image_url("/apple-touch-icon-#{size}x#{size}.png")}
     = stylesheet_link_tag "https://cdn.jsdelivr.net/npm/@picocss/pico@2/css/pico.min.css"
-    = stylesheet_link_tag "application", "data-turbo-track": "reload"
+    = stylesheet_link_tag :all, "data-turbo-track": "reload"
     = javascript_importmap_tags
   %body
     .container
