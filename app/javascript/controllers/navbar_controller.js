@@ -5,7 +5,6 @@ export default class extends Controller {
   static targets = ["menu"]
 
   connect() {
-    console.log("Navbar controller connected")
     this.updateMenu()
     window.addEventListener('resize', this.windowResized.bind(this))
   }
