@@ -129,7 +129,7 @@ GEM
       haml (>= 4.0.6)
       railties (>= 5.1)
     honeybadger (5.15.6)
-    i18n (1.14.5)
+    i18n (1.14.6)
       concurrent-ruby (~> 1.0)
     importmap-rails (2.0.1)
       actionpack (>= 6.0.0)
@@ -167,7 +167,7 @@ GEM
     nokogiri (1.16.7-x86_64-linux)
       racc (~> 1.4)
     orm_adapter (0.5.0)
-    propshaft (0.9.1)
+    propshaft (1.0.0)
       actionpack (>= 7.0.0)
       activesupport (>= 7.0.0)
       rack
