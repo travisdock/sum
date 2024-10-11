@@ -17,10 +17,3 @@
       %article{ style: 'margin: 0 10px 10px 0;'}
         %header{ style: 'text-align: center;'}= category
         %p{ style: 'text-align: center;'}= number_to_currency(total)
-  %hr
-  %h2 Charts
-  %input{ type: 'submit', name: 'commit', value: 'Pie Chart', class: 'btn btn-primary', formaction: '/turbo_charts/pie_chart', form: 'data_form' }
-  %input{ type: 'submit', name: 'commit', value: 'Total by Category Bar Chart', class: 'btn btn-primary', formaction: '/turbo_charts/bar_chart', form: 'data_form' }
-  %input{ type: 'submit', name: 'commit', value: 'Total Expense By Month', class: 'btn btn-primary', formaction: '/turbo_charts/total_by_month_bar_chart', form: 'data_form' }
-
-  %div#chart

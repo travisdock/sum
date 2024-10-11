@@ -16,7 +16,6 @@ Rails.application.routes.draw do
   # Dashboard
   get '/dashboard', to: 'dashboards#show'
   post '/dashboard', to: 'dashboards#show'
-  post '/turbo_charts/:chart_name', to: 'dashboards#charts', as: 'chart'
 
   devise_for :users
 
