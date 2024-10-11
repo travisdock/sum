@@ -24,11 +24,4 @@ class Dashboard
   def category_totals
     @entries.joins(:category).group(:name).sum(:amount)
   end
-
-  def total_spending_by_month
-    @entries.group("strftime('%m', date)")
-            .by_income(false)
-            .sum(:amount)
-            .transform_keys { |key| Date::MONTHNAMES[key.to_i] }
-  end
 end

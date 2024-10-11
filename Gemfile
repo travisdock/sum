@@ -41,9 +41,6 @@ gem "responders"
 # Use Haml instead of erb
 gem 'haml-rails'
 
-# Use Chartkick for charts
-gem 'chartkick'
-
 # Use icecube for scheduling
 gem 'ice_cube', github: 'ice-cube-ruby/ice_cube',
       ref: '6b97e77c106cd6662cb7292a5f59b01e4ccaedc6'
