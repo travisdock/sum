@@ -1,0 +1,23 @@
+.tabs {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
+
+.tab-list {
+  list-style: none;
+  display: flex;
+  padding: 0;
+}
+
+.tab {
+  margin-right: 5px;
+  border-radius: 5px 5px 0 0;
+  border: 1px solid #b2b2b2;
+  list-style: none;
+}
+
+.tab a {
+  text-decoration: none;
+  color: #333;
+
