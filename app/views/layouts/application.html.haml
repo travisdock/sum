@@ -43,7 +43,7 @@
               %a{ href: user_path(current_user) }
                 Account
             %li
-              = link_to "Logout", logout_path, method: :delete
+              = link_to "Logout", logout_path, data: { turbo_method: :delete }
           - else
             %li
               = link_to "Login", login_path
