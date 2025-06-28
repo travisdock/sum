@@ -1,0 +1,9 @@
+%h2 Profile
+%p
+  %strong Email:
+  = current_user.email
+
+%p
+  = link_to "Edit Profile", edit_user_path(current_user)
+  |
+  = link_to "Dashboard", dashboard_path

@@ -34,9 +34,8 @@ gem "tzinfo-data", platforms: %i[ mingw mswin x64_mingw jruby ]
 # Reduces boot times through caching; required in config/boot.rb
 gem "bootsnap", require: false
 
-# Use devise for auth
-gem 'devise'
-gem "responders"
+# Use bcrypt for secure password hashing
+gem 'bcrypt'
 
 # Use Haml instead of erb
 gem 'haml-rails'
@@ -65,6 +64,7 @@ end
 group :development do
   # Use console on exceptions pages [https://github.com/rails/web-console]
   gem "web-console"
+  gem 'claude-on-rails'
 end
 
 group :production do
