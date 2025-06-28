@@ -1,0 +1,13 @@
+%h2 Forgot Password
+%p Enter your email address and we'll send you instructions to reset your password.
+
+= form_with url: password_resets_path, local: true do |f|
+  .field
+    = f.label :email
+    %br/
+    = f.email_field :email, autofocus: true, autocomplete: "email"
+  .actions
+    = f.submit "Send Reset Instructions"
+
+%p
+  = link_to "Back to Login", new_session_path

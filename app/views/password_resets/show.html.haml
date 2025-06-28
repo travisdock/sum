@@ -1,0 +1,19 @@
+%h2 Reset Password
+= form_with model: @user, url: password_reset_path(params[:token]), local: true, method: :patch do |f|
+  - if @user.errors.any?
+    .error_messages
+      %h3= pluralize(@user.errors.count, "error") + " prohibited this password from being reset:"
+      %ul
+        - @user.errors.full_messages.each do |message|
+          %li= message
+  
+  .field
+    = f.label :password, "New Password"
+    %br/
+    = f.password_field :password, autocomplete: "new-password", autofocus: true
+  .field
+    = f.label :password_confirmation
+    %br/
+    = f.password_field :password_confirmation, autocomplete: "new-password"
+  .actions
+    = f.submit "Reset Password"

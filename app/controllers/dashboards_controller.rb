@@ -1,6 +1,4 @@
 class DashboardsController < ApplicationController
-  before_action :authenticate_user!
-
   # GET POST /dashboard
   def show
     entries = current_user.entries.by_year(params['year'] || Date.today.year).by_month(params['month'] || Date.today.month)

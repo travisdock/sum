@@ -1,0 +1,26 @@
+%h2 Edit Profile
+= form_with model: @user, url: user_path(@user), local: true, method: :patch do |f|
+  - if @user.errors.any?
+    .error_messages
+      %h3= pluralize(@user.errors.count, "error") + " prohibited this user from being saved:"
+      %ul
+        - @user.errors.full_messages.each do |message|
+          %li= message
+  
+  .field
+    = f.label :email
+    %br/
+    = f.email_field :email, autocomplete: "email"
+  .field
+    = f.label :password, "New Password (leave blank to keep current)"
+    %br/
+    = f.password_field :password, autocomplete: "new-password"
+  .field
+    = f.label :password_confirmation
+    %br/
+    = f.password_field :password_confirmation, autocomplete: "new-password"
+  .actions
+    = f.submit "Update Profile"
+
+%p
+  = link_to "Back to Profile", user_path(@user)
