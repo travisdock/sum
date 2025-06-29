@@ -49,7 +49,7 @@ gem 'ice_cube', github: 'ice-cube-ruby/ice_cube',
       ref: '6b97e77c106cd6662cb7292a5f59b01e4ccaedc6'
 
 # Use arask for scheduling crons
-gem 'arask'
+#gem 'arask'
 
 # Use ransack for search and sorting of tables
 gem 'ransack'
