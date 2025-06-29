@@ -10,5 +10,5 @@
 #     schedule: at 5am every day
 production:
   recurring_entries:
-    command: Recurrable.create_occurrences
+    command: "Recurrable.create_occurrences"
     schedule: at 12am every day
