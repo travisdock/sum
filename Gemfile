@@ -6,6 +6,9 @@ ruby "3.3.3"
 # Bundle edge Rails instead: gem "rails", github: "rails/rails", branch: "main"
 gem "rails", "~> 8.0"
 
+gem "solid_queue", "~> 1.1"
+gem "mission_control-jobs"
+
 # The original asset pipeline for Rails [https://github.com/rails/sprockets-rails]
 #gem "sprockets-rails"
 gem "propshaft"

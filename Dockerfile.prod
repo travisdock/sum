@@ -9,7 +9,8 @@ WORKDIR /rails
 
 # Set production environment
 ENV RAILS_ENV="production" \
-    BUNDLE_WITHOUT="development"
+    BUNDLE_WITHOUT="development" \
+    SOLID_QUEUE_IN_PUMA="true"
 
 
 # Throw-away build stage to reduce size of final image
