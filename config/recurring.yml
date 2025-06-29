@@ -12,3 +12,6 @@ production:
   recurring_entries:
     command: "Recurrable.create_occurrences"
     schedule: at 12am every day
+  testing_it:
+    command: "Rails.logger.error 'wow'"
+    scheudle: every minute
