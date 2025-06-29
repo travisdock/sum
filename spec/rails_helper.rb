@@ -69,5 +69,8 @@ RSpec.configure do |config|
   end
 
   config.include Devise::Test::ControllerHelpers, type: :controller
+  config.before(:each, type: :controller) do
+    Rails.application.reload_routes_unless_loaded
+  end
   config.include Warden::Test::Helpers
 end
