@@ -12,7 +12,8 @@
     - %w(57 72 76 114 120 144 152 180).each do |size|
       %link{:rel => "apple-touch-icon", :sizes => "#{size}x#{size}", :href => image_url("/apple-touch-icon-#{size}x#{size}.png")}
     = stylesheet_link_tag "https://cdn.jsdelivr.net/npm/@picocss/pico@2/css/pico.min.css"
-    = stylesheet_link_tag :all, "data-turbo-track": "reload"
+    = stylesheet_link_tag '_table'
+    = stylesheet_link_tag '_navbar'
     = javascript_importmap_tags
   %body
     .container
