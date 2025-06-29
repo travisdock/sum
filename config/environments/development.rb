@@ -3,6 +3,8 @@ require "active_support/core_ext/integer/time"
 Rails.application.configure do
   # Settings specified here will take precedence over those in config/application.rb.
 
+  config.web_console.permissions = '192.168.0.0/16'
+
   # Make code changes take effect immediately without server restart.
   config.enable_reloading = true
 
