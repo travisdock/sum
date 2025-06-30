@@ -6,6 +6,9 @@ ruby "3.3.3"
 # Bundle edge Rails instead: gem "rails", github: "rails/rails", branch: "main"
 gem "rails", "~> 8.0"
 
+gem "solid_queue", "~> 1.1"
+gem "mission_control-jobs"
+
 # The original asset pipeline for Rails [https://github.com/rails/sprockets-rails]
 #gem "sprockets-rails"
 gem "propshaft"
@@ -44,9 +47,6 @@ gem 'haml-rails'
 # Use icecube for scheduling
 gem 'ice_cube', github: 'ice-cube-ruby/ice_cube',
       ref: '6b97e77c106cd6662cb7292a5f59b01e4ccaedc6'
-
-# Use arask for scheduling crons
-gem 'arask'
 
 # Use ransack for search and sorting of tables
 gem 'ransack'
