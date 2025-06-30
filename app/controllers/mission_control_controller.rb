@@ -7,7 +7,6 @@ class MissionControlController < ApplicationController
   )
 
   def ensure_admin
-    Rails.logger.error "#{current_user.inspect}"
-    current_user.id == '1'
+    redirect_to root_path unless current_user&.id == 1
   end
 end
