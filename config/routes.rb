@@ -19,6 +19,12 @@ Rails.application.routes.draw do
   get '/dashboard', to: 'dashboards#show'
   post '/dashboard', to: 'dashboards#show'
 
+  # Charts
+  get '/charts', to: 'charts#index'
+
+  get '/charts/profit_loss', to: 'charts#profit_loss'
+  get '/charts/pie_chart', to: 'charts#pie_chart'
+
   devise_for :users
 
   devise_scope :user do

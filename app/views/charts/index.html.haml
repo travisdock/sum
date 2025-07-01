@@ -1,0 +1,10 @@
+%div.tabs
+  %ul.tab-list
+    %li.tab
+      %a{ role: 'button', href: '/charts/profit_loss', data: { turbo: { prefetch: 'false', stream: 'content' } } } Profit & Loss
+    %li.tab
+      %a{ role: 'button', href: '/charts/pie_chart', data: { turbo: { prefetch: 'false', stream: 'content' } } } Pie Chart
+
+%div#tab-content
+  = turbo_frame_tag "content"
+
