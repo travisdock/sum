@@ -1,0 +1,35 @@
+%main.container{ style: 'max-width: 400px; margin-top: 2rem;' }
+  %h1 Edit Account
+  
+  = form_with model: @user, url: user_path(@user), method: :patch, local: true do |f|
+    - if @user.errors.any?
+      %article{ style: 'background-color: var(--pico-del-color); padding: 1rem; margin-bottom: 1rem;' }
+        %h4= pluralize(@user.errors.count, "error") + " prohibited this account from being saved:"
+        %ul
+          - @user.errors.full_messages.each do |message|
+            %li= message
+    
+    %div
+      = f.label :email
+      = f.email_field :email, required: true, autocomplete: "email"
+    
+    %hr
+    
+    %h3 Change password
+    %p{ style: 'font-size: 0.9rem; color: var(--pico-muted-color);' } Leave blank if you don't want to change it
+    
+    %div
+      = f.label :password, "New password"
+      = f.password_field :password, autocomplete: "new-password", placeholder: "6 characters minimum"
+    
+    %div
+      = f.label :password_confirmation
+      = f.password_field :password_confirmation, autocomplete: "new-password"
+    
+    %div
+      = f.submit "Update", class: "contrast"
+    
+    %hr
+    
+    %div{ style: 'text-align: center;' }
+      = link_to "Sign out", logout_path, method: :delete, data: { turbo_method: :delete }, class: "secondary"
