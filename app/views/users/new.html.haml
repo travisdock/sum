@@ -1,0 +1,29 @@
+%main.container{ style: 'max-width: 400px; margin-top: 2rem;' }
+  %h1 Sign up
+  
+  = form_with model: @user, url: signup_path, local: true do |f|
+    - if @user.errors.any?
+      %article{ style: 'background-color: var(--pico-del-color); padding: 1rem; margin-bottom: 1rem;' }
+        %h4= pluralize(@user.errors.count, "error") + " prohibited this account from being saved:"
+        %ul
+          - @user.errors.full_messages.each do |message|
+            %li= message
+    
+    %div
+      = f.label :email
+      = f.email_field :email, required: true, autofocus: true, autocomplete: "email"
+    
+    %div
+      = f.label :password
+      = f.password_field :password, required: true, autocomplete: "new-password", placeholder: "6 characters minimum"
+    
+    %div
+      = f.label :password_confirmation
+      = f.password_field :password_confirmation, required: true, autocomplete: "new-password"
+    
+    %div
+      = f.submit "Sign up", class: "contrast"
+    
+    %div{ style: 'text-align: center; margin-top: 1rem;' }
+      Already have an account?
+      = link_to "Sign in", login_path

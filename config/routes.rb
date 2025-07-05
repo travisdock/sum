@@ -19,17 +19,22 @@ Rails.application.routes.draw do
   get '/dashboard', to: 'dashboards#show'
   post '/dashboard', to: 'dashboards#show'
 
-  devise_for :users
-
-  devise_scope :user do
-    authenticated :user do
-      root 'entries#new', as: :authenticated_root
-    end
-
-    unauthenticated :user do
-      root 'devise/sessions#new', as: :unauthenticated_root
-    end
+  # Authentication routes
+  get '/login', to: 'sessions#new', as: :login
+  post '/login', to: 'sessions#create'
+  delete '/logout', to: 'sessions#destroy', as: :logout
+  
+  get '/signup', to: 'users#new', as: :signup
+  post '/signup', to: 'users#create'
+  
+  resources :users, only: [:edit, :update]
+  
+  # Root routes
+  constraints lambda { |req| req.session[:user_id].present? } do
+    root 'entries#new', as: :authenticated_root
   end
+  
+  root 'sessions#new'
 
   if Rails.configuration.database_configuration[Rails.env]['database'] == 'storage/test.sqlite3'
     get '/clear_db', to: 'test#clear_db'
