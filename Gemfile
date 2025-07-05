@@ -1,7 +1,7 @@
 source "https://rubygems.org"
 git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 
-ruby "3.3.3"
+ruby "3.4.4"
 
 # Bundle edge Rails instead: gem "rails", github: "rails/rails", branch: "main"
 gem "rails", "~> 8.0"
@@ -16,6 +16,7 @@ gem "propshaft"
 # Use sqlite3 as the database for Active Record
 gem "sqlite3"
 
+gem 'csv'
 # Use the Puma web server [https://github.com/puma/puma]
 gem "puma"
 
@@ -37,9 +38,8 @@ gem "stimulus-rails"
 # Reduces boot times through caching; required in config/boot.rb
 gem "bootsnap", require: false
 
-# Use devise for auth
-gem 'devise'
-gem "responders"
+# Use bcrypt for password hashing
+gem 'bcrypt'
 
 # Use Haml instead of erb
 gem 'haml-rails'
@@ -65,6 +65,7 @@ end
 group :development do
   # Use console on exceptions pages [https://github.com/rails/web-console]
   gem "web-console"
+  gem 'claude-on-rails'
 end
 
 group :production do
