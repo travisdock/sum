@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.0].define(version: 2025_07_12_202054) do
+ActiveRecord::Schema[8.0].define(version: 2025_07_12_201959) do
   create_table "categories", force: :cascade do |t|
     t.string "name"
     t.boolean "income"
