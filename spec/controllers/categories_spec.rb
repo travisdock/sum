@@ -4,7 +4,7 @@ RSpec.describe CategoriesController, type: :controller do
 
   describe "GET #index" do
     before(:all) do
-      @user = User.create!(email: "test@mail.com", password: "123456")
+      @user = User.create!(email_address: "test@mail.com", password: "123456")
       @category1 = Category.create!(name: "Test Category 1")
       @category2 = Category.create!(name: "Test Category 2")
       @user.categories << @category1

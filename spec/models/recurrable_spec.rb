@@ -13,7 +13,7 @@ RSpec.describe Recurrable, type: :model do
   describe "#create_occurence" do
     it "should create an occurence" do
       category = Category.create(name: "Test")
-      user = User.create(email: "test@mail.com", password: "password")
+      user = User.create(email_address: "test@mail.com", password: "password")
       recurrable = Recurrable.create(name: "Test", category: category, user: user, day_of_month: 1, notes: "test notes", amount: 100)
 
       expect { recurrable.create_occurrence }.to change { Entry.count }.by(1)

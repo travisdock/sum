@@ -1,22 +1,17 @@
-%main.container{ style: 'max-width: 400px; margin-top: 2rem;' }
-  %h1 Sign in
-  
-  = form_with url: login_path, local: true do |f|
-    %div
-      = f.label :email
-      = f.email_field :email, required: true, autofocus: true, autocomplete: "email"
-    
-    %div
-      = f.label :password
-      = f.password_field :password, required: true, autocomplete: "current-password"
-    
-    %div
-      = f.check_box :remember_me
-      = f.label :remember_me, "Remember me"
-    
-    %div
-      = f.submit "Sign in", class: "contrast"
-    
-    %div{ style: 'text-align: center; margin-top: 1rem;' }
-      Don't have an account?
-      = link_to "Sign up", signup_path
+- if flash[:alert]
+  %div{style: "color:red"}= flash[:alert]
+- if flash[:notice]
+  %div{style: "color:green"}= flash[:notice]
+
+= form_with url: session_path do |form|
+  = form.email_field :email_address, required: true, autofocus: true, autocomplete: "username", placeholder: "Enter your email address", value: params[:email_address]
+  %br
+  = form.password_field :password, required: true, autocomplete: "current-password", placeholder: "Enter your password", maxlength: 72
+  %br
+  = form.submit "Sign in"
+
+%br
+
+= link_to "Forgot password?", new_password_path
+|
+= link_to "Sign up", signup_path

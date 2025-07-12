@@ -10,8 +10,8 @@
             %li= message
     
     %div
-      = f.label :email
-      = f.email_field :email, required: true, autofocus: true, autocomplete: "email"
+      = f.label :email_address
+      = f.email_field :email_address, required: true, autofocus: true, autocomplete: "email"
     
     %div
       = f.label :password
@@ -26,4 +26,4 @@
     
     %div{ style: 'text-align: center; margin-top: 1rem;' }
       Already have an account?
-      = link_to "Sign in", login_path
+      = link_to "Sign in", new_session_path

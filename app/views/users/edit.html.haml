@@ -10,8 +10,8 @@
             %li= message
     
     %div
-      = f.label :email
-      = f.email_field :email, required: true, autocomplete: "email"
+      = f.label :email_address
+      = f.email_field :email_address, required: true, autocomplete: "email"
     
     %hr
     
@@ -32,4 +32,4 @@
     %hr
     
     %div{ style: 'text-align: center;' }
-      = link_to "Sign out", logout_path, method: :delete, data: { turbo_method: :delete }, class: "secondary"
+      = link_to "Sign out", session_path, method: :delete, data: { turbo_method: :delete }, class: "secondary"
