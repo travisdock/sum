@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.0].define(version: 2025_06_29_175555) do
+ActiveRecord::Schema[8.0].define(version: 2025_07_12_195238) do
   create_table "categories", force: :cascade do |t|
     t.string "name"
     t.boolean "income"
@@ -56,6 +56,15 @@ ActiveRecord::Schema[8.0].define(version: 2025_06_29_175555) do
     t.index ["category_id"], name: "index_recurrables_on_category_id"
     t.index ["tag_id"], name: "index_recurrables_on_tag_id"
     t.index ["user_id"], name: "index_recurrables_on_user_id"
+  end
+
+  create_table "sessions", force: :cascade do |t|
+    t.integer "user_id", null: false
+    t.string "ip_address"
+    t.string "user_agent"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["user_id"], name: "index_sessions_on_user_id"
   end
 
   create_table "solid_queue_blocked_executions", force: :cascade do |t|
@@ -186,15 +195,11 @@ ActiveRecord::Schema[8.0].define(version: 2025_06_29_175555) do
   end
 
   create_table "users", force: :cascade do |t|
-    t.string "email", default: "", null: false
-    t.string "encrypted_password", default: "", null: false
-    t.string "reset_password_token"
-    t.datetime "reset_password_sent_at"
-    t.datetime "remember_created_at"
+    t.string "email_address", default: "", null: false
+    t.string "password_digest", default: "", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["email"], name: "index_users_on_email", unique: true
-    t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
+    t.index ["email_address"], name: "index_users_on_email_address", unique: true
   end
 
   add_foreign_key "entries", "categories"
@@ -203,6 +208,7 @@ ActiveRecord::Schema[8.0].define(version: 2025_06_29_175555) do
   add_foreign_key "recurrables", "categories"
   add_foreign_key "recurrables", "tags"
   add_foreign_key "recurrables", "users"
+  add_foreign_key "sessions", "users"
   add_foreign_key "solid_queue_blocked_executions", "solid_queue_jobs", column: "job_id", on_delete: :cascade
   add_foreign_key "solid_queue_claimed_executions", "solid_queue_jobs", column: "job_id", on_delete: :cascade
   add_foreign_key "solid_queue_failed_executions", "solid_queue_jobs", column: "job_id", on_delete: :cascade

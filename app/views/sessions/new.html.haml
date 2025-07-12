@@ -1,0 +1,17 @@
+- if flash[:alert]
+  .alert.alert-danger= flash[:alert]
+- if flash[:notice]
+  .alert.alert-success= flash[:notice]
+
+%h1 Sign In
+
+= form_with url: session_path, local: true do |form|
+  .form-group
+    = form.email_field :email_address, required: true, autofocus: true, autocomplete: "username", placeholder: "Enter your email address", value: params[:email_address], class: "form-control"
+  .form-group
+    = form.password_field :password, required: true, autocomplete: "current-password", placeholder: "Enter your password", maxlength: 72, class: "form-control"
+  .form-group
+    = form.submit "Sign in", class: "btn btn-primary"
+
+%p
+  = link_to "Forgot password?", new_password_path

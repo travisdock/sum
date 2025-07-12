@@ -1,14 +1,14 @@
 class User < ApplicationRecord
-  # Include default devise modules. Others available are:
-  # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
-  devise :database_authenticatable, :registerable,
-         :recoverable, :rememberable, :validatable,
-         :timeoutable
+  has_secure_password
+  has_many :sessions, dependent: :destroy
 
   has_and_belongs_to_many :categories
   has_many :entries
   has_many :recurrables
   before_destroy :remove_data
+
+  normalizes :email_address, with: ->(e) { e.strip.downcase }
+  validates :email_address, presence: true, uniqueness: true
 
   def tags
     # was going to use has_many through but it was not working

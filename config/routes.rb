@@ -1,4 +1,7 @@
 Rails.application.routes.draw do
+  resource :session
+  resources :passwords, param: :token
+  
   mount MissionControl::Jobs::Engine, at: "/jobs"
 
   get 'up' => 'rails/health#show', as: :rails_health_check
@@ -19,17 +22,12 @@ Rails.application.routes.draw do
   get '/dashboard', to: 'dashboards#show'
   post '/dashboard', to: 'dashboards#show'
 
-  devise_for :users
-
-  devise_scope :user do
-    authenticated :user do
-      root 'entries#new', as: :authenticated_root
-    end
-
-    unauthenticated :user do
-      root 'devise/sessions#new', as: :unauthenticated_root
-    end
+  # Root routes based on authentication
+  constraints(AuthenticatedConstraint.new) do
+    root 'entries#new', as: :authenticated_root
   end
+
+  root 'sessions#new'
 
   if Rails.configuration.database_configuration[Rails.env]['database'] == 'storage/test.sqlite3'
     get '/clear_db', to: 'test#clear_db'

@@ -37,9 +37,8 @@ gem "stimulus-rails"
 # Reduces boot times through caching; required in config/boot.rb
 gem "bootsnap", require: false
 
-# Use devise for auth
-gem 'devise'
-gem "responders"
+# Use bcrypt for password hashing
+gem "bcrypt", "~> 3.1.7"
 
 # Use Haml instead of erb
 gem 'haml-rails'
