@@ -26,7 +26,19 @@ module Authentication
     end
 
     def find_session_by_cookie
-      Session.find_by(id: cookies.signed[:session_id]) if cookies.signed[:session_id]
+      return unless cookies.signed[:session_id]
+      
+      session = Session.find_by(id: cookies.signed[:session_id])
+      return unless session
+      
+      # Check if session has expired (1 month timeout)
+      if session.created_at < 1.month.ago
+        session.destroy
+        cookies.delete(:session_id)
+        return nil
+      end
+      
+      session
     end
 
     def request_authentication
@@ -41,7 +53,12 @@ module Authentication
     def start_new_session_for(user)
       user.sessions.create!(user_agent: request.user_agent, ip_address: request.remote_ip).tap do |session|
         Current.session = session
-        cookies.signed.permanent[:session_id] = { value: session.id, httponly: true, same_site: :lax }
+        cookies.signed[:session_id] = { 
+          value: session.id, 
+          httponly: true, 
+          same_site: :lax, 
+          expires: 1.month.from_now 
+        }
       end
     end
 
