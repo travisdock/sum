@@ -1,5 +1,5 @@
 class CategoriesController < ApplicationController
-  before_action :authenticate_user!
+  # Authentication is handled by ApplicationController
   before_action :set_category, only: %i[ show edit update remove destroy ]
 
   # GET /categories or /categories.json

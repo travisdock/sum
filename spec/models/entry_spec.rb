@@ -3,7 +3,7 @@ require "rails_helper"
 RSpec.describe Entry, type: :model do
   describe "scopes" do
     it "should return only entries from the given year" do
-      user = User.create!(email: "test1@mail.com", password: "123456")
+      user = User.create!(email_address: "test1@mail.com", password: "123456")
       category = Category.create!(name: "Category 1")
       entry1 = Entry.create!(date: Date.new(2015, 1, 1), user: user, category: category, amount: 100)
       entry2 = Entry.create!(date: Date.new(2015, 2, 1), user: user, category: category, amount: 100)
@@ -14,7 +14,7 @@ RSpec.describe Entry, type: :model do
     end
 
     it "should return only entries from the given month" do
-      user = User.create!(email: "test1@mail.com", password: "123456")
+      user = User.create!(email_address: "test1@mail.com", password: "123456")
       category = Category.create!(name: "Category 1")
       entry1 = Entry.create!(date: Date.new(2015, 2, 1), user: user, category: category, amount: 100)
       entry2 = Entry.create!(date: Date.new(2015, 2, 1), user: user, category: category, amount: 100)
@@ -25,7 +25,7 @@ RSpec.describe Entry, type: :model do
     end
 
     it "should return only non-income entries" do
-      user = User.create!(email: "test1@mail.com", password: "123456")
+      user = User.create!(email_address: "test1@mail.com", password: "123456")
       category1 = Category.create!(name: "Category 1", income: true)
       category2 = Category.create!(name: "Category 2", income: false)
       entry1 = Entry.create!(date: Date.today, user: user, category: category2, amount: 100)
@@ -37,7 +37,7 @@ RSpec.describe Entry, type: :model do
     end
 
     it "should return untracked entries" do
-      user = User.create!(email: "test1@mail.com", password: "123456")
+      user = User.create!(email_address: "test1@mail.com", password: "123456")
       category1 = Category.create!(name: "Category 1", untracked: true)
       category2 = Category.create!(name: "Category 2", untracked: false)
       entry1 = Entry.create!(date: Date.today, user: user, category: category2, amount: 100)
@@ -49,7 +49,7 @@ RSpec.describe Entry, type: :model do
     end
 
     it "should return only category2 entries" do
-      user = User.create!(email: "test1@mail.com", password: "123456")
+      user = User.create!(email_address: "test1@mail.com", password: "123456")
       category1 = Category.create!(name: "Category 1")
       category2 = Category.create!(name: "Category 2")
       entry1 = Entry.create!(date: Date.today, user: user, category: category2, amount: 100)
@@ -61,7 +61,7 @@ RSpec.describe Entry, type: :model do
     end
 
     it "should return only tagged entries" do
-      user = User.create!(email: "test1@mail.com", password: "123456")
+      user = User.create!(email_address: "test1@mail.com", password: "123456")
       category1 = Category.create!(name: "Category 1")
       tag1 = Tag.create!(name: "Tag 1")
       entry1 = Entry.create!(date: Date.today, user: user, category: category1, amount: 100, tag: tag1)

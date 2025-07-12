@@ -1,21 +1,26 @@
 module AuthenticationHelpers
   def sign_in(user)
-    if respond_to?(:session)
-      # For controller specs
-      session[:user_id] = user.id
-      session[:expires_at] = 1.month.from_now.iso8601
+    if respond_to?(:cookies)
+      # For controller specs - create a session and set cookie
+      session_record = user.sessions.create!(
+        user_agent: 'RSpec Test',
+        ip_address: '127.0.0.1'
+      )
+      cookies.signed[:session_id] = { value: session_record.id, httponly: true }
     else
       # For request/system specs
-      post login_path, params: { email: user.email, password: user.password }
+      post session_path, params: { email_address: user.email_address, password: user.password }
     end
   end
   
   def sign_out
-    if respond_to?(:session)
-      session.delete(:user_id)
-      session.delete(:expires_at)
+    if respond_to?(:cookies)
+      if session_id = cookies.signed[:session_id]
+        Session.find_by(id: session_id)&.destroy
+      end
+      cookies.delete(:session_id)
     else
-      delete logout_path
+      delete session_path
     end
   end
 end

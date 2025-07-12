@@ -1,5 +1,5 @@
 class TagsController < ApplicationController
-  before_action :authenticate_user!
+  # Authentication is handled by ApplicationController
   before_action :set_tag, only: %i[ show edit update destroy ]
 
   # GET /tags

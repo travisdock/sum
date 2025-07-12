@@ -20,9 +20,8 @@ Rails.application.routes.draw do
   post '/dashboard', to: 'dashboards#show'
 
   # Authentication routes
-  get '/login', to: 'sessions#new', as: :login
-  post '/login', to: 'sessions#create'
-  delete '/logout', to: 'sessions#destroy', as: :logout
+  resource :session
+  resources :passwords, param: :token
   
   get '/signup', to: 'users#new', as: :signup
   post '/signup', to: 'users#create'
@@ -30,7 +29,7 @@ Rails.application.routes.draw do
   resources :users, only: [:edit, :update]
   
   # Root routes
-  constraints lambda { |req| req.session[:user_id].present? } do
+  constraints lambda { |req| Session.find_by(id: req.cookie_jar.signed[:session_id]).present? } do
     root 'entries#new', as: :authenticated_root
   end
   

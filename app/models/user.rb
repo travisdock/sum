@@ -1,5 +1,6 @@
 class User < ApplicationRecord
   has_secure_password
+  has_many :sessions, dependent: :destroy
   
   # Associations
   has_and_belongs_to_many :categories
@@ -10,12 +11,11 @@ class User < ApplicationRecord
   before_destroy :remove_data
   
   # Validations
-  validates :email, presence: true, uniqueness: { case_sensitive: false }
-  validates :email, format: { with: URI::MailTo::EMAIL_REGEXP }
+  validates :email_address, presence: true, uniqueness: { case_sensitive: false }
+  validates :email_address, format: { with: URI::MailTo::EMAIL_REGEXP }
   validates :password, length: { minimum: 6 }, allow_nil: true
   
-  # Normalize email before saving
-  before_save :downcase_email
+  normalizes :email_address, with: ->(e) { e.strip.downcase }
   
   def tags
     # was going to use has_many through but it was not working
@@ -29,24 +29,11 @@ class User < ApplicationRecord
     self.categories.destroy_all
   end
   
-  # Remember me functionality
-  def remember_me!
-    self.remember_created_at = Time.current
-    save!(validate: false)
+  def password_reset_token
+    signed_id(purpose: :password_reset, expires_in: 15.minutes)
   end
   
-  def forget_me!
-    self.remember_created_at = nil
-    save!(validate: false)
-  end
-  
-  def remember_me?
-    remember_created_at.present? && remember_created_at > 1.month.ago
-  end
-  
-  private
-  
-  def downcase_email
-    self.email = email.downcase if email.present?
+  def self.find_by_password_reset_token!(token)
+    find_signed!(token, purpose: :password_reset)
   end
 end

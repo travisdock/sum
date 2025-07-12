@@ -1,5 +1,5 @@
 class DashboardsController < ApplicationController
-  before_action :authenticate_user!
+  # Authentication is handled by ApplicationController
 
   # GET POST /dashboard
   def show
