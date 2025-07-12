@@ -1,7 +1,6 @@
 require 'csv'
 
 class EntriesController < ApplicationController
-  # Authentication is handled by ApplicationController
   before_action :set_entry, only: %i[ show edit update destroy ]
 
   # GET /entries or /entries.json

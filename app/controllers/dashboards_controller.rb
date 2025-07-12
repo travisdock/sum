@@ -1,5 +1,4 @@
 class DashboardsController < ApplicationController
-  # Authentication is handled by ApplicationController
 
   # GET POST /dashboard
   def show
