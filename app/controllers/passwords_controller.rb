@@ -7,15 +7,14 @@ class PasswordsController < ApplicationController
 
   def create
     if user = User.find_by(email_address: params[:email_address])
-      # Since we're not using mailers, we'll store the reset link in the session
       # In a real application without email, you might display this to the user or use SMS
-      reset_url = edit_password_url(user.password_reset_token)
-      Rails.logger.info "Password reset URL for #{user.email_address}: #{reset_url}"
-      flash[:notice] = "Password reset instructions sent (check logs for reset URL in development)."
+      # reset_url = edit_password_url(user.password_reset_token)
+      # Rails.logger.info "Password reset URL for #{user.email_address}: #{reset_url}"
+      flash[:notice] = "Please contact an administrator to reset your password. "
     else
-      flash[:notice] = "Password reset instructions sent (if user with that email address exists)."
+      flash[:notice] = "Please contact an administrator to reset your password."
     end
-    
+
     redirect_to new_session_path
   end
 

@@ -1,5 +1,4 @@
 class RecurrablesController < ApplicationController
-  # Authentication is handled by ApplicationController
   before_action :set_recurrable, only: %i[ show edit update destroy ]
 
   # GET /recurrables
