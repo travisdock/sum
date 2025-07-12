@@ -70,4 +70,5 @@ end
 group :production do
   # Use Honeybadger for errors
   gem "honeybadger"
+  gem "claude-on-rails"
 end
