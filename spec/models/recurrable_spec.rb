@@ -1,15 +1,6 @@
 require 'rails_helper'
 
 RSpec.describe Recurrable, type: :model do
-  describe "overwriting day_of_month" do
-    it "should set schedule and schedule_string" do
-      day_of_month = 1
-      recurrable = Recurrable.new(day_of_month: day_of_month)
-      expect(recurrable.schedule.next_occurrence).to eq(Date.today.next_month.beginning_of_month)
-      expect(recurrable.schedule_string).to eq("Monthly on the 1st day of the month")
-    end
-  end
-
   describe "#create_occurence" do
     it "should create an occurence" do
       category = Category.create(name: "Test")

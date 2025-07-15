@@ -25,11 +25,6 @@ gem 'csv'
 gem 'haml-rails'
 
 # TODO: Dependency to remove
-# Use icecube for scheduling
-gem 'ice_cube', github: 'ice-cube-ruby/ice_cube',
-      ref: '6b97e77c106cd6662cb7292a5f59b01e4ccaedc6'
-
-# TODO: Dependency to remove
 # Use ransack for search and sorting of tables
 gem 'ransack'
 
