@@ -42,3 +42,4 @@ coverage
 .claude-on-rails/sessions/
 .claude-swarm/
 claude-swarm.log
+node_modules/
