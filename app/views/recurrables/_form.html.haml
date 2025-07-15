@@ -12,6 +12,7 @@
   .field.mb-3
     = f.label :day_of_month, { class: 'form-label' }
     = f.select :day_of_month, (1..31), { class: 'form-select' }
+    %small If you use a day of the month that doesn't occur every month (e.g. 31) this recurrable entry will not occur on some months
   .field.mb-3
     = f.label :amount, { class: 'form-label' }
     = f.number_field :amount, { class: 'form-control', placeholder: '$0.00', step: '.01', inputmode: "decimal" }
