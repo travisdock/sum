@@ -19,6 +19,9 @@ Rails.application.routes.draw do
   get '/dashboard', to: 'dashboards#show'
   post '/dashboard', to: 'dashboards#show'
 
+  # Charts
+  resource :charts, only: [:show]
+
   # Authentication routes
   resource :session
   resources :passwords, param: :token
