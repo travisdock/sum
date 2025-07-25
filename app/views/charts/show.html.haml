@@ -1,0 +1,16 @@
+%h1 Charts
+
+.chart-controls
+  = form_with url: charts_path, method: :get, data: { turbo_frame: 'chart_content' } do |f|
+    = f.label :year, 'Select Year:'
+    = f.select :year, options_for_select(@available_years, @selected_year), {}, { onchange: 'this.form.requestSubmit()' }
+
+= turbo_frame_tag 'chart_content' do
+  .chart-container
+    %h2 Profit/Loss by Month - #{@selected_year}
+    %canvas#profit-loss-chart{ 
+      data: { 
+        controller: 'profit-loss-chart',
+        'profit-loss-chart-data-value': @monthly_data.to_json
+      }
+    }
