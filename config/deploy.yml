@@ -1,17 +1,23 @@
 service: sum-dev
-image: sum-dev
+image: travisdock/sum-dev
+
 servers:
   - 143.198.160.36
+
 ssh:
   user: 'root'
   keys: ["/home/user/.ssh/id_ed25519"]
 
+proxy:
+  ssl: true
+  host: dev.sum-finance.com
+  app_port: 3000
+
 builder:
-  dockerfile: Dockerfile.prod
   arch: amd64
+  dockerfile: Dockerfile.prod
 
 registry:
-  server: ghcr.io/travisdock
   username: travisdock
   password:
     - KAMAL_REGISTRY_PASSWORD
@@ -19,28 +25,12 @@ registry:
 env:
   secret:
     - SECRET_KEY_BASE
+  clear:
+    SOLID_QUEUE_IN_PUMA: true
 
 volumes:
-  - "storage:/rails/storage"
+  - "/app_storage/sum-dev:/rails/storage"
 
-proxy:
-  ssl: true
-  host: sum-dev.com
-  app_port: 3000
+asset_path: /rails/public/assets
 
-#traefik:
-#  options:
-#    publish:
-#      - "443:443"
-#    volume:
-#      - "/letsencrypt/acme.json:/letsencrypt/acme.json" # To save the configuration file.
-#  args:
-#    entryPoints.web.address: ":80"
-#    entryPoints.websecure.address: ":443"
-#    entryPoints.web.http.redirections.entryPoint.to: websecure # We want to force https
-#    entryPoints.web.http.redirections.entryPoint.scheme: https
-#    entryPoints.web.http.redirections.entrypoint.permanent: true
-#    certificatesResolvers.letsencrypt.acme.email: "travisdock@gmail.com"
-#    certificatesResolvers.letsencrypt.acme.storage: "/letsencrypt/acme.json" # Must match the path in `volume`
-#    certificatesResolvers.letsencrypt.acme.httpchallenge: true
-#    certificatesResolvers.letsencrypt.acme.httpchallenge.entrypoint: web # Must match the role in `servers`
+
