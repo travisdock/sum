@@ -7,6 +7,10 @@
     %meta{:content => "noindex, nofollow, noarchive", :name => "robots"}
     = csrf_meta_tags
     = csp_meta_tag
+    -# PWA meta tags
+    %meta{:name => "theme-color", :content => "#000000"}/
+    %meta{:name => "apple-mobile-web-app-capable", :content => "yes"}/
+    %link{:rel => "manifest", :href => "/manifest.json"}/
     %link{ rel: "icon", href: "/favicon.ico", type: "image/x-icon" }
     %link{ rel: "apple-touch-icon", href: "/apple-touch-icon.png" }
     - %w(57 72 76 114 120 144 152 180).each do |size|
@@ -15,9 +19,17 @@
     = stylesheet_link_tag '_table'
     = stylesheet_link_tag '_navbar'
     = stylesheet_link_tag 'charts'
+    = stylesheet_link_tag 'pwa'
     = javascript_importmap_tags
   %body
     .container
+      -# PWA Install Prompt for iOS
+      %div{ data: { controller: 'pwa-install' } }
+        %article.hidden{ data: { 'pwa-install-target': 'prompt' }, style: 'position: fixed; bottom: 20px; left: 20px; right: 20px; z-index: 1000; margin: 0;' }
+          %p{ style: 'margin: 0;' } Install Sum for quick access and a better experience!
+          %footer{ style: 'display: flex; gap: 10px;' }
+            %button{ data: { action: 'pwa-install#showInstructions' } } Install
+            %button.secondary{ data: { action: 'pwa-install#dismiss' } } Not now
       %nav{ data: { controller: 'navbar' } }
         %ul
           %li
