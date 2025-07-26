@@ -1,0 +1,70 @@
+require:
+  - rubocop-rails
+  - rubocop-rspec
+  - rubocop-performance
+
+AllCops:
+  TargetRubyVersion: 3.4
+  TargetRailsVersion: 8.0
+  NewCops: enable
+  Exclude:
+    - 'db/schema.rb'
+    - 'db/migrate/*'
+    - 'vendor/**/*'
+    - 'tmp/**/*'
+    - 'bin/*'
+    - 'node_modules/**/*'
+    - 'config/environments/*'
+    - 'config/initializers/*'
+    - 'spec/rails_helper.rb'
+    - 'spec/spec_helper.rb'
+
+Style/Documentation:
+  Enabled: false
+
+Style/FrozenStringLiteralComment:
+  Enabled: false
+
+Style/ClassAndModuleChildren:
+  Enabled: false
+
+Metrics/BlockLength:
+  Exclude:
+    - 'spec/**/*'
+    - 'config/routes.rb'
+    - 'lib/tasks/**/*'
+
+Metrics/MethodLength:
+  Max: 20
+
+Metrics/ClassLength:
+  Max: 200
+
+Metrics/AbcSize:
+  Max: 20
+
+Layout/LineLength:
+  Max: 120
+  Exclude:
+    - 'config/routes.rb'
+
+Rails/SkipsModelValidations:
+  Enabled: false
+
+Rails/OutputSafety:
+  Enabled: true
+
+RSpec/ExampleLength:
+  Max: 20
+
+RSpec/MultipleExpectations:
+  Max: 5
+
+RSpec/NestedGroups:
+  Max: 4
+
+RSpec/DescribeClass:
+  Exclude:
+    - 'spec/features/**/*'
+    - 'spec/requests/**/*'
+    - 'spec/system/**/*'
