@@ -1,5 +1,5 @@
 class TagsController < ApplicationController
-  before_action :set_tag, only: %i[ show edit update destroy ]
+  before_action :set_tag, only: %i[show edit update destroy]
 
   # GET /tags
   def index
@@ -24,7 +24,7 @@ class TagsController < ApplicationController
     @tag = Tag.new(tag_params)
 
     if @tag.save
-      redirect_to tag_url(@tag), notice: "Tag was successfully created."
+      redirect_to tag_url(@tag), notice: 'Tag was successfully created.'
     else
       render :new, status: :unprocessable_entity
     end
@@ -33,7 +33,7 @@ class TagsController < ApplicationController
   # PATCH/PUT /tags/1
   def update
     if @tag.update(tag_params)
-      redirect_to tags_url, notice: "Tag was successfully updated."
+      redirect_to tags_url, notice: 'Tag was successfully updated.'
     else
       render :edit, status: :unprocessable_entity
     end
@@ -44,19 +44,20 @@ class TagsController < ApplicationController
     Entry.where(tag_id: @tag.id).update_all(tag_id: nil)
     @tag.destroy
 
-    redirect_to tags_url, notice: "Tag was successfully destroyed."
+    redirect_to tags_url, notice: 'Tag was successfully destroyed.'
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_tag
-      @tag = current_user.tags.find(params[:id])
-    rescue ActiveRecord::RecordNotFound
-      redirect_to tags_url, notice: "Tag not found."
-    end
 
-    # Only allow a list of trusted parameters through.
-    def tag_params
-      params.require(:tag).permit(:name)
-    end
+  # Use callbacks to share common setup or constraints between actions.
+  def set_tag
+    @tag = current_user.tags.find(params[:id])
+  rescue ActiveRecord::RecordNotFound
+    redirect_to tags_url, notice: 'Tag not found.'
+  end
+
+  # Only allow a list of trusted parameters through.
+  def tag_params
+    params.require(:tag).permit(:name)
+  end
 end

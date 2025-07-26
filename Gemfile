@@ -1,22 +1,22 @@
-source "https://rubygems.org"
+source 'https://rubygems.org'
 git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 
-ruby "3.4.4"
+ruby '3.4.4'
 
-gem "puma"
+gem 'puma'
 
-gem "rails", "~> 8.0"
-gem "bootsnap", require: false
-gem "importmap-rails"
-gem "turbo-rails"
-gem "stimulus-rails"
+gem 'rails', '~> 8.0'
+gem 'bootsnap', require: false
+gem 'importmap-rails'
+gem 'turbo-rails'
+gem 'stimulus-rails'
 
-gem "solid_queue", "~> 1.1"
-gem "mission_control-jobs"
+gem 'solid_queue', '~> 1.1'
+gem 'mission_control-jobs'
 
-gem "propshaft"
+gem 'propshaft'
 
-gem "sqlite3"
+gem 'sqlite3'
 
 gem 'bcrypt'
 
@@ -29,14 +29,14 @@ gem 'haml-rails'
 gem 'ransack'
 
 group :development, :test do
-  gem "debug", platforms: %i[ mri mingw x64_mingw ]
+  gem 'debug', platforms: %i[mri mingw x64_mingw]
   gem 'rspec-rails'
   gem 'simplecov', require: false
   gem 'database_cleaner'
 end
 
 group :development do
-  gem "web-console"
+  gem 'web-console'
   gem 'claude-on-rails'
   gem 'rubocop', require: false
   gem 'rubocop-rails', require: false
@@ -45,5 +45,5 @@ group :development do
 end
 
 group :production do
-  gem "honeybadger"
+  gem 'honeybadger'
 end

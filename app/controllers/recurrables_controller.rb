@@ -1,5 +1,5 @@
 class RecurrablesController < ApplicationController
-  before_action :set_recurrable, only: %i[ show edit update destroy ]
+  before_action :set_recurrable, only: %i[show edit update destroy]
 
   # GET /recurrables
   def index
@@ -29,7 +29,7 @@ class RecurrablesController < ApplicationController
     @recurrable.user = current_user
 
     if @recurrable.save
-      redirect_to recurrable_url(@recurrable), notice: "Recurrable was successfully created."
+      redirect_to recurrable_url(@recurrable), notice: 'Recurrable was successfully created.'
     else
       @categories = current_user.categories
       render :new, status: :unprocessable_entity
@@ -39,7 +39,7 @@ class RecurrablesController < ApplicationController
   # PATCH/PUT /recurrables/1
   def update
     if @recurrable.update(recurrable_params)
-      redirect_to recurrable_url(@recurrable), notice: "Recurrable was successfully updated."
+      redirect_to recurrable_url(@recurrable), notice: 'Recurrable was successfully updated.'
     else
       render :edit, status: :unprocessable_entity
     end
@@ -48,19 +48,21 @@ class RecurrablesController < ApplicationController
   # DELETE /recurrables/1
   def destroy
     @recurrable.destroy
-    redirect_to recurrables_url, notice: "Recurrable was successfully destroyed."
+    redirect_to recurrables_url, notice: 'Recurrable was successfully destroyed.'
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_recurrable
-      @recurrable = current_user.recurrables.find(params[:id])
-    rescue ActiveRecord::RecordNotFound
-      redirect_to recurrables_url, notice: "Recurrable not found."
-    end
 
-    # Only allow a list of trusted parameters through.
-    def recurrable_params
-      params.require(:recurrable).permit(:name, :day_of_month, :amount, :notes, :category_id, tag_attributes: [:id, :name, :_destroy ])
-    end
+  # Use callbacks to share common setup or constraints between actions.
+  def set_recurrable
+    @recurrable = current_user.recurrables.find(params[:id])
+  rescue ActiveRecord::RecordNotFound
+    redirect_to recurrables_url, notice: 'Recurrable not found.'
+  end
+
+  # Only allow a list of trusted parameters through.
+  def recurrable_params
+    params.require(:recurrable).permit(:name, :day_of_month, :amount, :notes, :category_id,
+                                       tag_attributes: [:id, :name, :_destroy])
+  end
 end
