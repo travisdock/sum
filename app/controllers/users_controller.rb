@@ -12,7 +12,7 @@ class UsersController < ApplicationController
 
     if @user.save
       start_new_session_for(@user)
-      redirect_to root_path, notice: "Welcome! You have signed up successfully."
+      redirect_to root_path, notice: 'Welcome! You have signed up successfully.'
     else
       render :new, status: :unprocessable_entity
     end
@@ -24,7 +24,7 @@ class UsersController < ApplicationController
   def update
     # Allow updating without providing current password
     if @user.update(user_update_params)
-      redirect_to edit_user_path(@user), notice: "Your account has been updated successfully."
+      redirect_to edit_user_path(@user), notice: 'Your account has been updated successfully.'
     else
       render :edit, status: :unprocessable_entity
     end

@@ -1,5 +1,5 @@
 Rails.application.routes.draw do
-  mount MissionControl::Jobs::Engine, at: "/jobs"
+  mount MissionControl::Jobs::Engine, at: '/jobs'
 
   get 'up' => 'rails/health#show', as: :rails_health_check
 
@@ -25,17 +25,17 @@ Rails.application.routes.draw do
   # Authentication routes
   resource :session
   resources :passwords, param: :token
-  
+
   get '/signup', to: 'users#new', as: :signup
   post '/signup', to: 'users#create'
-  
+
   resources :users, only: [:edit, :update]
-  
+
   # Root routes
   constraints lambda { |req| Session.find_by(id: req.cookie_jar.signed[:session_id]).present? } do
     root 'entries#new', as: :authenticated_root
   end
-  
+
   root 'sessions#new'
 
   if Rails.configuration.database_configuration[Rails.env]['database'] == 'storage/test.sqlite3'

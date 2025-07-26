@@ -1,11 +1,11 @@
 class UpdateDemoDataJob < ApplicationJob
   include DemoDataGenerator
-  
+
   queue_as :default
 
   def perform
     # Only update data for the demo user
-    demo_user = User.find_by(email_address: "demo@example.com")
+    demo_user = User.find_by(email_address: 'demo@example.com')
     return unless demo_user
 
     # Get the date range for the past week
@@ -43,23 +43,24 @@ class UpdateDemoDataJob < ApplicationJob
     # Handle monthly transactions if we're in a new month
     if start_date.month != end_date.month || start_date.year != end_date.year
       current_month = end_date.beginning_of_month
-      
+
       # Check if monthly transactions already exist for this month
-      unless demo_user.entries.where(date: current_month..end_date).joins(:category).where(categories: { name: "Salary" }).exists?
+      unless demo_user.entries.where(date: current_month..end_date).joins(:category).where(categories: { name: 'Salary' }).exists?
         entry_count += generate_monthly_salary(demo_user, categories, tags, start_date, end_date)
       end
 
       # Add other monthly expenses if they fall within our date range
       # These would normally be handled by Recurrable.create_occurrences
       # but we'll check and add them if missing
-      
+
       # Occasional large expense (40% chance)
       if rand < 0.4 && !demo_user.entries.where(date: current_month..end_date, amount: 400..1000).exists?
         large_expense_date = current_month + rand(5..25).days
         if large_expense_date <= end_date && large_expense_date >= start_date
           expense_options = get_large_expense_categories
           expense = expense_options.sample
-          expense[:category] = [categories[:healthcare], categories[:transportation], categories[:shopping], categories[:shopping]].sample
+          expense[:category] =
+            [categories[:healthcare], categories[:transportation], categories[:shopping], categories[:shopping]].sample
           demo_user.entries.create!(
             category: expense[:category],
             date: large_expense_date,

@@ -13,23 +13,24 @@ module DemoDataGenerator
 
   def maybe_add_notes(category_name, amount = nil)
     category_notes = {
-      "Salary" => ["Monthly salary deposit", "Regular paycheck", "Direct deposit", "Salary payment"],
-      "Freelance" => ["Project payment", "Client invoice", "Consulting work", "Contract payment", "Freelance gig"],
-      "Rent/Mortgage" => ["Monthly rent", "Rent payment", "Apartment rent", "Housing payment"],
-      "Groceries" => ["Weekly groceries", "Whole Foods", "Trader Joe's", "Safeway run", "Costco trip", "Farmers market"],
-      "Utilities" => ["Electric bill", "Gas & electric", "Water bill", "Internet service", "Phone bill"],
-      "Transportation" => ["Gas", "Uber ride", "Bus pass", "Parking", "Train ticket", "Car maintenance"],
-      "Entertainment" => ["Movie tickets", "Concert", "Netflix", "Game purchase", "Event tickets", "Streaming service"],
-      "Healthcare" => ["Doctor visit", "Prescription", "Dentist", "Eye exam", "Lab work", "Pharmacy"],
-      "Shopping" => ["Amazon purchase", "Clothing", "Home supplies", "Electronics", "Books", "Target run"],
-      "Restaurants" => ["Lunch", "Dinner out", "Coffee shop", "Takeout", "Date night", "Brunch"],
-      "Insurance" => ["Health insurance", "Car insurance", "Life insurance", "Insurance premium"],
-      "Subscriptions" => ["Spotify", "Netflix", "Gym membership", "Cloud storage", "Software subscription"]
+      'Salary' => ['Monthly salary deposit', 'Regular paycheck', 'Direct deposit', 'Salary payment'],
+      'Freelance' => ['Project payment', 'Client invoice', 'Consulting work', 'Contract payment', 'Freelance gig'],
+      'Rent/Mortgage' => ['Monthly rent', 'Rent payment', 'Apartment rent', 'Housing payment'],
+      'Groceries' => ['Weekly groceries', 'Whole Foods', "Trader Joe's", 'Safeway run', 'Costco trip',
+                      'Farmers market'],
+      'Utilities' => ['Electric bill', 'Gas & electric', 'Water bill', 'Internet service', 'Phone bill'],
+      'Transportation' => ['Gas', 'Uber ride', 'Bus pass', 'Parking', 'Train ticket', 'Car maintenance'],
+      'Entertainment' => ['Movie tickets', 'Concert', 'Netflix', 'Game purchase', 'Event tickets', 'Streaming service'],
+      'Healthcare' => ['Doctor visit', 'Prescription', 'Dentist', 'Eye exam', 'Lab work', 'Pharmacy'],
+      'Shopping' => ['Amazon purchase', 'Clothing', 'Home supplies', 'Electronics', 'Books', 'Target run'],
+      'Restaurants' => ['Lunch', 'Dinner out', 'Coffee shop', 'Takeout', 'Date night', 'Brunch'],
+      'Insurance' => ['Health insurance', 'Car insurance', 'Life insurance', 'Insurance premium'],
+      'Subscriptions' => ['Spotify', 'Netflix', 'Gym membership', 'Cloud storage', 'Software subscription']
     }
-    
+
     # 60% chance of having notes
     if rand < 0.6
-      notes_array = category_notes[category_name] || ["Payment", "Purchase", "Transaction"]
+      notes_array = category_notes[category_name] || ['Payment', 'Purchase', 'Transaction']
       notes_array.sample
     else
       nil
@@ -45,7 +46,7 @@ module DemoDataGenerator
         category: categories[:groceries],
         date: date,
         amount: random_amount(100, 0.4),
-        notes: maybe_add_notes("Groceries"),
+        notes: maybe_add_notes('Groceries'),
         tag: maybe_add_tag(tags, 0.1)
       )
       entries_created += 1
@@ -57,7 +58,7 @@ module DemoDataGenerator
         category: categories[:transportation],
         date: date,
         amount: random_amount(15, 0.5),
-        notes: maybe_add_notes("Transportation"),
+        notes: maybe_add_notes('Transportation'),
         tag: maybe_add_tag(tags, 0.15)
       )
       entries_created += 1
@@ -69,7 +70,7 @@ module DemoDataGenerator
         category: categories[:restaurants],
         date: date,
         amount: random_amount(45, 0.6),
-        notes: maybe_add_notes("Restaurants"),
+        notes: maybe_add_notes('Restaurants'),
         tag: maybe_add_tag(tags, 0.2)
       )
       entries_created += 1
@@ -81,7 +82,7 @@ module DemoDataGenerator
         category: categories[:entertainment],
         date: date,
         amount: random_amount(60, 0.7),
-        notes: maybe_add_notes("Entertainment"),
+        notes: maybe_add_notes('Entertainment'),
         tag: maybe_add_tag(tags, 0.2)
       )
       entries_created += 1
@@ -93,7 +94,7 @@ module DemoDataGenerator
         category: categories[:shopping],
         date: date,
         amount: random_amount(90, 0.8),
-        notes: maybe_add_notes("Shopping"),
+        notes: maybe_add_notes('Shopping'),
         tag: maybe_add_tag(tags, 0.25)
       )
       entries_created += 1
@@ -105,7 +106,7 @@ module DemoDataGenerator
         category: categories[:healthcare],
         date: date,
         amount: random_amount(150, 0.9),
-        notes: maybe_add_notes("Healthcare"),
+        notes: maybe_add_notes('Healthcare'),
         tag: tags[:personal]
       )
       entries_created += 1
@@ -116,10 +117,10 @@ module DemoDataGenerator
 
   def get_large_expense_categories
     [
-      { amount: random_amount(800, 0.6), note: "Medical procedure" },
-      { amount: random_amount(600, 0.5), note: "Car repair" },
-      { amount: random_amount(400, 0.4), note: "Home repair" },
-      { amount: random_amount(500, 0.3), note: "Appliance purchase" }
+      { amount: random_amount(800, 0.6), note: 'Medical procedure' },
+      { amount: random_amount(600, 0.5), note: 'Car repair' },
+      { amount: random_amount(400, 0.4), note: 'Home repair' },
+      { amount: random_amount(500, 0.3), note: 'Appliance purchase' }
     ]
   end
 
@@ -131,13 +132,13 @@ module DemoDataGenerator
     elsif salary_date.sunday?
       salary_date -= 2
     end
-    
+
     if salary_date <= month_end && salary_date >= month_start
       user.entries.create!(
         category: categories[:salary],
         date: salary_date,
         amount: random_amount(4500, 0.02),
-        notes: maybe_add_notes("Salary"),
+        notes: maybe_add_notes('Salary'),
         tag: maybe_add_tag(tags, 0.05)
       )
       return 1
@@ -154,7 +155,7 @@ module DemoDataGenerator
           category: categories[:freelance],
           date: freelance_date,
           amount: random_amount(1200, 0.5),
-          notes: maybe_add_notes("Freelance"),
+          notes: maybe_add_notes('Freelance'),
           tag: tags[:business]
         )
         return 1

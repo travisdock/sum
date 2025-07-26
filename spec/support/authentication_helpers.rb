@@ -12,7 +12,7 @@ module AuthenticationHelpers
       post session_path, params: { email_address: user.email_address, password: user.password }
     end
   end
-  
+
   def sign_out
     if respond_to?(:cookies)
       if session_id = cookies.signed[:session_id]
