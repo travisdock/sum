@@ -2,6 +2,10 @@ Rails.application.routes.draw do
   mount MissionControl::Jobs::Engine, at: '/jobs'
 
   get 'up' => 'rails/health#show', as: :rails_health_check
+  
+  # PWA routes
+  get '/manifest.json', to: 'pwa#manifest'
+  get '/service-worker.js', to: 'pwa#service_worker'
 
   resources :recurrables
   resources :tags

@@ -7,6 +7,10 @@
     %meta{:content => "noindex, nofollow, noarchive", :name => "robots"}
     = csrf_meta_tags
     = csp_meta_tag
+    -# PWA meta tags
+    %meta{:name => "theme-color", :content => "#000000"}/
+    %meta{:name => "apple-mobile-web-app-capable", :content => "yes"}/
+    %link{:rel => "manifest", :href => "/manifest.json"}/
     %link{ rel: "icon", href: "/favicon.ico", type: "image/x-icon" }
     %link{ rel: "apple-touch-icon", href: "/apple-touch-icon.png" }
     - %w(57 72 76 114 120 144 152 180).each do |size|
