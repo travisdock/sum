@@ -12,3 +12,7 @@ production:
   recurring_entries:
     command: "Recurrable.create_occurrences"
     schedule: at 12am every day
+  update_demo_data:
+    class: UpdateDemoDataJob
+    queue: default
+    schedule: every sunday at 2am
