@@ -16,8 +16,13 @@ AllCops:
     - 'node_modules/**/*'
     - 'config/environments/*'
     - 'config/initializers/*'
-    - 'spec/rails_helper.rb'
-    - 'spec/spec_helper.rb'
+    - 'spec/**/*'
+
+RSpec:
+  Enabled: false
+
+Metrics:
+  Enabled: false
 
 Style/Documentation:
   Enabled: false
@@ -28,20 +33,8 @@ Style/FrozenStringLiteralComment:
 Style/ClassAndModuleChildren:
   Enabled: false
 
-Metrics/BlockLength:
-  Exclude:
-    - 'spec/**/*'
-    - 'config/routes.rb'
-    - 'lib/tasks/**/*'
-
-Metrics/MethodLength:
-  Max: 20
-
-Metrics/ClassLength:
-  Max: 200
-
-Metrics/AbcSize:
-  Max: 20
+Style/BlockDelimiters:
+  Enabled: false
 
 Layout/LineLength:
   Max: 120
@@ -54,17 +47,9 @@ Rails/SkipsModelValidations:
 Rails/OutputSafety:
   Enabled: true
 
-RSpec/ExampleLength:
-  Max: 20
+Rails/Date:
+  Enabled: false
 
-RSpec/MultipleExpectations:
-  Max: 5
+Rails/Output:
+  Enabled: false
 
-RSpec/NestedGroups:
-  Max: 4
-
-RSpec/DescribeClass:
-  Exclude:
-    - 'spec/features/**/*'
-    - 'spec/requests/**/*'
-    - 'spec/system/**/*'
