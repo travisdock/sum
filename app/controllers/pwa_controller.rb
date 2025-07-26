@@ -2,9 +2,8 @@ class PwaController < ApplicationController
   allow_unauthenticated_access
   
   def manifest
-    render file: Rails.public_path.join("manifest.json"), 
-           content_type: "application/manifest+json", 
-           layout: false
+    render json: render_to_string(template: "pwa/manifest", formats: :json), 
+           content_type: "application/manifest+json"
   end
   
   def service_worker
