@@ -23,6 +23,18 @@ class ChartsController < ApplicationController
     end
   end
 
+  def heatmap
+    @available_years = current_user.entries
+                                   .pluck(Arel.sql("DISTINCT strftime('%Y', date)"))
+                                   .compact
+                                   .sort
+                                   .reverse
+
+    @selected_year = params[:year] || @available_years.first || Date.current.year.to_s
+    
+    @heatmap_data = calculate_daily_expenses(@selected_year)
+  end
+
   private
 
   def calculate_monthly_profit_loss(year)
