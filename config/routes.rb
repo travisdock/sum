@@ -24,7 +24,11 @@ Rails.application.routes.draw do
   post '/dashboard', to: 'dashboards#show'
 
   # Charts
-  resource :charts, only: [:show]
+  resource :charts, only: [:show] do
+    member do
+      get 'heatmap'
+    end
+  end
 
   # Authentication routes
   resource :session
