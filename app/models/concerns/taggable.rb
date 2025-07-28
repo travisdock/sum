@@ -13,12 +13,12 @@ module Taggable
         self.tag = tag
       elsif tag.marked_for_destruction?
         self.tag = nil
-        self.save
+        save
       elsif tag.new_record? && Tag.find_by(name: tag.name).present?
         self.tag = Tag.find_by(name: tag.name)
       elsif tag.changed? && tag.name.blank?
         self.tag = nil
-        self.save
+        save
       elsif tag.changed?
         self.tag = Tag.find_or_create_by(name: tag.name)
       end

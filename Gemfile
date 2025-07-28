@@ -5,14 +5,14 @@ ruby '3.4.4'
 
 gem 'puma'
 
-gem 'rails', '~> 8.0'
 gem 'bootsnap', require: false
 gem 'importmap-rails'
-gem 'turbo-rails'
+gem 'rails', '~> 8.0'
 gem 'stimulus-rails'
+gem 'turbo-rails'
 
-gem 'solid_queue', '~> 1.1'
 gem 'mission_control-jobs'
+gem 'solid_queue', '~> 1.1'
 
 gem 'propshaft'
 
@@ -29,19 +29,19 @@ gem 'haml-rails'
 gem 'ransack'
 
 group :development, :test do
+  gem 'database_cleaner'
   gem 'debug', platforms: %i[mri mingw x64_mingw]
   gem 'rspec-rails'
   gem 'simplecov', require: false
-  gem 'database_cleaner'
 end
 
 group :development do
-  gem 'web-console'
   gem 'claude-on-rails'
   gem 'rubocop', require: false
+  gem 'rubocop-performance', require: false
   gem 'rubocop-rails', require: false
   gem 'rubocop-rspec', require: false
-  gem 'rubocop-performance', require: false
+  gem 'web-console'
 end
 
 group :production do

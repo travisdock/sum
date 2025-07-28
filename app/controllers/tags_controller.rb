@@ -7,8 +7,7 @@ class TagsController < ApplicationController
   end
 
   # GET /tags/1
-  def show
-  end
+  def show; end
 
   # GET /tags/new
   def new
@@ -16,8 +15,7 @@ class TagsController < ApplicationController
   end
 
   # GET /tags/1/edit
-  def edit
-  end
+  def edit; end
 
   # POST /tags
   def create

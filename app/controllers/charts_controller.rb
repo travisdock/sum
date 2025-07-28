@@ -23,17 +23,11 @@ class ChartsController < ApplicationController
     end
   end
 
-    respond_to do |format|
-      format.html
-      format.turbo_stream
-    end
-  end
-
   private
 
   def calculate_monthly_profit_loss(year)
-    months = (1..12).map { |m| m.to_s }
-    data = months.map do |month|
+    months = (1..12).map(&:to_s)
+    months.map do |month|
       entries = current_user.entries
                             .by_year(year)
                             .by_month(month)
@@ -50,14 +44,12 @@ class ChartsController < ApplicationController
         profit_loss: profit_loss
       }
     end
-
-    data
   end
 
   def calculate_daily_expenses(year)
     start_date = Date.parse("#{year}-01-01")
     end_date = Date.parse("#{year}-12-31")
-    
+
     # Get all expense entries for the year
     expense_entries = current_user.entries
                                   .by_year(year)
@@ -65,7 +57,7 @@ class ChartsController < ApplicationController
                                   .by_untracked(false)
                                   .group(:date)
                                   .select('date, COUNT(*) as count, SUM(amount) as total')
-    
+
     # Convert to hash for easy lookup
     expenses_by_date = expense_entries.each_with_object({}) do |entry, hash|
       hash[entry.date.to_s] = {
@@ -73,17 +65,17 @@ class ChartsController < ApplicationController
         total: entry.total.to_f
       }
     end
-    
+
     # Build complete year data with zeros for days without expenses
     daily_data = {}
     (start_date..end_date).each do |date|
       date_key = date.to_s
       daily_data[date_key] = expenses_by_date[date_key] || { count: 0, total: 0.0 }
     end
-    
+
     # Calculate max expense for scaling
-    max_expense = daily_data.values.map { |d| d[:total] }.max || 0
-    
+    max_expense = daily_data.values.map { |d| d[:total] }.max || 0 # rubocop:disable Rails/Pluck
+
     {
       daily_expenses: daily_data,
       max_expense: max_expense,

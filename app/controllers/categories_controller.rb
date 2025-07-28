@@ -8,8 +8,7 @@ class CategoriesController < ApplicationController
   end
 
   # GET /categories/1 or /categories/1.json
-  def show
-  end
+  def show; end
 
   # GET /categories/new
   def new
@@ -17,8 +16,7 @@ class CategoriesController < ApplicationController
   end
 
   # GET /categories/1/edit
-  def edit
-  end
+  def edit; end
 
   # POST /categories or /categories.json
   def create
@@ -88,7 +86,7 @@ class CategoriesController < ApplicationController
       @old_category.destroy
     end
     redirect_to merge_categories_path, notice: 'Category was successfully merged.'
-  rescue ActiveRecord::RecordInvalid => e
+  rescue ActiveRecord::RecordInvalid
     redirect_to merge_categories_path, alert: 'There was an error. Category could not be merged.'
   end
 
