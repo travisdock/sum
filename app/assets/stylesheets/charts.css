@@ -32,3 +32,107 @@
 #profit-loss-chart {
   max-height: 100%;
 }
+
+/* Tab navigation */
+.chart-tabs {
+  margin-bottom: 20px;
+}
+
+.tabs {
+  display: flex;
+  gap: 0;
+  border-bottom: 2px solid #e0e0e0;
+  justify-content: flex-start;
+}
+
+.tab-link {
+  padding: 10px 20px;
+  text-decoration: none;
+  color: #666;
+  background: transparent;
+  border: none;
+  border-bottom: 2px solid transparent;
+  margin-bottom: -2px;
+  transition: all 0.2s;
+  display: inline-block;
+}
+
+.tab-link:hover {
+  color: #333;
+  background: #f8f8f8;
+}
+
+.tab-link.active {
+  color: #007bff !important;
+  border-bottom-color: #007bff !important;
+  font-weight: 500;
+}
+
+/* P&L specific styles */
+.total-pl {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 18px;
+  margin-bottom: 20px;
+}
+
+.total-label {
+  color: #666;
+}
+
+.total-amount {
+  font-weight: bold;
+  font-size: 20px;
+}
+
+.total-amount.positive {
+  color: #28a745;
+}
+
+.total-amount.negative {
+  color: #dc3545;
+}
+
+/* Heatmap specific styles */
+.heatmap-container {
+  margin: 20px 0;
+}
+
+.heatmap-legend {
+  display: flex;
+  align-items: center;
+  margin-bottom: 15px;
+  gap: 10px;
+}
+
+.legend-gradient {
+  width: 200px;
+  height: 20px;
+  background: linear-gradient(to right, #f0f0f0, #fee, #fcc, #f99, #f66, #f33, #c00);
+  border: 1px solid #ddd;
+  border-radius: 3px;
+}
+
+.legend-label {
+  font-size: 12px;
+  color: #666;
+}
+
+.legend-max {
+  margin-left: 10px;
+  font-size: 12px;
+  color: #666;
+}
+
+.heatmap-wrapper {
+  overflow-x: auto;
+  padding: 10px;
+  background: white;
+  border-radius: 5px;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+}
+
+#expense-heatmap {
+  min-width: 954px;
+}
