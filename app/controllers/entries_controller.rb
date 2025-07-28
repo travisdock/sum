@@ -15,8 +15,7 @@ class EntriesController < ApplicationController
   end
 
   # GET /entries/1 or /entries/1.json
-  def show
-  end
+  def show; end
 
   # GET /entries/new
   def new
@@ -84,7 +83,7 @@ class EntriesController < ApplicationController
   # Only allow a list of trusted parameters through.
   def entry_params
     params.require(:entry).permit(:date, :amount, :notes, :category_name, :income, :untracked, :user_id,
-                                  :category_id, tag_attributes: [:id, :name, :_destroy])
+                                  :category_id, tag_attributes: %i[id name _destroy])
   end
 
   def search_params
