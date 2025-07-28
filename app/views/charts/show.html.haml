@@ -1,16 +1,161 @@
 %h1 Charts
 
-.chart-controls
-  = form_with url: charts_path, method: :get, data: { turbo_frame: 'chart_content' } do |f|
-    = f.label :year, 'Select Year:'
-    = f.select :year, options_for_select(@available_years, @selected_year), {}, { onchange: 'this.form.requestSubmit()' }
-
-= turbo_frame_tag 'chart_content' do
-  .chart-container
-    %h2 Profit/Loss by Month - #{@selected_year}
-    %canvas#profit-loss-chart{ 
-      data: { 
-        controller: 'profit-loss-chart',
-        'profit-loss-chart-data-value': @monthly_data.to_json
+= turbo_frame_tag 'charts_frame' do
+  .chart-tabs
+    %nav.tabs
+      = link_to "P&L", charts_path(tab: 'profit_loss'), 
+        class: "tab-link #{'active' if @tab == 'profit_loss'}", 
+        data: { turbo_frame: 'charts_frame' }
+      = link_to "Heatmap", charts_path(tab: 'heatmap'), 
+        class: "tab-link #{'active' if @tab == 'heatmap'}", 
+        data: { turbo_frame: 'charts_frame' }
+  
+  - if @tab == 'profit_loss'
+    .chart-controls
+      = form_with url: charts_path, method: :get, data: { turbo_frame: 'charts_frame' } do |f|
+        = f.hidden_field :tab, value: 'profit_loss'
+        = f.label :year, 'Select Year:'
+        = f.select :year, options_for_select(@available_years, @selected_year), {}, { onchange: 'this.form.requestSubmit()' }
+    
+    .chart-container
+      %h2 Profit/Loss by Month - #{@selected_year}
+      .total-pl
+        %span.total-label Total P&L:
+        %span{ class: "total-amount #{@total_profit_loss >= 0 ? 'positive' : 'negative'}" }
+          = number_to_currency(@total_profit_loss)
+      %canvas#profit-loss-chart{ 
+        data: { 
+          controller: 'profit-loss-chart',
+          'profit-loss-chart-data-value': @monthly_data.to_json
+        }
       }
+  
+  - elsif @tab == 'heatmap'
+    .chart-controls
+      = form_with url: charts_path, method: :get, data: { turbo_frame: 'charts_frame' } do |f|
+        = f.hidden_field :tab, value: 'heatmap'
+        = f.label :year, 'Select Year:'
+        = f.select :year, options_for_select(@available_years, @selected_year), {}, { onchange: 'this.form.requestSubmit()' }
+    
+    .heatmap-container
+      %h2 Daily Expenses - #{@selected_year}
+      .heatmap-legend
+        %span.legend-label Low
+        .legend-gradient
+        %span.legend-label High
+        %span.legend-max= "(Max: #{number_to_currency(@heatmap_data[:max_expense])})"
+      
+      .heatmap-wrapper{ 
+        data: { 
+          controller: 'heatmap',
+          'heatmap-data-value': @heatmap_data.to_json
+        }
+      }
+        %svg#expense-heatmap{ width: '100%', height: '180', viewBox: '0 0 954 180' }
+
+%style
+  :css
+    .chart-tabs {
+      margin-bottom: 20px;
+    }
+    
+    .tabs {
+      display: flex;
+      gap: 0;
+      border-bottom: 2px solid #e0e0e0;
+      justify-content: flex-start;
+    }
+    
+    .tab-link {
+      padding: 10px 20px;
+      text-decoration: none;
+      color: #666;
+      background: transparent;
+      border: none;
+      border-bottom: 2px solid transparent;
+      margin-bottom: -2px;
+      transition: all 0.2s;
+      display: inline-block;
+    }
+    
+    .tab-link:hover {
+      color: #333;
+      background: #f8f8f8;
+    }
+    
+    .tab-link.active {
+      color: #007bff !important;
+      border-bottom-color: #007bff !important;
+      font-weight: 500;
+    }
+    
+    .chart-controls {
+      margin-bottom: 20px;
+    }
+    
+    .total-pl {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-size: 18px;
+      margin-bottom: 20px;
+    }
+    
+    .total-label {
+      color: #666;
+    }
+    
+    .total-amount {
+      font-weight: bold;
+      font-size: 20px;
+    }
+    
+    .total-amount.positive {
+      color: #28a745;
+    }
+    
+    .total-amount.negative {
+      color: #dc3545;
+    }
+    
+    .heatmap-container {
+      margin: 20px 0;
+    }
+    
+    .heatmap-legend {
+      display: flex;
+      align-items: center;
+      margin-bottom: 15px;
+      gap: 10px;
+    }
+    
+    .legend-gradient {
+      width: 200px;
+      height: 20px;
+      background: linear-gradient(to right, #f0f0f0, #fee, #fcc, #f99, #f66, #f33, #c00);
+      border: 1px solid #ddd;
+      border-radius: 3px;
+    }
+    
+    .legend-label {
+      font-size: 12px;
+      color: #666;
+    }
+    
+    .legend-max {
+      margin-left: 10px;
+      font-size: 12px;
+      color: #666;
+    }
+    
+    .heatmap-wrapper {
+      overflow-x: auto;
+      padding: 10px;
+      background: white;
+      border-radius: 5px;
+      box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+    }
+    
+    #expense-heatmap {
+      min-width: 954px;
     }

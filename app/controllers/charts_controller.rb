@@ -7,20 +7,20 @@ class ChartsController < ApplicationController
                                    .reverse
 
     @selected_year = params[:year] || @available_years.first || Date.current.year.to_s
+    @tab = params[:tab] || 'profit_loss'
 
-    @monthly_data = calculate_monthly_profit_loss(@selected_year)
-  end
+    case @tab
+    when 'profit_loss'
+      @monthly_data = calculate_monthly_profit_loss(@selected_year)
+      @total_profit_loss = @monthly_data.sum { |month| month[:profit_loss] }
+    when 'heatmap'
+      @heatmap_data = calculate_daily_expenses(@selected_year)
+    end
 
-  def heatmap
-    @available_years = current_user.entries
-                                   .pluck(Arel.sql("DISTINCT strftime('%Y', date)"))
-                                   .compact
-                                   .sort
-                                   .reverse
-
-    @selected_year = params[:year] || @available_years.first || Date.current.year.to_s
-    
-    @heatmap_data = calculate_daily_expenses(@selected_year)
+    respond_to do |format|
+      format.html
+      format.turbo_stream
+    end
   end
 
   private
