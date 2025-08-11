@@ -4,14 +4,14 @@ module DemoDataGenerator
   def random_amount(base, variance = 0.2)
     min = base * (1 - variance)
     max = base * (1 + variance)
-    (rand * (max - min) + min).round(2)
+    ((rand * (max - min)) + min).round(2)
   end
 
   def maybe_add_tag(tags, probability = 0.15)
     rand < probability ? tags.values.sample : nil
   end
 
-  def maybe_add_notes(category_name, amount = nil)
+  def maybe_add_notes(category_name, _amount = nil)
     category_notes = {
       'Salary' => ['Monthly salary deposit', 'Regular paycheck', 'Direct deposit', 'Salary payment'],
       'Freelance' => ['Project payment', 'Client invoice', 'Consulting work', 'Contract payment', 'Freelance gig'],
@@ -29,12 +29,10 @@ module DemoDataGenerator
     }
 
     # 60% chance of having notes
-    if rand < 0.6
-      notes_array = category_notes[category_name] || ['Payment', 'Purchase', 'Transaction']
-      notes_array.sample
-    else
-      nil
-    end
+    return unless rand < 0.6
+
+    notes_array = category_notes[category_name] || %w[Payment Purchase Transaction]
+    notes_array.sample
   end
 
   def generate_daily_expenses(user, categories, tags, date)

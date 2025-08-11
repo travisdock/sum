@@ -173,17 +173,17 @@ while current_date <= end_date
   # Holiday shopping in November/December
   if [11, 12].include?(month_start.month)
     (month_start..month_end).each do |date|
-      if rand < 0.15 # 15% chance each day
-        Entry.create!(
-          user: demo_user,
-          category: categories[:shopping],
-          date: date,
-          amount: random_amount(120, 0.6),
-          notes: 'Holiday shopping',
-          tag: tags[:gift]
-        )
-        entry_count += 1
-      end
+      next unless rand < 0.15 # 15% chance each day
+
+      Entry.create!(
+        user: demo_user,
+        category: categories[:shopping],
+        date: date,
+        amount: random_amount(120, 0.6),
+        notes: 'Holiday shopping',
+        tag: tags[:gift]
+      )
+      entry_count += 1
     end
   end
 
@@ -194,29 +194,29 @@ while current_date <= end_date
 
     vacation_days.times do |day|
       vacation_date = vacation_start + day.days
-      if vacation_date <= month_end && vacation_date >= month_start
-        # Hotel
-        Entry.create!(
-          user: demo_user,
-          category: categories[:entertainment],
-          date: vacation_date,
-          amount: random_amount(150, 0.3),
-          notes: 'Hotel',
-          tag: tags[:vacation]
-        )
-        entry_count += 1
+      next unless vacation_date <= month_end && vacation_date >= month_start
 
-        # Dining out more
-        Entry.create!(
-          user: demo_user,
-          category: categories[:restaurants],
-          date: vacation_date,
-          amount: random_amount(80, 0.4),
-          notes: 'Vacation dining',
-          tag: tags[:vacation]
-        )
-        entry_count += 1
-      end
+      # Hotel
+      Entry.create!(
+        user: demo_user,
+        category: categories[:entertainment],
+        date: vacation_date,
+        amount: random_amount(150, 0.3),
+        notes: 'Hotel',
+        tag: tags[:vacation]
+      )
+      entry_count += 1
+
+      # Dining out more
+      Entry.create!(
+        user: demo_user,
+        category: categories[:restaurants],
+        date: vacation_date,
+        amount: random_amount(80, 0.4),
+        notes: 'Vacation dining',
+        tag: tags[:vacation]
+      )
+      entry_count += 1
     end
   end
 

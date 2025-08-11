@@ -24,9 +24,9 @@ class User < ApplicationRecord
   end
 
   def remove_data
-    self.tags.destroy_all
-    self.entries.destroy_all
-    self.categories.destroy_all
+    tags.destroy_all
+    entries.destroy_all
+    categories.destroy_all
   end
 
   def password_reset_token
