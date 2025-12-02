@@ -1,11 +1,13 @@
 class UsersController < ApplicationController
-  allow_unauthenticated_access only: [:new, :create]
-  before_action :set_user, only: [:edit, :update]
+  allow_unauthenticated_access only: %i[new create]
+  before_action :set_user, only: %i[edit update]
 
   def new
     redirect_to root_path if authenticated?
     @user = User.new
   end
+
+  def edit; end
 
   def create
     @user = User.new(user_params)
@@ -16,9 +18,6 @@ class UsersController < ApplicationController
     else
       render :new, status: :unprocessable_entity
     end
-  end
-
-  def edit
   end
 
   def update
@@ -43,9 +42,7 @@ class UsersController < ApplicationController
   def user_update_params
     # Only permit password fields if they are present
     permitted = [:email_address]
-    if params[:user][:password].present?
-      permitted += [:password, :password_confirmation]
-    end
+    permitted += %i[password password_confirmation] if params[:user][:password].present?
     params.require(:user).permit(permitted)
   end
 end

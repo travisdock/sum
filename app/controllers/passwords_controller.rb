@@ -2,23 +2,21 @@ class PasswordsController < ApplicationController
   allow_unauthenticated_access
   before_action :set_user_by_token, only: %i[edit update]
 
-  def new
-  end
+  def new; end
+
+  def edit; end
 
   def create
-    if user = User.find_by(email_address: params[:email_address])
-      # In a real application without email, you might display this to the user or use SMS
-      # reset_url = edit_password_url(user.password_reset_token)
-      # Rails.logger.info "Password reset URL for #{user.email_address}: #{reset_url}"
-      flash[:notice] = 'Please contact an administrator to reset your password. '
-    else
-      flash[:notice] = 'Please contact an administrator to reset your password.'
-    end
+    flash[:notice] = if User.find_by(email_address: params[:email_address])
+                       # In a real application without email, you might display this to the user or use SMS
+                       # reset_url = edit_password_url(user.password_reset_token)
+                       # Rails.logger.info "Password reset URL for #{user.email_address}: #{reset_url}"
+                       'Please contact an administrator to reset your password. '
+                     else
+                       'Please contact an administrator to reset your password.'
+                     end
 
     redirect_to new_session_path
-  end
-
-  def edit
   end
 
   def update
