@@ -26,6 +26,7 @@ env:
   secret:
     - SECRET_KEY_BASE
     - RAILS_MASTER_KEY
+    - HONEYBADGER_API_KEY
   clear:
     SOLID_QUEUE_IN_PUMA: true
 
