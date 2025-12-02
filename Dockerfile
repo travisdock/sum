@@ -1,4 +1,4 @@
-FROM ruby:3.4.4-slim-bookworm
+FROM ruby:3.4.7-slim-bookworm
 
 ENV APP_HOME="/app_home"
 ENV BUNDLE_PATH="${APP_HOME}/vendor/bundle"

@@ -1,7 +1,7 @@
 source 'https://rubygems.org'
 git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 
-ruby '3.4.4'
+ruby '3.4.7'
 
 gem 'puma'
 
@@ -23,6 +23,9 @@ gem 'bcrypt'
 gem 'csv'
 
 gem 'haml-rails'
+
+# AI integration for voice entry processing
+gem 'ruby_llm', '~> 1.9'
 
 # TODO: Dependency to remove
 # Use ransack for search and sorting of tables
