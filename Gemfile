@@ -37,7 +37,6 @@ end
 
 group :development do
   gem 'web-console'
-  gem 'claude-on-rails'
   gem 'rubocop', require: false
   gem 'rubocop-rails', require: false
   gem 'rubocop-rspec', require: false
