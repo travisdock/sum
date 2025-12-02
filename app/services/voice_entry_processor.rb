@@ -8,7 +8,7 @@ class VoiceEntryProcessor
 
   def process
     # Create a chat instance with Gemini
-    chat = RubyLLM.chat(model: 'gemini-2.0-flash-exp')
+    chat = RubyLLM.chat(model: 'gemini-2.5-flash-lite')
 
     # Ask the question with the audio file
     response = chat.ask(build_system_prompt, with: audio_file.path)
