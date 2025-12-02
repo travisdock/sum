@@ -22,7 +22,7 @@ export default class extends Controller {
     try {
       // Check if browser supports MediaRecorder
       if (!navigator.mediaDevices || !navigator.mediaDevices.getUserMedia) {
-        this.showFeedback('Voice recording is not supported in your browser', 'error')
+        this.showError('Voice recording is not supported in your browser')
         return
       }
 
@@ -49,7 +49,7 @@ export default class extends Controller {
       this.isRecording = true
       this.showRecording()
     } catch (error) {
-      this.showFeedback(`Failed to start recording: ${error.message}`, 'error')
+      this.showError('Failed to start recording. Please check your microphone permissions.')
     }
   }
 
@@ -81,12 +81,12 @@ export default class extends Controller {
 
       if (result.success) {
         this.populateForm(result.data)
-        this.showFeedback(`Transcribed: ${result.transcription}`, 'success')
+        this.clearFeedback()
       } else {
-        this.showFeedback(result.error || 'Failed to process audio', 'error')
+        this.showError(result.error || 'Failed to process audio')
       }
     } catch (error) {
-      this.showFeedback(`Failed to upload audio: ${error.message}`, 'error')
+      this.showError('Failed to upload audio. Please try again.')
     } finally {
       this.showIdle()
     }
@@ -152,17 +152,19 @@ export default class extends Controller {
     }
   }
 
-  showFeedback(message, type) {
+  showError(message) {
     if (this.hasStatusTarget) {
-      const color = type === 'success' ? '#d4edda' : '#f8d7da'
-      const borderColor = type === 'success' ? '#c3e6cb' : '#f5c6cb'
-      const textColor = type === 'success' ? '#155724' : '#721c24'
-
       this.statusTarget.innerHTML = `
-        <div style="padding: 1rem; background: ${color}; border: 1px solid ${borderColor}; border-radius: 4px; margin-top: 1rem;">
-          <p style="margin: 0; color: ${textColor}; font-size: 0.9rem;">${message}</p>
+        <div style="padding: 1rem; background: #f8d7da; border: 1px solid #f5c6cb; border-radius: 4px; margin-top: 1rem;">
+          <p style="margin: 0; color: #721c24; font-size: 0.9rem;">${message}</p>
         </div>
       `
+    }
+  }
+
+  clearFeedback() {
+    if (this.hasStatusTarget) {
+      this.statusTarget.innerHTML = ''
     }
   }
 }

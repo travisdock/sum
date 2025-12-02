@@ -1,5 +1,6 @@
 class VoiceEntriesController < ApplicationController
   # Rate limiting: 5 requests per minute per user
+  before_action :check_voice_entries_access
   before_action :check_rate_limit
 
   def create
@@ -27,6 +28,16 @@ class VoiceEntriesController < ApplicationController
   end
 
   private
+
+  def check_voice_entries_access
+    unless current_user.voice_entries_enabled?
+      render json: {
+        success: false,
+        error: 'Voice entries feature is not enabled for your account.',
+        transcription: nil
+      }, status: :forbidden
+    end
+  end
 
   def validate_audio!
     audio = params[:audio_file]
