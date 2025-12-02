@@ -53,6 +53,7 @@ class VoiceEntryProcessor
 
   def build_system_prompt
     categories_list = user.categories.pluck(:name).join(', ')
+    current_year = Date.today.year
 
     <<~PROMPT
       You are a financial entry assistant. Extract transaction information from speech and return as JSON.
@@ -60,13 +61,13 @@ class VoiceEntryProcessor
       Extract:
       - amount: Dollar amount as a number (e.g., 45 or 45.50)
       - category_name: Category that best matches the description from the available categories
-      - date: ONLY if a date is explicitly mentioned. Parse dates like "October 15th" as "2025-10-15", "yesterday", "last Tuesday", etc. If NO date is mentioned, set to null.
+      - date: ONLY if a date is explicitly mentioned. Parse dates like "October 15th" as "#{current_year}-10-15", "yesterday", "last Tuesday", etc. If NO date is mentioned, set to null.
       - notes: Any additional context or description
 
       USER'S AVAILABLE CATEGORIES: #{categories_list}
 
       Return ONLY a JSON object like:
-      {"amount": 45, "category_name": "Groceries", "date": "2025-10-15", "notes": "groceries at Trader Joe's"}
+      {"amount": 45, "category_name": "Groceries", "date": "#{current_year}-10-15", "notes": "groceries at Trader Joe's"}
 
       IMPORTANT: Only include a date if the user explicitly mentions one. If no date is mentioned, use null for the date field.
 
