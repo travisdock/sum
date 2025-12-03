@@ -69,9 +69,10 @@ class VoiceEntryProcessor
       Return ONLY a JSON object like:
       {"amount": 45, "category_name": "Groceries", "date": "#{current_year}-10-15", "notes": "groceries at Trader Joe's"}
 
-      IMPORTANT: Only include a date if the user explicitly mentions one. If no date is mentioned, use null for the date field.
-
-      If you cannot extract amount or category, set them to null.
+      IMPORTANT:
+        - Only include a date if the user explicitly mentions one. If no date is mentioned, use null for the date field.
+        - If you cannot extract amount or category, set them to null.
+        - The user may give instructions for formatting notes. Any additional details that the user gives about the transaction should be included in notes.
     PROMPT
   end
 end
