@@ -9,16 +9,16 @@
   %div.row{ style: 'display: flex; flex-direction: row; flex-wrap: wrap; gap: 6px;' }
     %div{ 'data-controller': 'date-picker', style: 'flex-grow: 1;' }
       = f.label :date
-      = f.date_field :date, { id: "#{@entry.id ? '' : 'date-picker'}" }
+      = f.date_field :date, { id: "#{@entry.id ? '' : 'date-picker'}", 'data-voice-recorder-target': 'dateField' }
     %div
       = f.label :amount
-      = f.number_field :amount, { placeholder: '$0.00', step: '.01', inputmode: "decimal", style: 'width: 130px;' }
+      = f.number_field :amount, { placeholder: '$0.00', step: '.01', inputmode: "decimal", style: 'width: 130px;', 'data-voice-recorder-target': 'amountField' }
     %div{ style: 'flex-grow: 3;' }
       = f.label :category
-      = f.collection_select :category_id, @categories, :id, :name, { include_blank: true }
+      = f.collection_select :category_id, @categories, :id, :name, { include_blank: true }, { 'data-voice-recorder-target': 'categorySelect' }
     %div{ style: 'width: 100%;' }
       = f.label :notes
-      = f.text_area :notes
+      = f.text_area :notes, { 'data-voice-recorder-target': 'notesField' }
   %fieldset{ 'data-controller': 'tag' }
     = f.fields_for :tag do |nested_form|
       = nested_form.label :name, 'Tag'

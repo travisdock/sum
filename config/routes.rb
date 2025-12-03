@@ -2,7 +2,7 @@ Rails.application.routes.draw do
   mount MissionControl::Jobs::Engine, at: '/jobs'
 
   get 'up' => 'rails/health#show', as: :rails_health_check
-  
+
   # PWA routes
   get '/manifest.json', to: 'pwa#manifest'
   get '/service-worker.js', to: 'pwa#service_worker'
@@ -10,6 +10,7 @@ Rails.application.routes.draw do
   resources :recurrables
   resources :tags
   resources :entries
+  resources :voice_entries, only: [:create]
   post '/filtered_entries', to: 'entries#index'
   get '/export/entries', to: 'entries#export'
 
