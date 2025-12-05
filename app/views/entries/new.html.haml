@@ -7,6 +7,6 @@
     %div{ style: "margin-top: 1.5rem; padding-top: 1.5rem; border-top: 1px solid var(--pico-muted-border-color, #e0e0e0);" }
       %p{ style: "text-align: center; color: var(--pico-muted-color, #666); font-size: 0.9rem;" } Or enter manually:
 
-    = render 'form'
+    = render 'form', voice_recorder_enabled: true
 - else
-  = render 'form'
+  = render 'form', voice_recorder_enabled: false
