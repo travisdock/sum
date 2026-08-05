@@ -1,0 +1,51 @@
+# See https://docs.docker.com/engine/reference/builder/#dockerignore-file for more about ignoring files.
+
+# Ignore git directory.
+/.git/
+/.gitignore
+
+# Ignore bundler config.
+/.bundle
+
+# Ignore all environment files.
+/.env*
+
+# Ignore all default key files.
+/config/master.key
+
+# Ignore all logfiles and tempfiles.
+/log/*
+/tmp/*
+!/log/.keep
+!/tmp/.keep
+
+# Ignore pidfiles, but keep the directory.
+/tmp/pids/*
+!/tmp/pids/
+!/tmp/pids/.keep
+
+# Ignore storage (uploaded files in development and any SQLite databases).
+/storage/*
+!/storage/.keep
+/tmp/storage/*
+!/tmp/storage/
+!/tmp/storage/.keep
+
+# Ignore assets.
+/node_modules/
+/public/assets
+
+# Ignore CI/CD service files.
+/.github
+
+# Ignore Kamal secrets/config.
+/.kamal
+
+# Ignore locally-installed gems; the build stage runs its own bundle install.
+/vendor/bundle
+
+# Ignore test-only artifacts and tooling not needed in the production image.
+/coverage
+/spec
+/cypress
+/cypress.config.js
