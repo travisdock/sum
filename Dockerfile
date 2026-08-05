@@ -1,4 +1,4 @@
-FROM ruby:3.4.7-slim-bookworm
+FROM ruby:4.0-slim
 
 ENV APP_HOME="/app_home"
 ENV BUNDLE_PATH="${APP_HOME}/vendor/bundle"
@@ -29,7 +29,6 @@ RUN bash -c "set -o pipefail && apt-get update \
   && useradd --create-home --no-log-init -u \"${UID}\" -g \"${GID}\" ruby \
   && mkdir /node_modules && chown ruby:ruby -R /node_modules /app_home"
 
-RUN npm install -g @anthropic-ai/claude-code
 EXPOSE 3000
 
 ENTRYPOINT ["./bin/docker-entrypoint"]
