@@ -24,9 +24,6 @@ gem 'csv'
 
 gem 'haml-rails'
 
-# AI integration for voice entry processing
-gem 'ruby_llm', '~> 1.9'
-
 # TODO: Dependency to remove
 # Use ransack for search and sorting of tables
 gem 'ransack'
