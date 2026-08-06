@@ -1,0 +1,53 @@
+{
+  "info": {
+    "name": "Sum API",
+    "description": "See docs/api.md (served live at GET /api/docs) for the full contract.",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "variable": [
+    { "key": "base_url", "value": "http://localhost:3000", "type": "string" },
+    { "key": "token", "value": "", "type": "string" }
+  ],
+  "item": [
+    {
+      "name": "Get API Docs",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "auth": { "type": "noauth" },
+        "url": {
+          "raw": "{{base_url}}/api/docs",
+          "host": ["{{base_url}}"],
+          "path": ["api", "docs"]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Create Entry",
+      "request": {
+        "method": "POST",
+        "header": [
+          { "key": "Content-Type", "value": "application/json" }
+        ],
+        "auth": {
+          "type": "bearer",
+          "bearer": [
+            { "key": "token", "value": "{{token}}", "type": "string" }
+          ]
+        },
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"amount\": 12.34,\n  \"category_name\": \"Groceries\",\n  \"notes\": \"Coffee\",\n  \"tag_name\": \"reimbursable\"\n}",
+          "options": { "raw": { "language": "json" } }
+        },
+        "url": {
+          "raw": "{{base_url}}/api/entries",
+          "host": ["{{base_url}}"],
+          "path": ["api", "entries"]
+        }
+      },
+      "response": []
+    }
+  ]
+}
