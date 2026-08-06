@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.1].define(version: 2025_12_02_132403) do
+ActiveRecord::Schema[8.1].define(version: 2026_08_06_002628) do
   create_table "categories", force: :cascade do |t|
     t.datetime "created_at", null: false
     t.boolean "income"
@@ -199,7 +199,6 @@ ActiveRecord::Schema[8.1].define(version: 2025_12_02_132403) do
     t.string "email_address", default: "", null: false
     t.string "password_digest", default: "", null: false
     t.datetime "updated_at", null: false
-    t.boolean "voice_entries_enabled", default: false, null: false
     t.index ["email_address"], name: "index_users_on_email_address", unique: true
   end
 

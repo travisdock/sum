@@ -103,17 +103,6 @@ GEM
     erubi (1.13.1)
     et-orbi (1.4.1)
       tzinfo
-    event_stream_parser (1.0.0)
-    faraday (2.14.3)
-      faraday-net_http (>= 2.0, < 3.5)
-      json
-      logger
-    faraday-multipart (1.2.0)
-      multipart-post (~> 2.0)
-    faraday-net_http (3.4.4)
-      net-http (~> 0.5)
-    faraday-retry (2.4.0)
-      faraday (~> 2.0)
     fugit (1.13.0)
       et-orbi (~> 1.4)
       raabro (~> 1.4)
@@ -172,9 +161,6 @@ GEM
       stimulus-rails
       turbo-rails
     msgpack (1.8.4)
-    multipart-post (2.4.1)
-    net-http (0.9.1)
-      uri (>= 0.11.1)
     net-imap (0.6.6)
       date
       net-protocol
@@ -308,17 +294,6 @@ GEM
       regexp_parser (>= 2.0)
       rubocop (~> 1.86, >= 1.86.2)
     ruby-progressbar (1.13.0)
-    ruby_llm (1.16.0)
-      base64
-      event_stream_parser (~> 1)
-      faraday (>= 1.10.0)
-      faraday-multipart (>= 1)
-      faraday-net_http (>= 1)
-      faraday-retry (>= 1)
-      marcel (~> 1)
-      ruby_llm-schema (~> 0)
-      zeitwerk (~> 2)
-    ruby_llm-schema (0.4.0)
     securerandom (0.4.1)
     simplecov (1.0.3)
     solid_queue (1.6.0)
@@ -380,7 +355,6 @@ DEPENDENCIES
   rubocop-performance
   rubocop-rails
   rubocop-rspec
-  ruby_llm (~> 1.9)
   simplecov
   solid_queue (~> 1.1)
   sqlite3
