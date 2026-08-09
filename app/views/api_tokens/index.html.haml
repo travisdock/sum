@@ -1,0 +1,33 @@
+%h1 API Tokens
+
+- if @new_token
+  %article
+    %p
+      %strong Copy this token now — you won't be able to see it again.
+    %p
+      %code= @new_token
+    %p
+      Use it in the
+      %code Authorization
+      header of API requests, e.g.
+      %code Authorization: Bearer #{@new_token}
+
+%a.btn.btn-primary{ href: new_api_token_path }
+  New API Token
+%table.styled-table
+  %thead
+    %tr
+      %th{scope: "col"} Name
+      %th{scope: "col"} Created
+      %th{scope: "col"} Last used
+      %th{scope: "col"} Requests
+      %th{scope: "col"}
+  %tbody
+    - @api_tokens.each do |api_token|
+      %tr
+        %td= api_token.name
+        %td= api_token.created_at
+        %td= api_token.last_used_at || 'Never'
+        %td= api_token.request_count
+        %td
+          = link_to 'Delete', api_token_path(api_token), data: { 'turbo-method': :delete, 'turbo-confirm': 'Are you sure? Anything using this token will stop working immediately.' }, class: 'btn btn-danger'

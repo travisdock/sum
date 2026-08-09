@@ -1,0 +1,12 @@
+= form_for @api_token do |f|
+  - if @api_token.errors.any?
+    #error_explanation
+      %h2= "#{pluralize(@api_token.errors.count, "error")} prohibited this API token from being saved:"
+      %ul
+        - @api_token.errors.full_messages.each do |message|
+          %li= message
+  .field.mb-3
+    = f.label :name
+    = f.text_field :name, class: 'form-control', placeholder: 'e.g. Personal agent'
+  .actions
+    = f.submit 'Create API Token'

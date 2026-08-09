@@ -1,6 +1,11 @@
 Rails.application.routes.draw do
   mount MissionControl::Jobs::Engine, at: '/jobs'
 
+  namespace :api do
+    resources :entries, only: [:create]
+    get 'docs', to: 'docs#show'
+  end
+
   get 'up' => 'rails/health#show', as: :rails_health_check
 
   # PWA routes
@@ -34,6 +39,7 @@ Rails.application.routes.draw do
   post '/signup', to: 'users#create'
 
   resources :users, only: [:edit, :update]
+  resources :api_tokens, only: %i[index new create destroy]
 
   # Root routes
   constraints lambda { |req| Session.find_by(id: req.cookie_jar.signed[:session_id]).present? } do

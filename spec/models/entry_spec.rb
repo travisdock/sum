@@ -1,6 +1,17 @@
 require 'rails_helper'
 
 RSpec.describe Entry, type: :model do
+  describe 'validations' do
+    it 'requires a date' do
+      user = User.create!(email_address: 'test1@mail.com', password: '123456')
+      category = Category.create!(name: 'Category 1')
+      entry = Entry.new(user: user, category: category, amount: 100)
+
+      expect(entry).not_to be_valid
+      expect(entry.errors[:date]).to be_present
+    end
+  end
+
   describe 'scopes' do
     it 'should return only entries from the given year' do
       user = User.create!(email_address: 'test1@mail.com', password: '123456')

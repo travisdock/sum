@@ -4,6 +4,8 @@ class Entry < ApplicationRecord
   belongs_to :user
   belongs_to :category
 
+  validates :date, presence: true
+
   scope :by_year, ->(year) { where("strftime('%Y', date) = ?", year.to_s) if year.present? }
   scope :by_month, ->(month) {
     where("ltrim(strftime('%m', date), '0') = ?", month.to_s) unless month.blank? || month.to_i.zero?
