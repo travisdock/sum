@@ -29,7 +29,7 @@ gem 'haml-rails'
 gem 'ransack'
 
 group :development, :test do
-  gem 'debug', platforms: %i[mri mingw x64_mingw]
+  gem 'debug'
   gem 'rspec-rails'
   gem 'simplecov', require: false
   gem 'database_cleaner'
