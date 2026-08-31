@@ -11,7 +11,7 @@ gem 'importmap-rails'
 gem 'turbo-rails'
 gem 'stimulus-rails'
 
-gem 'solid_queue', '~> 1.1'
+gem 'solid_queue', '~> 1.7'
 gem 'mission_control-jobs'
 
 gem 'propshaft'
