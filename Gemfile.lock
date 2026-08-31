@@ -237,7 +237,7 @@ GEM
       activerecord (>= 7.2)
       activesupport (>= 7.2)
       i18n
-    rbs (4.1.3)
+    rbs (4.2.0)
       logger
       prism (>= 1.6.0)
       tsort
@@ -297,7 +297,7 @@ GEM
     ruby-progressbar (1.13.0)
     securerandom (0.4.1)
     simplecov (1.1.1)
-    solid_queue (1.6.0)
+    solid_queue (1.7.0)
       activejob (>= 7.1)
       activerecord (>= 7.1)
       concurrent-ruby (>= 1.3.1)
@@ -357,7 +357,7 @@ DEPENDENCIES
   rubocop-rails
   rubocop-rspec
   simplecov
-  solid_queue (~> 1.1)
+  solid_queue (~> 1.7)
   sqlite3
   stimulus-rails
   turbo-rails
